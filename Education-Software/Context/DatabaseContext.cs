@@ -1,6 +1,6 @@
 ﻿using Education_Software.Models;
 using Microsoft.EntityFrameworkCore;
-
+using Software_Engineering_Project.Models;
 
 namespace Education_Software.Context
 {
@@ -12,6 +12,7 @@ namespace Education_Software.Context
         }
 
         public DbSet<UserModel> Users { get; set; }
+        public DbSet<LoginModel> Login { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

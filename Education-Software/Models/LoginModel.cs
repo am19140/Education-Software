@@ -8,7 +8,7 @@ namespace Software_Engineering_Project.Models
         public string username { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public string password { get; set; }
 
         public bool IsLoginConfirmed { get; set; } = true;
     }
