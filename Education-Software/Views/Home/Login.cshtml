@@ -1,9 +1,29 @@
-﻿
+﻿@model Education_Software.Models.LoginModel
 @{
     ViewData["Title"] = "Login";
 }
+@section Styles {
+    <link rel="stylesheet" href="~/css/loginStyle.css" />
+}
+    <div class="container">
+        <div class="sign-in-form">
+            <form asp-controller="Home" asp-action="Login" method="post" class="form">
+                <h1>Sign In</h1>
+                <div class="inputs">
+                    <input type="text" placeholder="Email" class="input" asp-for="username" />
+                </div>
+                <div class="inputs">
+                    <input type="password" placeholder="Password" class="input" asp-for="password" />
+                </div>
+                <div class="inputs">
+                    <input type="submit" class="submit-btn" value="Submit" class="input" />
 
-<div class="container">
-
-</div>
+                </div>
+            </form>
+        </div>
+        <div class="shape-container">
+            <div class="shape"></div>
+            <h2>We help you find your dream career</h2>
+        </div>
+    </div>
 
