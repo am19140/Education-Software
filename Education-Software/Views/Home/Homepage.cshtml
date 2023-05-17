@@ -39,7 +39,12 @@
                             <span class="text nav-text">Homepage</span>
                         </a>
                     </li>
-                    
+                    <li class="nav-link">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
+                            <i class='bx bx-book icon'></i>
+                            <span class="text nav-text">Subjects</span>
+                        </a>
+                    </li>
                     <li class="nav-link">
                         <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Profile">
                             <i class='bx bx-male icon'></i>
@@ -47,12 +52,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-link">
-                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
-                            <i class='bx bx-male icon'></i>
-                            <span class="text nav-text">Subjects</span>
-                        </a>
-                    </li>
+                    
                 </ul>
             </div>
             <div class="bottom-content">

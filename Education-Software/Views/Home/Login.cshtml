@@ -5,7 +5,7 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/loginStyle.css" />
 }
-    <div class="container">
+    <div class="page">
         <div class="sign-in-form">
             <form asp-controller="Home" asp-action="Login" method="post" class="form">
                 <h1>Sign In</h1>
@@ -22,8 +22,14 @@
             </form>
         </div>
         <div class="shape-container">
-            <div class="shape"></div>
-            <h2>We help you find your dream career</h2>
+        <img src="@Url.Content("~/Resources/login-image.png")" class="image" />
+
+        <h2 class="text">We help you find your <i>dream career</i></h2>
         </div>
     </div>
 
+@if (Model != null && !Model.isLoginConfirmed)
+{
+    <script type="text/javascript" src="~/js/LoginScript.js">
+    </script>
+}
