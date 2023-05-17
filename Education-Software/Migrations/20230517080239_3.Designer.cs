@@ -2,6 +2,7 @@
 using Education_Software.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Education_Software.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230517080239_3")]
+    partial class _3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +55,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("q_id");
 
-                    b.ToTable("questions");
+                    b.ToTable("QuestionModel");
                 });
 
             modelBuilder.Entity("Education_Software.Models.SubjectModel", b =>
@@ -103,7 +106,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("sub_id");
 
-                    b.ToTable("subjects");
+                    b.ToTable("SubjectModel");
                 });
 
             modelBuilder.Entity("Education_Software.Models.UserModel", b =>

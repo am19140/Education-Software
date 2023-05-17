@@ -2,6 +2,7 @@
 using Education_Software.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Education_Software.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230517074511_2")]
+    partial class _2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,40 +23,6 @@ namespace Education_Software.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Education_Software.Models.QuestionModel", b =>
-                {
-                    b.Property<string>("q_id")
-                        .HasMaxLength(40)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<string>("answer")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("chapter")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<string>("q_type")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<string>("question")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("sub_id")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("VARCHAR");
-
-                    b.HasKey("q_id");
-
-                    b.ToTable("questions");
-                });
 
             modelBuilder.Entity("Education_Software.Models.SubjectModel", b =>
                 {

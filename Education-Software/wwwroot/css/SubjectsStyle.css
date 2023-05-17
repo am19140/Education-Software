@@ -1,0 +1,70 @@
+﻿:root {
+    /* ===== Colors ===== */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #695CFE;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+    --light-text-color: #white;
+    --pink: #FF33CC;
+    --light-pink: #FF66CC;
+    --light-blue: #33CCFF;
+    --yellow: #FFC000;
+    --green: #92D050;
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+}
+table{
+    width:100%;
+}
+
+.right-corner {
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    font-size: 15px;
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+}
+.subject-list{
+    padding:2%;
+}
+
+
+form{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+    background-color:var(--sidebar-color);
+    border-radius:20px;
+    padding:2%;
+}
+
+    form:hover {
+        transform: scale(1.004);
+        transition: var(--tran-03);
+    }
+    form .icon {
+        font-size: 25px;
+        transition: var(--tran-03);
+    }
+
+input[type=submit] {
+    background-color: transparent;
+    cursor: pointer;
+    border: 0px;
+    font-size: 20px;
+    color: var(--text-color);
+    width:100%;
+    text-align:left;
+}

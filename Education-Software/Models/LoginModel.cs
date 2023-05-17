@@ -10,6 +10,6 @@ namespace Education_Software.Models
         [Required]
         public string password { get; set; }
 
-        public bool IsLoginConfirmed { get; set; } = true;
+        public bool isLoginConfirmed { get; set; } = true;
     }
 }
