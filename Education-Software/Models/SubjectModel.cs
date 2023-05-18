@@ -11,7 +11,7 @@ namespace Education_Software.Models
         [Required]
         [Key]
         [MaxLength(10)]
-        [RegularExpression(@"^ΠΛ\d*$", ErrorMessage = "Id must start with 'ΠΛ'")]
+        [RegularExpression(@"^CS\d*$", ErrorMessage = "Id must start with 'CS'")]
         public string sub_id { get; set; }
 
         [Required]

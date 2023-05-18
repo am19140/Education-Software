@@ -52,7 +52,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("q_id");
 
-                    b.ToTable("questions");
+                    b.ToTable("questions", (string)null);
                 });
 
             modelBuilder.Entity("Education_Software.Models.SubjectModel", b =>
@@ -103,7 +103,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("sub_id");
 
-                    b.ToTable("subjects");
+                    b.ToTable("subjects", (string)null);
                 });
 
             modelBuilder.Entity("Education_Software.Models.UserModel", b =>
@@ -146,7 +146,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("username");
 
-                    b.ToTable("users");
+                    b.ToTable("users", (string)null);
                 });
 #pragma warning restore 612, 618
         }

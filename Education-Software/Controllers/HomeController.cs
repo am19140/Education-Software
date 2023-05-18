@@ -74,24 +74,34 @@ namespace Education_Software.Controllers
         {
             ViewBag.username = username;
             ViewBag.subject = subject;
-            List<SubjectModel> subjects = new List<SubjectModel>();
+            SubjectModel subjectmodel = new SubjectModel();
             NpgsqlConnection connection = Database.Database.Connection();
-            NpgsqlDataReader output = Database.Database.ExecuteQuery(string.Format("SELECT sub_id," +
-                "title,semester " +
+            NpgsqlDataReader output = Database.Database.ExecuteQuery(string.Format("SELECT * " +
                 "from subjects WHERE " +
                 "title='{0}'",subject), connection);
             while (output.Read())
             {
-                SubjectModel model = new SubjectModel();
-                model.sub_id = output.GetString(0);
-                model.title = output.GetString(1);
-                model.semester = output.GetInt32(2);
-                subjects.Add(model);
+                subjectmodel.sub_id = output.GetString(0);
+                subjectmodel.title = output.GetString(1);
+                subjectmodel.semester = output.GetInt32(2);
+                subjectmodel.sub_type= output.GetString(3);
+                subjectmodel.description= output.GetString(4);
+                subjectmodel.description_reading = output.GetInt32(5);
+                subjectmodel.learning_outcomes= output.GetString(6);
+                subjectmodel.learning_outcomes_reading = output.GetInt32(7);
+                subjectmodel.skills_acquired= output.GetString(8);
+                subjectmodel.skills_acquired_reading = output.GetInt32(9);
+                subjectmodel.specialization_link= output.GetString(10);
+                subjectmodel.specialization_link_reading = output.GetInt32(11);
+
+
+
+
 
 
             }
             connection.Close();
-            return View("Subject", subjects);
+            return View("Subject", subjectmodel);
 
         }
 
