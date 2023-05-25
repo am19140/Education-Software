@@ -1,4 +1,7 @@
 using Education_Software.Context;
+using Education_Software.Controllers;
+using Education_Software.Models;
+using Education_Software.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(x => x.UseNpgsql(builder.Configuration.GetConnectionString("EducationSoftware")));
+builder.Services.AddScoped<SubjectService>();
+
 
 var app = builder.Build();
 
