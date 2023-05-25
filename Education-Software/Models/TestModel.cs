@@ -17,7 +17,6 @@ namespace Education_Software.Models
 
         [Column(TypeName = "VARCHAR")]
         [Required]
-        [Key]
         [MaxLength(20)]
         public string test_id { get; set; }
 
@@ -29,11 +28,11 @@ namespace Education_Software.Models
 
         [Column(TypeName = "INT")]
         [Required]
-        public string score { get; set; }
+        public int score { get; set; }
 
         [Column(TypeName = "INT")]
         [Required]
-        public string trials { get; set; }
+        public int trials { get; set; }
 
     }
 }

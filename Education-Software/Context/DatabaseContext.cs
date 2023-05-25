@@ -28,17 +28,16 @@ namespace Education_Software.Context
             modelBuilder.Entity<UserModel>().Property(x => x.username);
             modelBuilder.Entity<SubjectModel>().Property(x => x.sub_id).IsRequired();
             modelBuilder.Entity<QuestionModel>().Property(x => x.q_id).IsRequired();
-            modelBuilder.Entity<TestModel>().Property(x => x.username).IsRequired();
+            modelBuilder.Entity<TestModel>().HasKey(x => new {  x.username,x.test_id});
             modelBuilder.Entity<TestModel>().Property(x => x.test_id).IsRequired();
-            
+
             //modelBuilder.Entity<ProgressModel>().Property(x => x.username and x => x.test_id).IsRequired();
-            modelBuilder.Entity<SpecializationModel>().Property(x => x.spe_id).IsRequired();
+            modelBuilder.Entity<SpecializationModel>().HasKey(x => new {x.spe_id,x.spe_name,x.sub_id});
             modelBuilder.Entity<SpecializationModel>().Property(x => x.spe_name ).IsRequired();
             modelBuilder.Entity<SpecializationModel>().Property(x => x.sub_id).IsRequired();
 
             modelBuilder.Entity<QuestionnaireModel>().Property(x => x.q_id).IsRequired();
-            modelBuilder.Entity<RecommendationModel>().Property(x => x.username).IsRequired();
-            modelBuilder.Entity<RecommendationModel>().Property( x => x.q_id).IsRequired();
+            modelBuilder.Entity<RecommendationModel>().HasKey(x => new { x.username,x.q_id });
         }
 
 

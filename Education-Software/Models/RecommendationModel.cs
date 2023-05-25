@@ -17,7 +17,6 @@ namespace Education_Software.Models
 
         [Column(TypeName = "VARCHAR")]
         [Required]
-        [Key]
         [MaxLength(50)]
         [ForeignKey("QuestionnaireModel")]
         public string q_id { get; set; }
