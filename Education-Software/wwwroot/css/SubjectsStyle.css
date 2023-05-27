@@ -45,7 +45,7 @@ form {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: var(--primary-color-light);
+    background-color: var(--primary-color);
     border-radius: 20px;
     padding: 2%;
     transition: var(--tran-05);
@@ -65,7 +65,7 @@ input[type=submit] {
     cursor: pointer;
     border: 0px;
     font-size: 20px;
-    color: var(--text-color);
+    color: white;
     width:100%;
     text-align:left;
 }

@@ -28,6 +28,14 @@ namespace Education_Software.Service
         
         }
 
+        public SubjectModel RecordReading(string title)
+        {
+            var subject = _context.subjects.FirstOrDefault(x=>x.title==title);
+            subject.reading += 1;
+            _context.SaveChanges();
+            return subject;
+        }
+
         public bool Login(string username,string password)
         {
             var login = _context.users.FirstOrDefault(x => x.username == username && x.pass==password);

@@ -82,32 +82,46 @@
         </div>
         <div class="main">
             <div class="top">
-                <h3>Code: @Model.sub_id</h3>
+                <div>
+                    <h3>Code: @Model.sub_id</h3>
 
-                <h3>No. of semester: @Model.semester</h3>
+                    <h3>No. of semester: @Model.semester</h3>
+                </div>
+                 <div class="indicator">
+                        <form asp-controller="Home" asp-action="ReadSubject" method="post" class="read-btn">
+                            <input type="hidden" name="username" value="@ViewBag.username" />
+                            <input type="hidden" name="subject" value="@ViewBag.subject" />
+                            <button type="submit" class="done buttons icon">
+                                Done
+                            </button> 
+                        </form>
+                        @if (Model.reading >= 1)
+                        {
+                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
+
+                        }
+                        else {<i class='bx bxs-check-circle' style="color:lightgrey"></i>} 
+                    </div>
+            </div>
+            <div class="explanation">
+                <h5><i>Note: Everytime you read the subject, please remember to click the 'Done' button to enhance your career recomendations </i></h5>
             </div>
             <div class="description box">
-                <h2>
-                    Description
-                </h2>
-                <div class="info">
-                    <div>
+                
+                    <h2>
+                        Description
+                    </h2>
+                    
+               
+               
+                <div class="info">                    
                         @foreach (var d in @Model.description.Split("•"))
                         {
                             <span>•</span>
 
                             @d <br />
-                        }
-                    </div>
-                    <div class="indicator">
-                        @if (Model.description_reading >= 1)
-                        {
-                            <i class='bx bxs-check-circle' style="color:greenyellow"></i>
-
-                        }
-                        else {<i class='bx bxs-check-circle' style="color:lightgrey"></i>} 
-                    </div>
-                   
+                        }                   
+                    
                 </div>
                 
             </div>
@@ -115,28 +129,21 @@
                 <h2>Learning Outcomes</h2>
 
                 <div class="info">
-                <div>
+                
                         @foreach (var outcome in @Model.learning_outcomes.Split("•"))
                         {
                             <span>•</span> @outcome
                             <br />
                         }
-                </div>
-                <div class="indicator">
-                        @if (Model.description_reading >= 1)
-                        {
-                            <i class='bx bxs-check-circle' style="color:greenyellow"></i>
-
-                        }
-                        else {<i class='bx bxs-check-circle' style="color:lightgrey"></i>} 
-                    </div>
+                
+               
                 
                 </div>
             </div>
             <div class="skills box">
                 <h2>Acquired Skills</h2>
                 <div class="info">
-                    <div>
+                    
                         @foreach (var skill in @Model.skills_acquired.Split("•"))
                         {
                             <span>•</span>
@@ -144,18 +151,8 @@
                             @skill
                             <br />
                         }
-                    </div>
-                    <div class="indicator">
-                        @if (Model.description_reading >= 1)
-                        {
-                            <i class='bx bxs-check-circle' style="color:greenyellow"></i>
-
-                        }
-                        else
-                        {
-                            <i class='bx bxs-check-circle' style="color:lightgrey"></i>
-                        }
-                    </div>
+                    
+                    
                 </div>
                
 

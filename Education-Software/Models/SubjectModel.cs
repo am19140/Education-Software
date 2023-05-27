@@ -30,35 +30,24 @@ namespace Education_Software.Models
 
         [Column(TypeName = "TEXT")]
         [Required]
-        public string description { get; set; }
-
-        [Column(TypeName = "INT")]
-        [Required]
-        public int description_reading { get; set; }
+        public string description { get; set; }        
 
         [Column(TypeName = "TEXT")]
         [Required]
-        public string learning_outcomes { get; set; }
-
-        [Column(TypeName = "INT")]
-        [Required]
-        public int learning_outcomes_reading { get; set; }
+        public string learning_outcomes { get; set; }       
 
         [Column(TypeName = "TEXT")]
         [Required]
         public string skills_acquired { get; set; }
 
-        [Column(TypeName = "INT")]
-        [Required]
-        public int skills_acquired_reading { get; set; }
-
+        
         [Column(TypeName = "TEXT")]
         [Required]
         public string specialization_link { get; set; }
 
         [Column(TypeName = "INT")]
         [Required]
-        public int specialization_link_reading { get; set; }
+        public int reading { get; set; }
 
 
 

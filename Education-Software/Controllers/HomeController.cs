@@ -62,6 +62,16 @@ namespace Education_Software.Controllers
             return View("Subject", subjectmodel);
         }
 
+        [HttpPost]
+        public IActionResult ReadSubject(string username,string subject)
+        {
+            ViewBag.username = username;
+            ViewBag.subject = subject;
+            var subjectmodel = _subjectService.RecordReading(subject);
+            return View("Subject",subjectmodel);
+
+        }
+
 
 
         public IActionResult Privacy()

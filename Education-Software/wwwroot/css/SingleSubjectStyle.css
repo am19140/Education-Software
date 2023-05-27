@@ -54,12 +54,16 @@ table {
 
 .top{
     margin-bottom:1%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
 }
 .box{
     margin-bottom:1%;
     padding:1%;
     border-radius:20px;
-    background-color:var(--primary-color-light);
+    background-color:var(--primary-color);
+    color:white;
 }
 
 h2{
@@ -67,15 +71,38 @@ h2{
     font-weight:500;
     
 }
-.info{
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
+h5{
+    padding-left:1%;
 }
+
 .indicator{
     display:flex;
     align-items:center;
     justify-content:center;
     width:9%;
     font-size:30px;
+    transition:var(--tran-05);
 }
+.read-btn{
+    display:flex;
+    align-items:center;
+    margin-right:15%;
+}
+
+.read-btn .done{
+    background-color:#92D050;
+    border:none;
+    padding:15%;
+    margin-right:1%;
+    border-radius:20px;
+    cursor:pointer;
+    color:white;
+}
+
+.read-btn:hover{
+    transition:var(--tran-04);
+    transform:scale(1.08);
+}
+
+
+
