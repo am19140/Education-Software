@@ -1,11 +1,11 @@
-﻿@model IEnumerable<SubjectModel>
+﻿@model LoginModel
 
 @{
-    ViewData["Title"] = "Subjects";
+    ViewData["Title"] = "Homepage";
 }
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/SubjectsStyle.css" />
+    <link rel="stylesheet" href="~/css/HomepageStyle.css" />
     <link rel="stylesheet" href="~/css/MenuStyle.css" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
@@ -34,14 +34,13 @@
                 </li>
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a class="homebtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Homepage">
+                        <a class="homebtn" href="#">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Homepage</span>
                         </a>
                     </li>
-
                     <li class="nav-link">
-                        <a class="profbtn" href="#">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
                             <i class='bx bx-book icon'></i>
                             <span class="text nav-text">Subjects</span>
                         </a>
@@ -71,7 +70,7 @@
                         </a>
                     </li>
 
-                   
+                    
                 </ul>
             </div>
             <div class="bottom-content">
@@ -81,7 +80,7 @@
                         <span class="text nav-text">Logout</span>
                     </a>
                 </li>
-
+                
 
             </div>
         </div>
@@ -90,41 +89,18 @@
     <section class="home">
 
         <div class="header">
-            <div class="text title">Subjects</div>
+            <div class="text title">Past Grades</div>
             <div class="right-corner">
                 <img src="~/Resources/icons8-male-user-24 (1).png"></img>
                 <div class="smalltext username ">@ViewBag.username </div>
             </div>
         </div>
         <div class="main">
-            <div class="subject-list">
-                <table>
-                   
-                        @foreach (var subject in Model)
+            
 
-                    {
-                        <tr>
-                            <td>
-                                <form asp-controller="Home" asp-action="Subject" method="post" class="left-form-up">
-                                    <input type="hidden" name="subject" value="@subject.title"/>
-                                    <input type="hidden" name="username" value="@ViewBag.username" />
-                                    <input type="submit" class="subject" value="@subject.title" />
-                                    <i class='bx bx-chevron-right icon'></i>
-                                </form>
-                            </td>
-                            <td>
-                                
-                            </td>
-                        </tr>
-
-                    }
-                </table>
-                
-                
-            </div>
         </div>
 
-
+        
     </section>
 
     <script>
@@ -155,8 +131,7 @@
         });
     </script>
 
-</body>
-
+    </body>
 
 
 

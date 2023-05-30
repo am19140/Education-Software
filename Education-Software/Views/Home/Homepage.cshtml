@@ -45,6 +45,24 @@
                             <span class="text nav-text">Subjects</span>
                         </a>
                     </li>
+                        <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Progress">
+                                <i class='bx bx-book icon'></i>
+                                <span class="text nav-text">Progress</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Grades">
+                                <i class='bx bx-book icon'></i>
+                                <span class="text nav-text">Past Grades</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Recommendations">
+                                <i class='bx bx-book icon'></i>
+                                <span class="text nav-text">Career Recommendations</span>
+                            </a>
+                        </li>
                     <li class="nav-link">
                         <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Profile">
                             <i class='bx bx-male icon'></i>

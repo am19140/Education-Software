@@ -7,13 +7,13 @@ using System.Diagnostics;
 
 namespace Education_Software.Controllers
 {
-    public class HomeController : Controller
+    public class TestController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<TestController> _logger;
         private readonly SubjectService _subjectService;
 
 
-        public HomeController(ILogger<HomeController> logger, SubjectService subjectService)
+        public TestController(ILogger<HomeController> logger, SubjectService subjectService)
         {
             _logger = logger;
             _subjectService = subjectService;
@@ -72,38 +72,12 @@ namespace Education_Software.Controllers
 
         }
 
-        public IActionResult Progress(string username)
-        {
-            ViewBag.username = username;
-            //_progressService will be like _subjectService but will retrieve the students progress to each subject and present it in the progress page
-            //var progressmodel = _subjectService.getSubjects();
-            return View();
 
-        }
-
-        public IActionResult Grades(string username)
-        {
-            ViewBag.username = username;
-            //_progressService will be like _subjectService but will retrieve the students progress to each subject and present it in the progress page
-            //var progressmodel = _subjectService.getSubjects();
-            return View();
-
-        }
-
-        public IActionResult Recommendations(string username)
-        {
-            ViewBag.username = username;
-            //_gradeService will be like _subjectService but will retrieve the students grades to continue in the recommendations 
-            // var recommendationsmodel = _gradeService.getGrades();
-            return View();
-
-        }
 
         public IActionResult Privacy()
         {
             return View();
         }
-
         public IActionResult Homepage(string username)
         {
             ViewBag.username = username;
