@@ -1,4 +1,4 @@
-﻿@model TestModel
+﻿@model QuestionModel
 
 @{
     ViewData["Title"] = "Tests";
@@ -10,6 +10,7 @@
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
 }
+using System.Random
 
 <!--Side Menu-->
 <body>
@@ -89,7 +90,7 @@
     <section class="home">
 
         <div class="header">
-            <div class="text title">@ViewBag.subject Test</div>
+            <div class="text title">@ViewBag.subject.title Test</div>
             <div class="right-corner">
                 <img src="~/Resources/icons8-male-user-24 (1).png"></img>
                 <div class="smalltext username ">@ViewBag.username </div>
@@ -104,14 +105,7 @@
 
                 <div class="info">
                     <!--Choose a random number of questions and then print them-->
-                    @ List<int>
-                    RandomNumbers = Enumerable.Range(1, 100).OrderBy(g => Guid.NewGuid()).Take(2);
-                    foreach(int i in RandomNumbers)
-                    {
-                        // code to fetch your question based on int i
-                        @Model.question
-                    }
-
+                    
                 </div>
 
             </div>

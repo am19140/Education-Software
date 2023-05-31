@@ -108,16 +108,28 @@
                         <form asp-controller="Home" asp-action="ReadSubject" method="post" class="read-btn">
                             <input type="hidden" name="username" value="@ViewBag.username" />
                             <input type="hidden" name="subject" value="@ViewBag.subject" />
-                            <button type="submit" class="done buttons icon">
+                            <button id="btnDone" type="submit" class="done buttons icon">
                                 Done
-                            </button> 
+                            </button>
+                            <script>
+                                document.querySelector('#btnDone').addEventListener('click', () => {
+                                    Confirm.open({
+                                        title: 'You will be redirected to the subject Test',
+                                        message: 'The test is compulsory. If you press Cancel, you will have to read the content again.\n'
+                                                                    'Are you sure you wish to take the test now?',
+                                        onok: () => {
+                                            <a class="donebtn" asp - controller="Test" asp - route - username="@ViewBag.username" asp - action="Index" > </a>
+                                        }
+                                    })
+                                });
+                            </script>
                         </form>
                         @if (Model.reading >= 1)
                         {
                         <i class='bx bxs-check-circle' style="color:#92D050"></i>
 
                         }
-                        else {<i class='bx bxs-check-circle' style="color:lightgrey"></i>} 
+                        else {<i class='bx bxs-check-circle' style="color:lightgrey"></i>}
                     </div>
             </div>
             <div class="explanation">

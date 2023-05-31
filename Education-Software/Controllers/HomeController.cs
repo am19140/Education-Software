@@ -59,7 +59,7 @@ namespace Education_Software.Controllers
             ViewBag.username = username;
             ViewBag.subject = subject;
             var subjectmodel = _subjectService.getSubjectDetails(subject);           
-            return View("Subject", subjectmodel);
+            return View("Subject", subjectmodel); 
         }
 
         [HttpPost]

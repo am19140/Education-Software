@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(x => x.UseNpgsql(builder.Configuration.GetConnectionString("EducationSoftware")));
 builder.Services.AddScoped<SubjectService>();
+builder.Services.AddScoped<TestService>();
 
 
 var app = builder.Build();
