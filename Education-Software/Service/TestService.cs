@@ -24,6 +24,11 @@ namespace Education_Software.Service
             return questions;
         }
          */
+        public QuestionModel SubjectTest(SubjectModel subjectmodel)
+        {
+            var question = _context.questions.FirstOrDefault(x => x.sub_id == subjectmodel.sub_id);
+            return question;
+        }
 
         public List<QuestionModel> getRandomQuestions(string subject)
         {

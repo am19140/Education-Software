@@ -17,6 +17,8 @@ namespace Education_Software.Models
         [Required]
         public string question { get; set; }
 
-
+        [Column(TypeName = "TEXT")]
+        [Required]
+        public string possible_answers { get; set; }
     }
 }

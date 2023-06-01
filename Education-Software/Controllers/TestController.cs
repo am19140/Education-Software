@@ -64,29 +64,8 @@ namespace Education_Software.Controllers
             ViewBag.questions = q;
             return View("Test", q);
         }
-        public IActionResult Login()
-        {
-            return View();
-        }
 
-        [HttpPost]
-        public IActionResult Login(LoginModel loginModel)
-        {
-
-            string username = loginModel.username;
-            var password = loginModel.password;
-            var authentication = _subjectService.Login(username,password);
-            if (authentication)
-            {
-                ViewBag.Username = loginModel.username;
-                return View("Homepage", loginModel);
-            }
-            else
-            {
-                return View("Login");
-            }
-          
-        }
+        
         public IActionResult Subjects(string username) {
             ViewBag.username = username;
 
@@ -111,18 +90,6 @@ namespace Education_Software.Controllers
             var subjectmodel = _subjectService.RecordReading(subject);
             return View("Subject",subjectmodel);
 
-        }
-
-
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-        public IActionResult Homepage(string username)
-        {
-            ViewBag.username = username;
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

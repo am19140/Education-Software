@@ -11,12 +11,14 @@ namespace Education_Software.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly SubjectService _subjectService;
+        private readonly TestService _testService;
 
 
-        public HomeController(ILogger<HomeController> logger, SubjectService subjectService)
+        public HomeController(ILogger<HomeController> logger, SubjectService subjectService, TestService testService)
         {
             _logger = logger;
             _subjectService = subjectService;
+            _testService = testService;
         }
 
         public IActionResult Index()
@@ -58,7 +60,7 @@ namespace Education_Software.Controllers
         {
             ViewBag.username = username;
             ViewBag.subject = subject;
-            var subjectmodel = _subjectService.getSubjectDetails(subject);           
+            SubjectModel subjectmodel = _subjectService.getSubjectDetails(subject);           
             return View("Subject", subjectmodel); 
         }
 
@@ -67,8 +69,10 @@ namespace Education_Software.Controllers
         {
             ViewBag.username = username;
             ViewBag.subject = subject;
-            var subjectmodel = _subjectService.RecordReading(subject);
-            return View("Subject",subjectmodel);
+            SubjectModel subjectmodel = _subjectService.RecordReading(subject);
+            ViewBag.id = subjectmodel.sub_id;
+            QuestionModel questionmodel= _testService.SubjectTest(subjectmodel);
+            return View("Test", questionmodel);
 
         }
 
