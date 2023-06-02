@@ -18,7 +18,7 @@ namespace Education_Software.Context
         public DbSet<TestModel> tests { get; set; }
         //public DbSet<ProgressModel> progress { get; set; }
         public DbSet<SpecializationModel> specializations { get; set; }
-        //public DbSet<GradesModel> grades { get; set; }
+        public DbSet<GradesModel> grades { get; set; }
         public DbSet<QuestionnaireModel> questionnaire { get; set; }
         public DbSet<RecommendationModel> recommendations { get; set; }
 

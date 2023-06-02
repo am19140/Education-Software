@@ -71,7 +71,7 @@ namespace Education_Software.Controllers
             ViewBag.subject = subject;
             SubjectModel subjectmodel = _subjectService.RecordReading(subject);
             ViewBag.id = subjectmodel.sub_id;
-            QuestionModel questionmodel= _testService.SubjectTest(subjectmodel);
+            List<QuestionModel> questionmodel= _testService.SubjectTest(subjectmodel);
             return View("Test", questionmodel);
 
         }

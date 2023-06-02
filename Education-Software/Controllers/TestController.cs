@@ -22,9 +22,9 @@ namespace Education_Software.Controllers
             _testService = testService;
         }
 
-        public IActionResult Index(string sub_id)
+        public IActionResult PrintQuestions(List<QuestionModel> model)
         {
-            List<QuestionModel> questions = _testService.getRandomQuestions(sub_id);
+            List<QuestionModel> questions = _testService.getRandomQuestions(model);
             List<Tuple<string, string, List<string>, List<string>>> q = new List<Tuple<string, string, List<string>, List<string>>>();
             foreach (QuestionModel question in questions)
             {
@@ -46,7 +46,8 @@ namespace Education_Software.Controllers
                 }
                 else if (question.q_type == "completion")
                 {
-
+                    string[] s = question.question.Split("•");
+                    body.Add(s[0]);
                 }
                 else if (question.q_type == "matching")
                 {
@@ -62,7 +63,7 @@ namespace Education_Software.Controllers
             //ViewBag.username = username;
             //ViewBag.subject = subject;
             ViewBag.questions = q;
-            return View("Test", q);
+            return View("Test");
         }
 
         

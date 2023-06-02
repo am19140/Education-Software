@@ -39,5 +39,8 @@ namespace Education_Software.Models
         [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Invalid Phone Number.")]
         public string phone_number { get; set; }
 
+
+        public ICollection<GradesModel> Grades { get; }
+
     }
 }

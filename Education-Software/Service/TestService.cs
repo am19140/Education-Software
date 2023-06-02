@@ -1,6 +1,7 @@
 ﻿using Education_Software.Context;
 using Education_Software.Models;
 using System;
+using System.Diagnostics;
 using System.Drawing.Printing;
 // using System.Linq;
 
@@ -24,16 +25,17 @@ namespace Education_Software.Service
             return questions;
         }
          */
-        public QuestionModel SubjectTest(SubjectModel subjectmodel)
+        public List<QuestionModel> SubjectTest(SubjectModel subjectmodel)
         {
-            var question = _context.questions.FirstOrDefault(x => x.sub_id == subjectmodel.sub_id);
+            var question = _context.questions.Where(x => x.sub_id == subjectmodel.sub_id).ToList();
             return question;
         }
 
-        public List<QuestionModel> getRandomQuestions(string subject)
+        public List<QuestionModel> getRandomQuestions(List<QuestionModel> model)
         {
             @Random r = new Random((int)DateTime.Now.Ticks);
-            List<QuestionModel> questions = _context.questions.Where(h => h.sub_id == subject).OrderBy(h => r.Next()).Take(2).ToList();
+            List<QuestionModel> questions = model.OrderBy(h => r.Next()).Take(2).ToList();
+            Debug.WriteLine("Random Questions Done");
             return questions;
         }
         

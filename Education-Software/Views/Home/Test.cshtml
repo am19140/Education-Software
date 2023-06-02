@@ -1,4 +1,4 @@
-﻿@model QuestionModel
+﻿@model IEnumerable<QuestionModel>
 
 @{
     ViewData["Title"] = "Tests";
@@ -102,12 +102,23 @@ using System.Random
                 <h2>
                     Questions
                 </h2>
+                    <form asp-controller="Test" asp-action="PrintQuestions" method="post" class="left-form-up">
+                        <input type="hidden" name="questions" value="@Model" />
+                        <input type="submit" class="questions" value="@Model" />
+                        <i class='bx bx-chevron-right icon'></i>
+                    </form>
+                    @foreach(var el in @ViewBag.questions)
+                    {
+                        <span>•</span>
 
-                <div class="info">
-                    <!--Choose a random number of questions and then print them-->
-                    
-                </div>
+                    @el[1]
 
+                    <br />
+                    @el[2]
+
+                    <br />
+                         @el[3]<br/>
+                    }
             </div>
 
         </div>

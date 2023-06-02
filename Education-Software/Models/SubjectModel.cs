@@ -52,6 +52,6 @@ namespace Education_Software.Models
 
 
 
-
+        public ICollection<GradesModel> Grades { get; }
     }
 }
