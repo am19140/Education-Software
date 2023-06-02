@@ -47,7 +47,7 @@ namespace Education_Software.Controllers
                 else if (question.q_type == "completion")
                 {
                     string[] s = question.question.Split("•");
-                    body.Add(s[0]);
+                    body.Add(s[0]); 
                 }
                 else if (question.q_type == "matching")
                 {
