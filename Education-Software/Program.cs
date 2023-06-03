@@ -9,8 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(x => x.UseNpgsql(builder.Configuration.GetConnectionString("EducationSoftware")));
-builder.Services.AddScoped<SubjectService>();
-builder.Services.AddScoped<TestService>();
+builder.Services.AddScoped<Service>();
 
 
 var app = builder.Build();

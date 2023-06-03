@@ -10,7 +10,6 @@
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
 }
-using System.Random
 
 <!--Side Menu-->
 <body>
@@ -102,25 +101,59 @@ using System.Random
                 <h2>
                     Questions
                 </h2>
-                    <form asp-controller="Test" asp-action="PrintQuestions" method="post" class="left-form-up">
-                        <input type="hidden" name="questions" value="@Model" />
-                        <input type="submit" class="questions" value="@Model" />
-                        <i class='bx bx-chevron-right icon'></i>
-                    </form>
-                    @foreach(var el in @ViewBag.questions)
+                <form asp-controller="Home" asp-action="SubmitTest" method="post" class="test-btn">
+                         <input type="hidden" name="username" value="@ViewBag.username" />
+                         <input type="hidden" name="subject" value="@ViewBag.id" />    
+                    @foreach(var question in @ViewBag.questions)
                     {
-                        <span>•</span>
+                        string id = question.Item1;
+                        string type = question.Item2;
+                        List<string> body = question.Item3;
+                        List<string> possible_answers = question.Item4;
+                        foreach (string i in body){
+                            @i<br />
+                            foreach (string j in possible_answers)
+                            {
+                            if (type == "multiple_choice")
+                            {
+                                    <input type="radio" id="" name="" value="">
+                                @j
+                                <br />
+                            }
+                            else if (type == "true/false")
+                            {
+                                @j
+                                    <input type="radio" id="" name="" value="True">
+                                    <input type="radio" id="" name="" value="False">
+                                <br />
+                            }
+                            else if (type == "ordering")
+                            {
+                                @j
 
-                    @el[1]
+                                <br />
+                            }
+                            else if (type == "completion")
+                            {
+                                    //l = @j.Split("#").ToList();
+                                    <input type="text">
+                                <br />
+                            }
+                            else if (type == "matching")
+                            {
+                                @j
 
-                    <br />
-                    @el[2]
-
-                    <br />
-                         @el[3]<br/>
+                                <br />
+                            }
+                            }
+                            <br><br>
+                        }
                     }
-            </div>
-
+                    <button id="btnDone" type="submit" class="done buttons icon">
+                        Submit Test
+                    </button>
+                </form>
+            </div>          
         </div>
 
         

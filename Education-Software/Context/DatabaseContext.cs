@@ -29,8 +29,9 @@ namespace Education_Software.Context
             modelBuilder.Entity<UserModel>().Property(x => x.username);
             modelBuilder.Entity<SubjectModel>().Property(x => x.sub_id).IsRequired();
             modelBuilder.Entity<QuestionModel>().Property(x => x.q_id).IsRequired();
-            modelBuilder.Entity<TestModel>().HasKey(x => new { x.username,x.test_id});
+            modelBuilder.Entity<TestModel>().HasKey(x => new { x.username,x.test_id, x.q_id});
             modelBuilder.Entity<TestModel>().Property(x => x.test_id).IsRequired();
+            modelBuilder.Entity<TestModel>().Property(x => x.q_id).IsRequired();
 
             //modelBuilder.Entity<ProgressModel>().HasKey(x => new { x.username, x.test_id });
             //modelBuilder.Entity<ProgressModel>().Property(x => x.test_id).IsRequired();

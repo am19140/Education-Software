@@ -2,6 +2,7 @@
 using Education_Software.Models;
 using Education_Software.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System.Diagnostics;
 
@@ -10,15 +11,13 @@ namespace Education_Software.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly SubjectService _subjectService;
-        private readonly TestService _testService;
+        private readonly Service.Service _Service;
 
 
-        public HomeController(ILogger<HomeController> logger, SubjectService subjectService, TestService testService)
+        public HomeController(ILogger<HomeController> logger, Service.Service Service)
         {
             _logger = logger;
-            _subjectService = subjectService;
-            _testService = testService;
+            _Service = Service;
         }
 
         public IActionResult Index()
@@ -36,7 +35,7 @@ namespace Education_Software.Controllers
 
             string username = loginModel.username;
             var password = loginModel.password;
-            var authentication = _subjectService.Login(username,password);
+            var authentication = _Service.Login(username,password);
             if (authentication)
             {
                 ViewBag.Username = loginModel.username;
@@ -51,7 +50,7 @@ namespace Education_Software.Controllers
         public IActionResult Subjects(string username) {
             ViewBag.username = username;
 
-            var subjectmodel = _subjectService.getSubjects();            
+            var subjectmodel = _Service.getSubjects();            
             return View("Subjects",subjectmodel);
 
         }
@@ -60,7 +59,7 @@ namespace Education_Software.Controllers
         {
             ViewBag.username = username;
             ViewBag.subject = subject;
-            SubjectModel subjectmodel = _subjectService.getSubjectDetails(subject);           
+            SubjectModel subjectmodel = _Service.getSubjectDetails(subject);           
             return View("Subject", subjectmodel); 
         }
 
@@ -69,11 +68,21 @@ namespace Education_Software.Controllers
         {
             ViewBag.username = username;
             ViewBag.subject = subject;
-            SubjectModel subjectmodel = _subjectService.RecordReading(subject);
+            SubjectModel subjectmodel = _Service.RecordReading(subject);
             ViewBag.id = subjectmodel.sub_id;
-            List<QuestionModel> questionmodel = _testService.SubjectTest(subjectmodel);
+            List<QuestionModel> questionmodel = _Service.SubjectTest(subjectmodel);
+            List<Tuple<string, string, List<string>, List<string>>> questions = _Service.SplitQuestions(questionmodel);
+            ViewBag.questions = questions;
+            ViewBag.Done = false;
             return View("Test", questionmodel);
 
+        }
+
+        //[HttpPost]
+        public IActionResult SubmitTest(string username, List<string> q_ids, List<string> answers, string test_type)
+        {
+            
+            return View("Test");
         }
 
         public IActionResult Progress(string username)
@@ -100,7 +109,6 @@ namespace Education_Software.Controllers
             //_gradeService will be like _subjectService but will retrieve the students grades to continue in the recommendations 
             // var recommendationsmodel = _gradeService.getGrades();
             return View();
-
         }
 
         public IActionResult Privacy()

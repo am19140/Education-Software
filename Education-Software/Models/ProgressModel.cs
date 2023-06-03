@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Education_Software.Models
 {
-    [Table("tests")]
-    public class TestModel
+    [Table("progress")]
+    public class ProgressModel
     {
         [Column(TypeName = "VARCHAR")]
         [Required]
@@ -17,15 +17,17 @@ namespace Education_Software.Models
 
         [Column(TypeName = "VARCHAR")]
         [Required]
-        [Key]
         [MaxLength(20)]
+        [ForeignKey("TestModel")]
         public string test_id { get; set; }
 
         [Column(TypeName = "VARCHAR")]
         [Required]
         [Key]
-        [MaxLength(40)]
-        public string q_id { get; set; }
+        [MaxLength(10)]
+        [RegularExpression(@"^CS\d*$", ErrorMessage = "Id must start with 'CS'")]
+        [ForeignKey("SubjectModel")]
+        public string sub_id { get; set; }
 
         [Column(TypeName = "CHAR")]
         [Required]
