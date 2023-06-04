@@ -38,7 +38,7 @@ namespace Education_Software.Migrations
 
                     b.HasIndex("sub_id");
 
-                    b.ToTable("grades");
+                    b.ToTable("grades", (string)null);
                 });
 
             modelBuilder.Entity("Education_Software.Models.QuestionModel", b =>
@@ -72,7 +72,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("q_id");
 
-                    b.ToTable("questions");
+                    b.ToTable("questions", (string)null);
                 });
 
             modelBuilder.Entity("Education_Software.Models.QuestionnaireModel", b =>
@@ -91,7 +91,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("q_id");
 
-                    b.ToTable("questionnaire");
+                    b.ToTable("questionnaire", (string)null);
                 });
 
             modelBuilder.Entity("Education_Software.Models.RecommendationModel", b =>
@@ -110,7 +110,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("username", "q_id");
 
-                    b.ToTable("recommendations");
+                    b.ToTable("recommendations", (string)null);
                 });
 
             modelBuilder.Entity("Education_Software.Models.SpecializationModel", b =>
@@ -129,7 +129,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("spe_id", "spe_name", "sub_id");
 
-                    b.ToTable("specializations");
+                    b.ToTable("specializations", (string)null);
                 });
 
             modelBuilder.Entity("Education_Software.Models.SubjectModel", b =>
@@ -171,7 +171,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("sub_id");
 
-                    b.ToTable("subjects");
+                    b.ToTable("subjects", (string)null);
                 });
 
             modelBuilder.Entity("Education_Software.Models.TestModel", b =>
@@ -198,7 +198,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("username", "test_id", "q_id");
 
-                    b.ToTable("tests");
+                    b.ToTable("tests", (string)null);
                 });
 
             modelBuilder.Entity("Education_Software.Models.UserModel", b =>
@@ -241,7 +241,7 @@ namespace Education_Software.Migrations
 
                     b.HasKey("username");
 
-                    b.ToTable("users");
+                    b.ToTable("users", (string)null);
                 });
 
             modelBuilder.Entity("Education_Software.Models.GradesModel", b =>

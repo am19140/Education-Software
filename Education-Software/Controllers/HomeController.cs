@@ -4,6 +4,7 @@ using Education_Software.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using NuGet.Protocol;
 using System.Diagnostics;
 
 namespace Education_Software.Controllers
@@ -63,26 +64,59 @@ namespace Education_Software.Controllers
             return View("Subject", subjectmodel); 
         }
 
-        [HttpPost]
-        public IActionResult ReadSubject(string username,string subject)
+        public IActionResult NextSubject(string username,string subject)
         {
             ViewBag.username = username;
             ViewBag.subject = subject;
-            SubjectModel subjectmodel = _Service.RecordReading(subject);
-            ViewBag.id = subjectmodel.sub_id;
-            List<QuestionModel> questionmodel = _Service.SubjectTest(subjectmodel);
-            List<Tuple<string, string, List<string>, List<string>>> questions = _Service.SplitQuestions(questionmodel);
-            ViewBag.questions = questions;
-            ViewBag.Done = false;
-            return View("Test", questionmodel);
+            SubjectModel subjectmodel = _Service.getNextSubjectDetails(subject);           
+            return View("Subject", subjectmodel); 
+        }
 
+        [HttpPost]
+        public IActionResult ReadSubject(string username,string subject)
+        {
+            TempData["Username"] = username;
+            TempData["Subject"] = subject;
+            SubjectModel subjectmodel = _Service.RecordReading(subject);
+            TempData["Id"] = subjectmodel.sub_id;
+            List<QuestionModel> questionmodel = _Service.SubjectTest(subjectmodel);
+            List<Tuple<string, string, string, List<string>>> questions = _Service.SplitQuestions(questionmodel);
+            TempData["Questions"] = questions;
+            TempData["Submitted"] = false;
+            TestModel testmodel = new TestModel();
+            testmodel.test_id = Guid.NewGuid().ToString();
+            return View("Test", testmodel);
         }
 
         //[HttpPost]
-        public IActionResult SubmitTest(string username, List<string> q_ids, List<string> answers, string test_type)
+        public IActionResult SubmitTest(string username, List<Tuple<string,string>> resp, string test_type)
         {
-            
+            List<Tuple<string,string>> responses = resp;
+            List<bool> results = _Service.GetTestAnswers(username, responses, test_type);
+            int count = results.Count;
+            List<bool> correct = results.Where(x => x.Equals(true)).ToList();
+            int corr = correct.Count;
+            int percentage = (corr/count)*100;
+            TempData["Submitted"] = true;
+            TempData["Percentage"] = percentage;
             return View("Test");
+        }
+
+        public IActionResult SubmitSimpleQuestion(TestModel test, string username, string q_id , string response, string test_type, bool last = false)
+        {
+            if(last)
+            {
+                bool result = _Service.AddAnswer(test, username, q_id, response, test_type);
+                TempData["Result"] = result;
+                return View("Test");
+
+            }
+            else
+            {
+                bool result = _Service.AddAnswer(test, username, q_id, response, test_type);
+                TempData["Result"] = result;
+                return View("Test");
+            }
         }
 
         public IActionResult Progress(string username)

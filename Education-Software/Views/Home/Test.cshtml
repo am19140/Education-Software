@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QuestionModel>
+﻿@model TestModel
 
 @{
     ViewData["Title"] = "Tests";
@@ -28,7 +28,7 @@
         </header>
         <div class="menu-bar">
             <div class="menu">
-                <li class="search-box">
+                <li class="search-box"> 
                     <i class='bx bx-search icon'></i>
                     <input type="text" placeholder="Search...">
                 </li>
@@ -40,31 +40,31 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@TempData["Username"]" asp-action="Subjects">
                             <i class='bx bx-book icon'></i>
                             <span class="text nav-text">Subjects</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Progress">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@TempData["Username"]" asp-action="Progress">
                             <i class='bx bx-book icon'></i>
                             <span class="text nav-text">Progress</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Grades">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@TempData["Username"]" asp-action="Grades">
                             <i class='bx bx-book icon'></i>
                             <span class="text nav-text">Past Grades</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Recommendations">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@TempData["Username"]" asp-action="Recommendations">
                             <i class='bx bx-book icon'></i>
                             <span class="text nav-text">Career Recommendations</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Profile">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@TempData["Username"]" asp-action="Profile">
                             <i class='bx bx-male icon'></i>
                             <span class="text nav-text">Profile</span>
                         </a>
@@ -89,10 +89,10 @@
     <section class="home">
 
         <div class="header">
-            <div class="text title">@ViewBag.subject Test</div>
+                <div class="text title">@TempData["Subject"] Test</div>
             <div class="right-corner">
                 <img src="~/Resources/icons8-male-user-24 (1).png"></img>
-                <div class="smalltext username ">@ViewBag.username </div>
+                    <div class="smalltext username ">@TempData["Username"] </div>
             </div>
         </div>
         <div class="main">
@@ -101,61 +101,185 @@
                 <h2>
                     Questions
                 </h2>
-                <form asp-controller="Home" asp-action="SubmitTest" method="post" class="test-btn">
-                         <input type="hidden" name="username" value="@ViewBag.username" />
-                         <input type="hidden" name="subject" value="@ViewBag.id" />    
-                    @foreach(var question in @ViewBag.questions)
+                @ViewBag.questions = @TempData["Questions"] as List<string>;
+                @foreach (var question in @ViewBag.questions)
+                {
+                string id = question.Item1;
+                string type = question.Item2;
+                string body = question.Item3;
+                List<string> possible_answers = question.Item4;
+                if (type == "multiple_choice")
+                {
+                <form asp-controller="Home" asp-action="SubmitSimpleQuestion" method="post" class="test-btn">
+                    <input type="hidden" name="testmodel" value=Model />
+                            <input type="hidden" name="username" value="@TempData["Username"]" />
+                    <input type="hidden" name="q_id" value="@id" />
+                    @body<br />
+                    <div class="radios">
+                        @foreach (var answer in possible_answers)
+                          {
+                        var ind = possible_answers.IndexOf(answer)+1;
+                        <input type="radio" id="mc" name="mc" value="@ind">
+                        <label for="mc">@answer</label><br>
+                          }
+                    </div>
+                    <input type="hidden" name="test_type" value="A" />
+                    @if (question == @ViewBag.questions[@ViewBag.questions.Count-1])
                     {
-                        string id = question.Item1;
-                        string type = question.Item2;
-                        List<string> body = question.Item3;
-                        List<string> possible_answers = question.Item4;
-                        foreach (string i in body){
-                            @i<br />
-                            foreach (string j in possible_answers)
-                            {
-                            if (type == "multiple_choice")
-                            {
-                                    <input type="radio" id="" name="" value="">
-                                @j
-                                <br />
-                            }
-                            else if (type == "true/false")
-                            {
-                                @j
-                                    <input type="radio" id="" name="" value="True">
-                                    <input type="radio" id="" name="" value="False">
-                                <br />
-                            }
-                            else if (type == "ordering")
-                            {
-                                @j
-
-                                <br />
-                            }
-                            else if (type == "completion")
-                            {
-                                    //l = @j.Split("#").ToList();
-                                    <input type="text">
-                                <br />
-                            }
-                            else if (type == "matching")
-                            {
-                                @j
-
-                                <br />
-                            }
-                            }
-                            <br><br>
-                        }
+                    <input type="hidden" name="number" value=true />
                     }
                     <button id="btnDone" type="submit" class="done buttons icon">
-                        Submit Test
+                        Sumbit
+                    </button>
+                    @if (@ViewBag.result == true)
+                        {
+                    <i class='bx bxs-check-circle' style="color:#92D050"></i>
+
+                        }
+                        else {<i class='bx bxs-check-circle' style="color:lightgrey"></i>}
+                </form>
+                }
+                else if (type == "true/false")
+                {
+                }
+                else if (type == "completion")
+                {
+                }
+                else if (type == "matching")
+                {
+            <form asp-controller="Home" asp-action="SubmitComplexQuestion" method="post" class="test-btn">
+                <input type="hidden" name="testmodel" value=Model/>
+                                <input type="hidden" name="username" value="@TempData["Username"]" />
+                <input type="hidden" name="q_id" value="@id" />
+                <input type="hidden" name="test_type" value="A" />
+                @if (question == @ViewBag.questions[@ViewBag.questions.Count - 1])
+                {
+                    <input type="hidden" name="number" value=true />
+                }
+                <button id="btnDone" type="submit" class="done buttons icon">
+                    Sumbit
+                </button>
+            </form>
+                }
+                }
+
+
+
+
+
+
+
+
+
+                <!--
+    <form asp-controller="Home" asp-action="SubmitTest" method="post" class="test-btn">
+        <input type="hidden" name="username" value="@ViewBag.username" />
+        <input type="hidden" name="subject" value="@ViewBag.id" />
+        List<Tuple<string,string>> responses = new List<Tuple<string,string>>
+        foreach(var question in @ViewBag.questions)
+        {
+            string id = question.Item1;
+            string type = question.Item2;
+            List<string> body = question.Item3;
+            List<string>
+            possible_answers = question.Item4;
+            foreach (string i in body)
+            {
+                i<br />
+                <div class="radios">
+                Html.RadioButtonFor(r=>r.gender,"Female", new{id="Female"})<label for="Female">Female</label><br>
+                Html.RadioButtonFor(r=>r.gender,"Male", new{id="Male"})<label for="Male">Male</label><br>
+                Html.RadioButtonFor(r=>r.gender,"Other", new{id="Other"})<label for="Other">Other</label><br>
+                </div>
+                string answers = "";
+                foreach (string j in possible_answers)
+                {
+                    if (type == "multiple_choice")
+                    {
+                        answers = <input type="radio" id="" name="" value="">.ToString();
+                        j
+                        <br />
+                    }
+                    else if (type == "true/false")
+                    {
+                        j
+                        <input type="radio" id="" name="" value="True">
+                        <input type="radio" id="" name="" value="False">
+                        <br />
+                    }
+                    else if (type == "completion")
+                    {
+                        //l = j.Split("#").ToList();
+                        <input type="text">
+                        <br />
+                    }
+                    else if (type == "matching")
+                    {
+                       j
+
+                        <br />
+                    }
+                }
+            responses.Add(new Tuple<string,string>(id,answers));
+            <br><br>
+            }
+        }
+    <button id="btnDone" type="submit" class="done buttons icon">
+        Submit Test
+    </button>
+    </form>
+        
+                if (@ViewBag.submitted)
+                {
+                <h5>
+                    <i>
+                        You have answered correctly in @ViewBag.percentage% of the questions.
+                    </i>
+                </h5>
+                if(@ViewBag.percentage < 60)
+                {
+                <h5>
+                    <i>
+                        You have to read again the chapter and make the test again.
+                    </i>
+                </h5>
+                <form asp-controller="Home" asp-action="Subject" method="post" class="test-btn">
+                    <input type="hidden" name="username" value="@ViewBag.username" />
+                    <input type="hidden" name="subject" value="@ViewBag.subject" />
+                    <button id="btnDone" type="submit" class="done buttons icon">
+                        Go to the subject's content.
                     </button>
                 </form>
+                }
+                else
+                {
+                <h5>
+                    <i>
+                        Do you want to retake the test to improve your results?
+                        (Note: You have to read again the chapter to take another test.)
+                    </i>
+                </h5>
+                <form asp-controller="Home" asp-action="Subject" method="post" class="test-btn">
+                    <input type="hidden" name="username" value="@ViewBag.username" />
+                    <input type="hidden" name="subject" value="@ViewBag.subject" />
+                    <button id="btnDone" type="submit" class="done buttons icon">
+                        Yes, retake the test.
+                    </button>
+                </form>
+                <form asp-controller="Home" asp-action="NextSubject" method="post" class="test-btn">
+                    <input type="hidden" name="username" value="@ViewBag.username" />
+                    <input type="hidden" name="subject" value="@ViewBag.subject" />
+                    <button id="btnDone" type="submit" class="done buttons icon">
+                        No, go to the next chapter.
+                    </button>
+                </form>
+                }
+
+                }
+                -->
             </div>          
         </div>
-
+        
         
     </section>
 

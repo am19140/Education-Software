@@ -30,6 +30,16 @@ namespace Education_Software.Service
         
         }
 
+        public SubjectModel getNextSubjectDetails(string title)
+        {
+            var subject = _context.subjects.ToList();
+            var nextsubject = subject[0];
+            //var ind = subject.IndexOf(x => x.title == title);
+            //var nextsubject = subject.[ind];
+            return nextsubject;
+
+        }
+
         public SubjectModel RecordReading(string title)
         {
             var subject = _context.subjects.FirstOrDefault(x=>x.title==title);
@@ -51,49 +61,47 @@ namespace Education_Software.Service
             return questions;
         }
         
-        public List<Tuple<string, string, List<string>, List<string>>> SplitQuestions(List<QuestionModel> model)
+        public List<Tuple<string, string, string, List<string>>> SplitQuestions(List<QuestionModel> model)
         {
             List<QuestionModel> questions = getRandomQuestions(model);
-            List<Tuple<string, string, List<string>, List<string>>> q = new List<Tuple<string, string, List<string>, List<string>>>();
+            List<Tuple<string, string, string, List<string>>> q = new List<Tuple<string, string, string, List<string>>>();
             foreach (QuestionModel question in questions)
             {
-                List<string> body = new List<string>();
+                string body = "";
                 List<string> possible_answers = new List<string>();
                 if (question.q_type == "multiple_choice")
                 {
                     string[] s = question.question.Split("•");
                     Debug.WriteLine(s);
-                    body.Add(s[0]);
+                    body = s[0];
                     possible_answers = s.Skip(1).ToList();
                 }
                 else if (question.q_type == "true/false")
                 {
                     string[] s = question.question.Split("•");
-                    body.Add(s[0]);
+                    body = s[0];
                     possible_answers = s.Skip(1).ToList();
                 }
                 else if (question.q_type == "ordering")
                 {
                     string[] s = question.question.Split("•");
-                    body.Add(s[0]);
+                    body = s[0];
                     possible_answers = s.Skip(1).ToList();
                 }
                 else if (question.q_type == "completion")
                 {
                     string[] s = question.question.Split("•");
-                    body.Add(s[0]);
+                    body = s[0];
                     possible_answers = s.Skip(1).ToList();
                 }
                 else if (question.q_type == "matching")
                 {
                     string[] s = question.question.Split("•");
-                    body.Add(s[0]);
-                    int half = (s.Length-1) / 2;
-                    body = s.Skip(1).Where((e, i) => i < half).ToList();
-                    possible_answers = s.Skip(half).ToList();
+                    body = s[0];
+                    possible_answers = s.Skip(1).ToList();
                 }
 
-                Tuple<string, string, List<string>, List<string>> el = new Tuple<string, string, List<string>, List<string>>(question.q_id, question.q_type, body, possible_answers);
+                Tuple<string, string, string, List<string>> el = new Tuple<string, string, string, List<string>>(question.q_id, question.q_type, body, possible_answers);
                 q.Add(el);
             }
             return q;
@@ -120,13 +128,32 @@ namespace Education_Software.Service
                         results.Add(false);
                 }
                 test.username = username;
-                test.test_id = "";
+                test.test_id = Guid.NewGuid().ToString();
                 test.q_id = q_id;
                 test.test_type = test_type;
                 test.score = result;
             }
             _context.tests.Add(test);
             return results;
+        }
+
+        public bool AddAnswer(TestModel test, string username, string q_id, string response, string test_type)
+        {
+            bool result = false;
+            var question = _context.questions.FirstOrDefault(x => x.q_id == q_id);
+            if (question.answer == response)
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+            test.username = username;
+            test.q_id = q_id;
+            test.test_type = test_type;
+            test.score = result;
+            return result;
         }
 
         public bool Login(string username,string password)
