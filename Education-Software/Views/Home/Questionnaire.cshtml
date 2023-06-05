@@ -1,7 +1,7 @@
-﻿@model LoginModel
+﻿@model IEnumerable<QuestionnaireModel>
 
 @{
-    ViewData["Title"] = "Homepage";
+    ViewData["Title"] = "Recommendations";
 }
 
 @section Styles{
@@ -58,6 +58,12 @@
                             </a>
                         </li>
                         <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Questionnaire">
+                                <i class='bx bx-book icon'></i>
+                                <span class="text nav-text">Career Test</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
                             <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Recommendations">
                                 <i class='bx bx-book icon'></i>
                                 <span class="text nav-text">Career Recommendations</span>
@@ -96,8 +102,25 @@
             </div>
         </div>
         <div class="main">
-            
-
+            <form asp-controller="Home" asp-action="SubmitQuestionnaire" method="post" class="test-btn">
+            @foreach (var md in Model)
+                {
+                    <input type="hidden" name="username" value="@ViewBag.username" />
+                    <input type="hidden" name="q_id" value="@md.q_id" />
+                    @md.question<br />
+                    <div class="radios">
+                        @foreach (var answer in md.possible_answers)
+                          {
+                        var ind = md.possible_answers.IndexOf(answer)+1;
+                        <input type="radio" id="mc" name="mc" value="@ind">
+                        <label for="mc">@answer</label><br>
+                          }
+                    </div>
+                }
+                <button id="btnDone" type="submit" class="done buttons icon">
+                        Sumbit
+                    </button>
+                </form>
         </div>
 
         

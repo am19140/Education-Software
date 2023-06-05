@@ -57,6 +57,12 @@
                             <span class="text nav-text">Past Grades</span>
                         </a>
                     </li>
+                        <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Questionnaire">
+                                <i class='bx bx-book icon'></i>
+                                <span class="text nav-text">Career Test</span>
+                            </a>
+                        </li>
                     <li class="nav-link">
                         <a class="profbtn" asp-controller="Home" asp-route-username="@TempData["Username"]" asp-action="Recommendations">
                             <i class='bx bx-book icon'></i>
@@ -101,7 +107,7 @@
                 <h2>
                     Questions
                 </h2>
-                @ViewBag.questions = @TempData["Questions"] as List<string>;
+                <!--@ViewBag.questions = @TempData["Questions"] as List<string>;
                 @foreach (var question in @ViewBag.questions)
                 {
                 string id = question.Item1;
@@ -163,7 +169,7 @@
                 }
                 }
 
-
+                -->
 
 
 

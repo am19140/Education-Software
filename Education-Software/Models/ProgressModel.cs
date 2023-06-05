@@ -35,9 +35,24 @@ namespace Education_Software.Models
         [RegularExpression(@"^[A,E]{1}$", ErrorMessage = "Invalid Test Type.")]
         public string test_type { get; set; }
 
-        [Column(TypeName = "BOOLEAN")]
+        [Column(TypeName = "NUMERIC")]
         [Required]
-        public bool score { get; set; }
+        public int score { get; set; }
 
+        [Column(TypeName = "NUMERIC")]
+        [Required]
+        public int description_percentage { get; set; }
+
+        [Column(TypeName = "NUMERIC")]
+        [Required]
+        public int learning_outcomes_percentage { get; set; }
+
+        [Column(TypeName = "NUMERIC")]
+        [Required]
+        public int skills_acquired_percentage { get; set; }
+
+        [Column(TypeName = "NUMERIC")]
+        [Required]
+        public int specialization_link_percentage { get; set; }
     }
 }

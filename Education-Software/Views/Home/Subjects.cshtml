@@ -59,6 +59,12 @@
                             </a>
                         </li>
                         <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Questionnaire">
+                                <i class='bx bx-book icon'></i>
+                                <span class="text nav-text">Career Test</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
                             <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Recommendations">
                                 <i class='bx bx-book icon'></i>
                                 <span class="text nav-text">Career Recommendations</span>
@@ -118,6 +124,26 @@
                         </tr>
 
                     }
+                    
+                    <tr>
+                        <td>
+                            <br />
+                            <br />
+                            <h5>
+                                <i>
+                                    Note: In order to access the Evaluation Test, you have to read the content of each subject and pass the test in the end of the chapter.
+                                </i><
+                            </h5>
+                            <form asp-controller="Home" asp-action="EvaluationTest" method="post" class="left-form-up">
+                                <input type="hidden" name="evaluationtest" value="Evaluation Test" />
+                                <input type="hidden" name="username" value="@ViewBag.username" />
+                                <input type="submit" class="subject" value="Evaluation Test" />
+                                <i class='bx bx-chevron-right icon'></i>
+                            </form>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
                 </table>
                 
                 

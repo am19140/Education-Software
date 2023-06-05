@@ -3,9 +3,11 @@ using Education_Software.Models;
 using Education_Software.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Npgsql;
 using NuGet.Protocol;
 using System.Diagnostics;
+using System.Security.Policy;
 
 namespace Education_Software.Controllers
 {
@@ -81,7 +83,8 @@ namespace Education_Software.Controllers
             TempData["Id"] = subjectmodel.sub_id;
             List<QuestionModel> questionmodel = _Service.SubjectTest(subjectmodel);
             List<Tuple<string, string, string, List<string>>> questions = _Service.SplitQuestions(questionmodel);
-            TempData["Questions"] = questions;
+            //TempData["Questions"] = questions;
+            ViewBag.questions = questions;
             TempData["Submitted"] = false;
             TestModel testmodel = new TestModel();
             testmodel.test_id = Guid.NewGuid().ToString();
@@ -119,6 +122,11 @@ namespace Education_Software.Controllers
             }
         }
 
+        public IActionResult EvaluationTest(string username)
+        {
+            return View("Evaluation");
+        }
+
         public IActionResult Progress(string username)
         {
             ViewBag.username = username;
@@ -131,20 +139,55 @@ namespace Education_Software.Controllers
         public IActionResult Grades(string username)
         {
             ViewBag.username = username;
-            //_progressService will be like _subjectService but will retrieve the students progress to each subject and present it in the progress page
-            //var progressmodel = _subjectService.getSubjects();
-            return View();
-
+            List<SubjectModel> subjectmodels = _Service.getSubjects();
+            Dictionary<string,string> subjects = new Dictionary<string,string>();
+            List<GradesModel> gradesmodels = new List<GradesModel>();
+            foreach (var subject in subjectmodels)
+            {
+                subjects.Add(subject.sub_id, subject.title);
+                GradesModel model = new GradesModel();
+                model.username = username;
+                model.sub_id = subject.sub_id;
+                model.grade = null;
+                gradesmodels.Add(model);               
+            }
+            ViewBag.subjects = subjects;
+            return View("Grades", gradesmodels);
         }
 
-        public IActionResult Recommendations(string username)
+        public IActionResult SubmitGrades(string username, List<string> subjects, List<string> grades)
         {
             ViewBag.username = username;
-            //_gradeService will be like _subjectService but will retrieve the students grades to continue in the recommendations 
-            // var recommendationsmodel = _gradeService.getGrades();
-            return View();
+            //GradesModel gradesmodel = _Service.addGrades(username, subjects, grades);
+            return View("Grades");
         }
 
+        public IActionResult Questionnaire(string username)
+        {
+            ViewBag.username = username;
+            List<QuestionnaireModel> questionnairemodel = _Service.getRecommendationQuestions();
+            return View("Questionnaire", questionnairemodel);
+        }
+
+        public IActionResult SubmitQuestionnaire(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3)
+        {
+            RecommendationModel recommendation = _Service.getRecommendations(username, q_id1, answer1, q_id2, answer2, q_id3, answer3);
+            return View("Recommendations", recommendation);
+        }
+
+        public IActionResult Recommendation(string username)
+        {
+            RecommendationModel r = _Service.getRecommendationModel(username);
+            if(r.recommendation == null)
+            {
+                ViewBag.recommendation = false;
+            }
+            else
+            {
+                ViewBag.recommendation = true;
+            }
+            return View("Recommendation", r);
+        }
         public IActionResult Privacy()
         {
             return View();

@@ -1,6 +1,7 @@
 ﻿using Education_Software.Context;
 using Education_Software.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Operations;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -154,6 +155,150 @@ namespace Education_Software.Service
             test.test_type = test_type;
             test.score = result;
             return result;
+        }
+
+        public void AddGrades(string username, List<string> subjects, List<string> grades)
+        {
+            //foreach()
+        }
+
+        public List<QuestionnaireModel> getRecommendationQuestions()
+        {
+            List<QuestionnaireModel> q = (from s in _context.questionnaire
+                                    select s).ToList();
+            return q;
+        }
+
+        public RecommendationModel getRecommendations(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3)
+        {
+            List<string> first = new List<string>();
+            List<string> second = new List<string>();
+            if(answer1 == "1")
+            {
+                first.Append(answer1);
+            }
+            else if (answer1 == "2")
+            {
+                second.Append(answer1);
+            }
+            if (answer2 == "1")
+            {
+                first.Append(answer2);
+            }
+            else if (answer2 == "2")
+            {
+                second.Append(answer2);
+            }
+            if (answer3 == "1")
+            {
+                first.Append(answer3);
+            }
+            else if (answer3 == "2")
+            {
+                second.Append(answer3);
+            }
+
+            List<GradesModel> grades = _context.grades.Where(x => x.username == username).ToList();
+            Dictionary<string, int?> dict = new Dictionary<string, int?>(); 
+            foreach (var gr in grades)
+            {
+                dict[gr.sub_id] = gr.grade;
+            }
+            string recommendation = "";
+            if (first.Count > second.Count)
+            {
+                if (!dict.ElementAt(0).Value.HasValue)
+                {
+                    recommendation = "Your profile and preferences seem to associate you to front-end development, as you are more likely" +
+                        "an artistic personality and like writing code in C#. You don't habve a grade yet in subjects like Human-Computer Interaction, but this doesn't prevent you to start thinking about your career." +
+                        "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
+                        "There are some fitting post-graduate programs available to you, like: " +
+                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
+                        "\r\nMSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
+                        "\r\nMSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
+                        "\r\nMSc in Information Systems - Athens University of Economics and Business (AUEB)" +
+                        "\r\nMSc in Computer Science - University of Patras" +
+                        "\r\nMSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
+                }
+                else if (dict.ElementAt(0).Value > 6)
+                {
+                    recommendation = "Your profile and preferences seem to associate you to front-end development, as you are more likely" +
+                        "an artistic personality and like writing code in C#. Your Grades in subjects like Human-Computer Interaction are good, and you might prefer that subject among others." +
+                        "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
+                        "There are some fitting post-graduate programs available to you, like: " +
+                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
+                        "\r\nMSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
+                        "\r\nMSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
+                        "\r\nMSc in Information Systems - Athens University of Economics and Business (AUEB)" +
+                        "\r\nMSc in Computer Science - University of Patras" +
+                        "\r\nMSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
+                }
+                else
+                {
+                    recommendation = "Your profile and preferences seem to associate you to front-end development, as you are more likely" +
+                        "an artistic personality and like writing code in C#. However, your Grades in subjects like Human-Computer Interaction are not that good, even though you might prefer that subject among others, but with more experience in the topic you can become an expert later on." +
+                        "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
+                        "There are some fitting post-graduate programs available to you, like: " +
+                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
+                        "\r\nMSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
+                        "\r\nMSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
+                        "\r\nMSc in Information Systems - Athens University of Economics and Business (AUEB)" +
+                        "\r\nMSc in Computer Science - University of Patras" +
+                        "\r\nMSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
+                }
+            }
+            else if (first.Count < second.Count)
+            {
+                if (!dict.ElementAt(1).Value.HasValue)
+                {
+                    recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" +
+                        "a practical personality and like writing code in Assembly. You don't habve a grade yet in subjects like Computer Architecture, but this doesn't prevent you to start thinking about your career." +
+                        "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." +
+                        "There are some fitting post-graduate programs available to you, like:" +
+                        "\r\nMSc in Electronic Computer Systems - University of Piraeus" +
+                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
+                        "\r\nMSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
+                        "\r\nMSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
+                        "\r\nMSc in Computer Engineering - University of Patras" +
+                        "\r\nMSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
+                }
+                else if (dict.ElementAt(1).Value > 7)
+                {
+                    recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" +
+                        "a practical personality and like writing code in Assembly. Your Grades in subjects like Computer Architecture are good and you might prefer these subjects among others." +
+                        "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." +
+                        "There are some fitting post-graduate programs available to you, like:" +
+                        "\r\nMSc in Electronic Computer Systems - University of Piraeus" +
+                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
+                        "\r\nMSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
+                        "\r\nMSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
+                        "\r\nMSc in Computer Engineering - University of Patras" +
+                        "\r\nMSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
+                }
+                else
+                {
+                    recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" +
+                        "a practical personality and like writing code in Assembly. However, your Grades in subjects like Computer Architecture are not that good, even though you might prefer that subject among others, but with more experience in the topic you can become an expert later on." +
+                        "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." +
+                        "There are some fitting post-graduate programs available to you, like:" +
+                        "\r\nMSc in Electronic Computer Systems - University of Piraeus" +
+                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
+                        "\r\nMSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
+                        "\r\nMSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
+                        "\r\nMSc in Computer Engineering - University of Patras" +
+                        "\r\nMSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
+                }
+            }
+            RecommendationModel r = new RecommendationModel();
+            r.username = username;
+            r.recommendation = recommendation;
+            return r;
+        }
+
+        public RecommendationModel getRecommendationModel(string username)
+        {
+            var r = _context.recommendations.FirstOrDefault(x => x.username == username);
+            return r;
         }
 
         public bool Login(string username,string password)

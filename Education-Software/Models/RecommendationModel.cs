@@ -15,15 +15,9 @@ namespace Education_Software.Models
         [ForeignKey("UserModel")]
         public string username { get; set; }
 
-        [Column(TypeName = "VARCHAR")]
-        [Required]
-        [MaxLength(50)]
-        [ForeignKey("QuestionnaireModel")]
-        public string q_id { get; set; }
-
         [Column(TypeName = "TEXT")]
         [Required]
-        public string answer { get; set; }
+        public string recommendation { get; set; }
 
     }
 }

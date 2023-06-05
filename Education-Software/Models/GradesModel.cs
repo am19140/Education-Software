@@ -22,7 +22,7 @@ namespace Education_Software.Models
 
         [Required]
         [RegularExpression(@"^[0-10]$", ErrorMessage = "The grade must be a number between 0 and 10.")]
-        public int grade { get; set; }
+        public int? grade { get; set; }
 
     }
 }
