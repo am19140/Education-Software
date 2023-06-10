@@ -42,7 +42,7 @@ namespace Education_Software.Context
             modelBuilder.Entity<GradesModel>().HasKey(x => new { x.username, x.sub_id});
             modelBuilder.Entity<GradesModel>().Property(x => x.sub_id).IsRequired();
             modelBuilder.Entity<QuestionnaireModel>().Property(x => x.q_id).IsRequired();
-            modelBuilder.Entity<RecommendationModel>().HasKey(x => new { x.username,x.q_id });
+            modelBuilder.Entity<RecommendationModel>().HasKey(x => new { x.username });
         }
 
 

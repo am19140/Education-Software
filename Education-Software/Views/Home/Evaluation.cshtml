@@ -1,0 +1,144 @@
+﻿@model TestModel
+
+@{
+    ViewData["Title"] = "Evaluation";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/HomepageStyle.css" />
+    <link rel="stylesheet" href="~/css/MenuStyle.css" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+}
+
+    <!--Side Menu-->
+    <body>
+        <nav class="sidebar close">
+            <header>
+                <div class="image-text">
+                    <span class="image">
+                        <!--<img src="logo.png" alt="">-->
+                    </span>
+                    <div class="text logo-text">
+                        <span class="name">Job orientation</span>
+                        <span class="profession"><i>Computer Science</i> </span>
+                    </div>
+                </div>
+                <i class='bx bx-chevron-right toggle'></i>
+            </header>
+            <div class="menu-bar">
+                <div class="menu">
+                    <li class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="text" placeholder="Search...">
+                    </li>
+                    <ul class="menu-links">
+                        <li class="nav-link">
+                            <a class="homebtn" href="#">
+                                <i class='bx bx-home-alt icon'></i>
+                                <span class="text nav-text">Homepage</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
+                                <i class='bx bx-book icon'></i>
+                                <span class="text nav-text">Subjects</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Progress">
+                                <i class='bx bx-book icon'></i>
+                                <span class="text nav-text">Progress</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Grades">
+                                <i class='bx bx-book icon'></i>
+                                <span class="text nav-text">Past Grades</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Questionnaire">
+                                <i class='bx bx-book icon'></i>
+                                <span class="text nav-text">Career Test</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Recommendations">
+                                <i class='bx bx-book icon'></i>
+                                <span class="text nav-text">Career Recommendations</span>
+                            </a>
+                        </li>
+                        <li class="nav-link">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Profile">
+                                <i class='bx bx-male icon'></i>
+                                <span class="text nav-text">Profile</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <div class="bottom-content">
+                    <li class="">
+                        <a class="logoutbtn" asp-controller="Home" asp-action="Login">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text">Logout</span>
+                        </a>
+                    </li>
+
+
+                </div>
+            </div>
+        </nav>
+
+        <section class="home">
+
+            <div class="header">
+                <div class="text title">Evaluation</div>
+                <div class="right-corner">
+                    <img src="~/Resources/icons8-male-user-24 (1).png"></img>
+                    <div class="smalltext username ">@ViewBag.username </div>
+                </div>
+            </div>
+            <div class="main">
+                <form asp-controller="Home" asp-action="Subjects" method="post">
+                    <input type="hidden" name="username" value="@ViewBag.username" />
+                    <button id="btnDone" type="submit" class="done buttons icon">
+                        Go to HomePage
+                        </button>
+                </form>
+            </div>
+
+
+        </section>
+
+        <script>
+            const body = document.querySelector('body'),
+                sidebar = body.querySelector('nav'),
+                toggle = body.querySelector(".toggle"),
+                searchBtn = body.querySelector(".search-box"),
+                modeSwitch = body.querySelector(".toggle-switch"),
+                modeText = body.querySelector(".mode-text"),
+                buttonplay = body.querySelector(".play"),
+                buttonpause = body.querySelector(".pause");
+
+            toggle.addEventListener("click", () => {
+                sidebar.classList.toggle("close");
+            })
+            searchBtn.addEventListener("click", () => {
+                sidebar.classList.remove("close");
+            })
+            modeSwitch.addEventListener("click", () => {
+                body.classList.toggle("dark");
+
+                if (body.classList.contains("dark")) {
+                    modeText.innerText = "Light mode";
+                } else {
+                    modeText.innerText = "Dark mode";
+
+                }
+            });
+        </script>
+
+    </body>

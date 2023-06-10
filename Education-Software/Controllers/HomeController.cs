@@ -124,7 +124,15 @@ namespace Education_Software.Controllers
 
         public IActionResult EvaluationTest(string username)
         {
-            return View("Evaluation");
+            TempData["Username"] = username;
+            List<QuestionModel> q = _Service.getAllQuestions();
+            List<Tuple<string, string, string, List<string>>> questions = _Service.SplitQuestions(q);
+            //TempData["Questions"] = questions;
+            ViewBag.questions = questions;
+            TempData["Submitted"] = false;
+            TestModel testmodel = new TestModel();
+            testmodel.test_id = Guid.NewGuid().ToString();
+            return View("Evaluation", testmodel);
         }
 
         public IActionResult Progress(string username)
@@ -172,6 +180,7 @@ namespace Education_Software.Controllers
         public IActionResult SubmitQuestionnaire(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3)
         {
             RecommendationModel recommendation = _Service.getRecommendations(username, q_id1, answer1, q_id2, answer2, q_id3, answer3);
+            ViewBag.recommendation = true;
             return View("Recommendations", recommendation);
         }
 
@@ -186,7 +195,7 @@ namespace Education_Software.Controllers
             {
                 ViewBag.recommendation = true;
             }
-            return View("Recommendation", r);
+            return View("Recommendations", r);
         }
         public IActionResult Privacy()
         {

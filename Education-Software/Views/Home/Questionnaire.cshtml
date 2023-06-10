@@ -92,39 +92,49 @@
         </div>
     </nav>
 
-    <section class="home">
+                <section class="home">
 
-        <div class="header">
-            <div class="text title">Recommendations</div>
-            <div class="right-corner">
-                <img src="~/Resources/icons8-male-user-24 (1).png"></img>
-                <div class="smalltext username ">@ViewBag.username </div>
-            </div>
-        </div>
-        <div class="main">
-            <form asp-controller="Home" asp-action="SubmitQuestionnaire" method="post" class="test-btn">
-            @foreach (var md in Model)
-                {
-                    <input type="hidden" name="username" value="@ViewBag.username" />
-                    <input type="hidden" name="q_id" value="@md.q_id" />
-                    @md.question<br />
-                    <div class="radios">
-                        @foreach (var answer in md.possible_answers)
-                          {
-                        var ind = md.possible_answers.IndexOf(answer)+1;
-                        <input type="radio" id="mc" name="mc" value="@ind">
-                        <label for="mc">@answer</label><br>
-                          }
+                    <div class="header">
+                        <div class="text title">Recommendations</div>
+                        <div class="right-corner">
+                            <img src="~/Resources/icons8-male-user-24 (1).png"></img>
+                            <div class="smalltext username ">@ViewBag.username </div>
+                        </div>
                     </div>
-                }
-                <button id="btnDone" type="submit" class="done buttons icon">
-                        Sumbit
-                    </button>
-                </form>
-        </div>
+                    <div class="main">
+                        <form asp-controller="Home" asp-action="SubmitQuestionnaire" method="post" class="test-btn">
+                            <input type="hidden" name="username" value="@ViewBag.username" />
+                            @foreach (var md in Model)
+                            {
+                            <input type="hidden" id="q" name="q_id" value="@md.q_id" />
+                            @md.question<br />
+                            <div class="radios">
+                                @foreach (var answer in md.possible_answers)
+                            {
+                            var ind = md.possible_answers.IndexOf(answer)+1;
+                                <input type="radio" id="mc" name="mc" value="@ind">
+                                <label for="mc">@answer</label><br>
+                            }
+                            </div>
+                            }
+                            <button id="btnDone" type="submit" onclick="myFunction()" class="done buttons icon">
+                                Sumbit
+                            </button>
+                        </form>
+                        <script>
+                            function myFunction() {
+                                Dictionairy < string, string > d = new Dictionairy < string, string > ();
+                                d.keys() = document.getElementsByName("q_id").values();
+                                foreach(var key in d.keys())
+                                {
 
-        
-    </section>
+                                }
+                            }
+                        </script>
+                    </div>
+                    
+
+                </section>
 
     <script>
         const body = document.querySelector('body'),

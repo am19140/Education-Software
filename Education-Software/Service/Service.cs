@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.Operations;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 
 namespace Education_Software.Service
 {
@@ -53,6 +54,12 @@ namespace Education_Software.Service
         {
             var question = _context.questions.Where(x => x.sub_id == subjectmodel.sub_id).ToList();
             return question;
+        }
+
+        public List<QuestionModel> getAllQuestions()
+        {
+            List<QuestionModel> q = _context.questions.ToList();
+            return q;
         }
 
         public List<QuestionModel> getRandomQuestions(List<QuestionModel> model)
