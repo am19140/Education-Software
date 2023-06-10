@@ -95,7 +95,7 @@
                 <section class="home">
 
                     <div class="header">
-                        <div class="text title">Recommendations</div>
+                        <div class="text title">Career Test</div>
                         <div class="right-corner">
                             <img src="~/Resources/icons8-male-user-24 (1).png"></img>
                             <div class="smalltext username ">@ViewBag.username </div>
@@ -109,28 +109,19 @@
                             <input type="hidden" id="q" name="q_id" value="@md.q_id" />
                             @md.question<br />
                             <div class="radios">
-                                @foreach (var answer in md.possible_answers)
+                                @foreach (var answer in md.possible_answers.Split("•"))
                             {
+
                             var ind = md.possible_answers.IndexOf(answer)+1;
                                 <input type="radio" id="mc" name="mc" value="@ind">
                                 <label for="mc">@answer</label><br>
                             }
                             </div>
                             }
-                            <button id="btnDone" type="submit" onclick="myFunction()" class="done buttons icon">
+                            <button id="btnDone" type="submit" class="done buttons icon">
                                 Sumbit
                             </button>
                         </form>
-                        <script>
-                            function myFunction() {
-                                Dictionairy < string, string > d = new Dictionairy < string, string > ();
-                                d.keys() = document.getElementsByName("q_id").values();
-                                foreach(var key in d.keys())
-                                {
-
-                                }
-                            }
-                        </script>
                     </div>
                     
 

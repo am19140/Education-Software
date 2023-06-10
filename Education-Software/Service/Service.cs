@@ -62,16 +62,44 @@ namespace Education_Software.Service
             return q;
         }
 
-        public List<QuestionModel> getRandomQuestions(List<QuestionModel> model)
+        public List<QuestionModel> getRandomQuestions(List<QuestionModel> model, string test_type)
         {
             @Random r = new Random((int)DateTime.Now.Ticks);
-            List<QuestionModel> questions = model.OrderBy(h => r.Next()).Take(2).ToList();
-            return questions;
+            List<QuestionModel> quest = new List<QuestionModel>();
+            if (test_type == "A")
+            {
+                var q1 = model.Where(x => x.q_type == "multiple_choice").OrderBy(h => r.Next()).Take(1).First();
+                var q2 = model.Where(x => x.q_type == "true/false").OrderBy(h => r.Next()).Take(1).First();
+                var q3 = model.Where(x => x.q_type == "completion").OrderBy(h => r.Next()).Take(1).First();
+                //var q4 = model.Where(x => x.q_type == "matching").OrderBy(h => r.Next()).Take(1).First();
+                quest.Add(q1);
+                quest.Add(q2);
+                quest.Add(q3);
+                //quest.Add(q4);
+            }
+            else
+            {
+                var q1 = model.OrderBy(h => r.Next()).Take(1).First();
+                var q2 = model.OrderBy(h => r.Next()).Take(1).First();
+                var q3 = model.OrderBy(h => r.Next()).Take(1).First();
+                var q4 = model.OrderBy(h => r.Next()).Take(1).First();
+                var q5 = model.OrderBy(h => r.Next()).Take(1).First();
+                var q6 = model.OrderBy(h => r.Next()).Take(1).First();
+                var q7 = model.OrderBy(h => r.Next()).Take(1).First();
+                quest.Add(q1);
+                quest.Add(q2);
+                quest.Add(q3);
+                quest.Add(q4);
+                quest.Add(q5);
+                quest.Add(q6);
+                quest.Add(q7);
+            }
+            return quest;
         }
         
-        public List<Tuple<string, string, string, List<string>>> SplitQuestions(List<QuestionModel> model)
+        public List<Tuple<string, string, string, List<string>>> SplitQuestions(List<QuestionModel> model, string test_type)
         {
-            List<QuestionModel> questions = getRandomQuestions(model);
+            List<QuestionModel> questions = getRandomQuestions(model, test_type);
             List<Tuple<string, string, string, List<string>>> q = new List<Tuple<string, string, string, List<string>>>();
             foreach (QuestionModel question in questions)
             {
@@ -115,15 +143,15 @@ namespace Education_Software.Service
             return q;
         }
 
-        public List<bool> GetTestAnswers(string username, List<Tuple<string,string>> responses, string test_type)
+        public List<bool> GetTestAnswers(string username, Dictionary<string,string> responses, string test_type)
         {
             List<bool> results = new List<bool>();
             bool result = false;
             TestModel test = new TestModel();
-            foreach (Tuple<string,string> response in responses) 
+            foreach (var (key,value) in responses) 
             {
-                string q_id = response.Item1;
-                string answer = response.Item2;
+                string q_id = key;
+                string answer = value;
                 var question = _context.questions.FirstOrDefault(x => x.q_id == q_id);
                 if (question.answer == answer)
                 {
@@ -164,9 +192,19 @@ namespace Education_Software.Service
             return result;
         }
 
-        public void AddGrades(string username, List<string> subjects, List<string> grades)
+        public void AddGrades(List<GradesModel> model, List<string> grades)
         {
-            //foreach()
+            for (int i= 0; i< model.Count; i++)
+            {
+                if (grades[i] == "None")
+                {
+                    model[i].grade = null;
+                }
+                else
+                {
+                    model[i].grade = int.Parse(grades[i]);
+                }
+            }
         }
 
         public List<QuestionnaireModel> getRecommendationQuestions()

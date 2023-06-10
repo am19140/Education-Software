@@ -77,31 +77,33 @@ namespace Education_Software.Controllers
         [HttpPost]
         public IActionResult ReadSubject(string username,string subject)
         {
-            TempData["Username"] = username;
-            TempData["Subject"] = subject;
+            ViewBag.username = username;
+            ViewBag.subject = subject;
             SubjectModel subjectmodel = _Service.RecordReading(subject);
             TempData["Id"] = subjectmodel.sub_id;
             List<QuestionModel> questionmodel = _Service.SubjectTest(subjectmodel);
-            List<Tuple<string, string, string, List<string>>> questions = _Service.SplitQuestions(questionmodel);
+            List<Tuple<string, string, string, List<string>>> questions = _Service.SplitQuestions(questionmodel, "A");
             //TempData["Questions"] = questions;
             ViewBag.questions = questions;
-            TempData["Submitted"] = false;
-            TestModel testmodel = new TestModel();
-            testmodel.test_id = Guid.NewGuid().ToString();
-            return View("Test", testmodel);
+            ViewBag.submitted = false;
+            return View("Test");
         }
 
-        //[HttpPost]
-        public IActionResult SubmitTest(string username, List<Tuple<string,string>> resp, string test_type)
+        [HttpPost]
+        public IActionResult SubmitTest(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type)
         {
-            List<Tuple<string,string>> responses = resp;
+            Dictionary<string,string> responses = new Dictionary<string,string>();
+            responses.Add(q_id1, answer1);
+            responses.Add(q_id2, answer2);
+            responses.Add(q_id3, answer3);
             List<bool> results = _Service.GetTestAnswers(username, responses, test_type);
             int count = results.Count;
             List<bool> correct = results.Where(x => x.Equals(true)).ToList();
             int corr = correct.Count;
             int percentage = (corr/count)*100;
-            TempData["Submitted"] = true;
-            TempData["Percentage"] = percentage;
+            ViewBag.results = results;
+            ViewBag.submitted = true;
+            ViewBag.percentage = percentage;
             return View("Test");
         }
 
@@ -126,7 +128,7 @@ namespace Education_Software.Controllers
         {
             TempData["Username"] = username;
             List<QuestionModel> q = _Service.getAllQuestions();
-            List<Tuple<string, string, string, List<string>>> questions = _Service.SplitQuestions(q);
+            List<Tuple<string, string, string, List<string>>> questions = _Service.SplitQuestions(q, "E");
             //TempData["Questions"] = questions;
             ViewBag.questions = questions;
             TempData["Submitted"] = false;
@@ -148,6 +150,7 @@ namespace Education_Software.Controllers
         {
             ViewBag.username = username;
             List<SubjectModel> subjectmodels = _Service.getSubjects();
+            Debug.WriteLine(subjectmodels[0].title);
             Dictionary<string,string> subjects = new Dictionary<string,string>();
             List<GradesModel> gradesmodels = new List<GradesModel>();
             foreach (var subject in subjectmodels)
@@ -160,13 +163,16 @@ namespace Education_Software.Controllers
                 gradesmodels.Add(model);               
             }
             ViewBag.subjects = subjects;
+            Debug.WriteLine(gradesmodels);
             return View("Grades", gradesmodels);
         }
 
-        public IActionResult SubmitGrades(string username, List<string> subjects, List<string> grades)
+        public IActionResult SubmitGrades(List<GradesModel> model, string grade1, string grade2)
         {
-            ViewBag.username = username;
-            //GradesModel gradesmodel = _Service.addGrades(username, subjects, grades);
+            List<string> grades = new List<string>();
+            grades.Add(grade1);
+            grades.Add(grade2);
+            _Service.AddGrades(model, grades);
             return View("Grades");
         }
 
