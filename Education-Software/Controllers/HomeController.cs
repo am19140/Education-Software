@@ -90,7 +90,7 @@ namespace Education_Software.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitTest(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type)
+        public IActionResult SubmitTest(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type, List<Tuple<string,string, string, List<string>>> questions)
         {
             Dictionary<string,string> responses = new Dictionary<string,string>();
             responses.Add(q_id1, answer1);
@@ -100,10 +100,11 @@ namespace Education_Software.Controllers
             int count = results.Count;
             List<bool> correct = results.Where(x => x.Equals(true)).ToList();
             int corr = correct.Count;
-            int percentage = (corr/count)*100;
+            int percentage = (corr / count) * 100;
             ViewBag.results = results;
             ViewBag.submitted = true;
             ViewBag.percentage = percentage;
+            ViewBag.questions = questions;
             return View("Test");
         }
 

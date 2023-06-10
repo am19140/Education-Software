@@ -107,40 +107,39 @@
                 </h2>
                 
                 <form asp-controller="Home" asp-action="SubmitTest" method="post">
-                    <input type="hidden" name="testmodel" value=Model />
                         <input type="hidden" name="username" value="@ViewBag.username" />
                     
-                    <input type="hidden" name="q_id" value="@ViewBag.questions[0].Item1" />
+                    <input type="hidden" name="q_id1" value="@ViewBag.questions[0].Item1" />
                         @ViewBag.questions[0].Item3<br />
                         <div class="radios">
                             @foreach (var answer in @ViewBag.questions[0].Item4)
-                    {
+                            {
                             var ind = @ViewBag.questions[0].Item4.IndexOf(@answer)+1;
-                        <input type="radio" id="mc" name="mc" value="@ind">
+                        <input type="radio" id="mc" name="answer1" value="@ind"/>
                         <label for="mc">@answer</label><br>
-                    }
+                            }
                     </div>
                     <br />
-                    <input type="hidden" name="q_id" value="@ViewBag.questions[1].Item1" />
+                    <input type="hidden" name="q_id2" value="@ViewBag.questions[1].Item1" />
                     @ViewBag.questions[1].Item3<br />
                         <div class="radios">
                         @foreach (var answer in @ViewBag.questions[1].Item4)
                         {
                             @answer<br/>
-                        <input type="radio" id="t" name="t" value="true">
+                        <input type="radio" id="t" name="answer2" value="true"/>
                         <label for="t">True</label><br>
-                        <input type="radio" id="f" name="f" value="false">
+                        <input type="radio" id="f" name="answer2" value="false"/>
                         <label for="t">False</label><br>
                         }
                         </div>
                         <br />
-                    <input type="hidden" name="q_id" value="@ViewBag.questions[2].Item1" />
+                    <input type="hidden" name="q_id3" value="@ViewBag.questions[2].Item1" />
                     @ViewBag.questions[2].Item3<br />
                     @foreach (string answer in @ViewBag.questions[2].Item4)
                         {
                         var s = @answer.Split("#");
                         <label>@s[0]</label>
-                            <input type="text" id="text" name="text">
+                            <input type="text" id="text" name="answer3">
                             <label>@s[1]</label>
                         }
 

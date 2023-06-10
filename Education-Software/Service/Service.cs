@@ -170,6 +170,7 @@ namespace Education_Software.Service
                 test.score = result;
             }
             _context.tests.Add(test);
+            _context.SaveChanges();
             return results;
         }
 
