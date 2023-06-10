@@ -184,19 +184,18 @@ namespace Education_Software.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<string>("q_id")
-                        .HasMaxLength(40)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<bool>("score")
-                        .HasColumnType("BOOLEAN");
+                    b.Property<int>("score")
+                        .HasColumnType("INT");
 
                     b.Property<string>("test_type")
                         .IsRequired()
                         .HasMaxLength(1)
                         .HasColumnType("CHAR");
 
-                    b.HasKey("username", "test_id", "q_id");
+                    b.Property<int>("trials")
+                        .HasColumnType("INT");
+
+                    b.HasKey("username", "test_id");
 
                     b.ToTable("tests", (string)null);
                 });
