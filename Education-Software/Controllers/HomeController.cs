@@ -82,15 +82,15 @@ namespace Education_Software.Controllers
             SubjectModel subjectmodel = _Service.RecordReading(subject);
             TempData["Id"] = subjectmodel.sub_id;
             List<QuestionModel> questionmodel = _Service.SubjectTest(subjectmodel);
-            List<Tuple<string, string, string, List<string>>> questions = _Service.SplitQuestions(questionmodel, "A");
+            List<QuestionModel> questions = _Service.SplitQuestions(questionmodel, "A");
             //TempData["Questions"] = questions;
-            ViewBag.questions = questions;
+            //ViewBag.questions = questions;
             ViewBag.submitted = false;
-            return View("Test");
+            return View("Test", questions);
         }
 
         [HttpPost]
-        public IActionResult SubmitTest(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type, List<Tuple<string,string, string, List<string>>> questions)
+        public IActionResult SubmitTest(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type, List<QuestionModel> questions)
         {
             Dictionary<string,string> responses = new Dictionary<string,string>();
             responses.Add(q_id1, answer1);
@@ -104,8 +104,9 @@ namespace Education_Software.Controllers
             ViewBag.results = results;
             ViewBag.submitted = true;
             ViewBag.percentage = percentage;
-            ViewBag.questions = questions;
-            return View("Test");
+            //ViewBag.questions = TempData["Questions"];
+            //ViewBag.questions = questions;
+            return View("Test", questions);
         }
 
         public IActionResult SubmitSimpleQuestion(TestModel test, string username, string q_id , string response, string test_type, bool last = false)
@@ -127,15 +128,30 @@ namespace Education_Software.Controllers
 
         public IActionResult EvaluationTest(string username)
         {
-            TempData["Username"] = username;
+            ViewBag.username = username;
             List<QuestionModel> q = _Service.getAllQuestions();
-            List<Tuple<string, string, string, List<string>>> questions = _Service.SplitQuestions(q, "E");
+            List<QuestionModel> questions = _Service.SplitQuestions(q, "E");
             //TempData["Questions"] = questions;
-            ViewBag.questions = questions;
-            TempData["Submitted"] = false;
-            TestModel testmodel = new TestModel();
-            testmodel.test_id = Guid.NewGuid().ToString();
-            return View("Evaluation", testmodel);
+            //ViewBag.questions = questions;
+            ViewBag.submitted = false;
+            return View("Evaluation", questions);
+        }
+
+        public IActionResult SubmitEvaluationTest(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type, List<QuestionModel> questions)
+        {
+            Dictionary<string, string> responses = new Dictionary<string, string>();
+            responses.Add(q_id1, answer1);
+            responses.Add(q_id2, answer2);
+            responses.Add(q_id3, answer3);
+            List<bool> results = _Service.GetTestAnswers(username, responses, test_type);
+            int count = results.Count;
+            List<bool> correct = results.Where(x => x.Equals(true)).ToList();
+            int corr = correct.Count;
+            int percentage = (corr / count) * 100;
+            //ViewBag.results = results;
+            //ViewBag.submitted = true;
+            //ViewBag.percentage = percentage;
+            return View("Subjects");
         }
 
         public IActionResult Progress(string username)
@@ -157,10 +173,7 @@ namespace Education_Software.Controllers
             foreach (var subject in subjectmodels)
             {
                 subjects.Add(subject.sub_id, subject.title);
-                GradesModel model = new GradesModel();
-                model.username = username;
-                model.sub_id = subject.sub_id;
-                model.grade = null;
+                GradesModel model = _Service.getGrades(username, subject.sub_id);
                 gradesmodels.Add(model);               
             }
             ViewBag.subjects = subjects;
@@ -168,13 +181,13 @@ namespace Education_Software.Controllers
             return View("Grades", gradesmodels);
         }
 
-        public IActionResult SubmitGrades(List<GradesModel> model, string grade1, string grade2)
+        public IActionResult SubmitGrades(string grade1, string grade2, List<GradesModel> model)
         {
             List<string> grades = new List<string>();
             grades.Add(grade1);
             grades.Add(grade2);
             _Service.AddGrades(model, grades);
-            return View("Grades");
+            return View("Homepage");
         }
 
         public IActionResult Questionnaire(string username)

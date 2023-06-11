@@ -20,7 +20,6 @@ namespace Education_Software.Models
         [RegularExpression(@"^CS\d*$", ErrorMessage = "Id must start with 'CS'")]
         public string sub_id { get; set; } //takes the primary key of subjectmodel
 
-        [Required]
         [RegularExpression(@"^[0-10]$", ErrorMessage = "The grade must be a number between 0 and 10.")]
         public int? grade { get; set; }
 

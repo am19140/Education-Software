@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<QuestionModel>
+
+@{
     ViewData["Title"] = "Tests";
 }
 
@@ -108,22 +110,30 @@
                 
                 <form asp-controller="Home" asp-action="SubmitTest" method="post">
                         <input type="hidden" name="username" value="@ViewBag.username" />
-                    
-                    <input type="hidden" name="q_id1" value="@ViewBag.questions[0].Item1" />
-                        @ViewBag.questions[0].Item3<br />
+                        @if ((@ViewBag.results!=null) && (@ViewBag.results[0] == true))
+                        {
+                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
+
+                        }
+                        else if ((@ViewBag.results!=null) && (@ViewBag.results[0] == false))
+                        {
+                        <i class='bx bxs-check-circle' style="color:lightgrey"></i>
+                        }
+                    <input type="hidden" name="q_id1" value= "@Model.ToList()[0].q_id"/>
+                        @Model.ToList()[0].question<br />
                         <div class="radios">
-                            @foreach (var answer in @ViewBag.questions[0].Item4)
+                        @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
                             {
-                            var ind = @ViewBag.questions[0].Item4.IndexOf(@answer)+1;
+                        var ind = @Model.ToList()[0].possible_answers.IndexOf(@answer)+1;
                         <input type="radio" id="mc" name="answer1" value="@ind"/>
                         <label for="mc">@answer</label><br>
                             }
                     </div>
                     <br />
-                    <input type="hidden" name="q_id2" value="@ViewBag.questions[1].Item1" />
-                    @ViewBag.questions[1].Item3<br />
+                    <input type="hidden" name="q_id2" value="@Model.ToList()[1].q_id" />
+                    @Model.ToList()[1].question<br />
                         <div class="radios">
-                        @foreach (var answer in @ViewBag.questions[1].Item4)
+                        @foreach (var answer in @Model.ToList()[1].possible_answers.Split("•"))
                         {
                             @answer<br/>
                         <input type="radio" id="t" name="answer2" value="true"/>
@@ -133,9 +143,9 @@
                         }
                         </div>
                         <br />
-                    <input type="hidden" name="q_id3" value="@ViewBag.questions[2].Item1" />
-                    @ViewBag.questions[2].Item3<br />
-                    @foreach (string answer in @ViewBag.questions[2].Item4)
+                    <input type="hidden" name="q_id3" value="@Model.ToList()[2].q_id" />
+                    @Model.ToList()[2].question<br />
+                    @foreach (string answer in @Model.ToList()[2].possible_answers.Split("•"))
                         {
                         var s = @answer.Split("#");
                         <label>@s[0]</label>
@@ -146,6 +156,21 @@
 
                     <input type="hidden" name="test_type" value="A" />
                     <br />
+
+                    @foreach (var md in Model)
+                    {
+                        
+                            <div>
+                                @Html.HiddenFor(m => md.q_id)
+                                @Html.HiddenFor(m => md.question)
+                                @Html.HiddenFor(m => md.possible_answers)
+                                @Html.HiddenFor(m => md.answer)
+                                @Html.HiddenFor(m => md.sub_id)
+                                @Html.HiddenFor(m => md.chapter)
+                                @Html.HiddenFor(m => md.q_type)
+                            </div>
+                        
+                    }
                     <button type="submit">Submit</button>    
                 </form>
                     @if (@ViewBag.submitted)

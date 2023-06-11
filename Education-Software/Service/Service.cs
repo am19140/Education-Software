@@ -79,13 +79,13 @@ namespace Education_Software.Service
             }
             else
             {
-                var q1 = model.OrderBy(h => r.Next()).Take(1).First();
-                var q2 = model.OrderBy(h => r.Next()).Take(1).First();
-                var q3 = model.OrderBy(h => r.Next()).Take(1).First();
-                var q4 = model.OrderBy(h => r.Next()).Take(1).First();
-                var q5 = model.OrderBy(h => r.Next()).Take(1).First();
-                var q6 = model.OrderBy(h => r.Next()).Take(1).First();
-                var q7 = model.OrderBy(h => r.Next()).Take(1).First();
+                var q1 = model.Where(x=> x.sub_id == "CS0001").OrderBy(h => r.Next()).Take(1).First();
+                var q2 = model.Where(x => x.sub_id == "CS0001").OrderBy(h => r.Next()).Take(1).First();
+                var q3 = model.Where(x => x.sub_id == "CS0001").OrderBy(h => r.Next()).Take(1).First();
+                var q4 = model.Where(x => x.sub_id == "CS0001").OrderBy(h => r.Next()).Take(1).First();
+                var q5 = model.Where(x => x.sub_id == "CS0002").OrderBy(h => r.Next()).Take(1).First();
+                var q6 = model.Where(x => x.sub_id == "CS0002").OrderBy(h => r.Next()).Take(1).First();
+                var q7 = model.Where(x => x.sub_id == "CS0002").OrderBy(h => r.Next()).Take(1).First();
                 quest.Add(q1);
                 quest.Add(q2);
                 quest.Add(q3);
@@ -97,10 +97,11 @@ namespace Education_Software.Service
             return quest;
         }
         
-        public List<Tuple<string, string, string, List<string>>> SplitQuestions(List<QuestionModel> model, string test_type)
+        public List<QuestionModel> SplitQuestions(List<QuestionModel> model, string test_type)
         {
             List<QuestionModel> questions = getRandomQuestions(model, test_type);
-            List<Tuple<string, string, string, List<string>>> q = new List<Tuple<string, string, string, List<string>>>();
+            //List<Tuple<string, string, string, List<string>>> q = new List<Tuple<string, string, string, List<string>>>();
+            /*
             foreach (QuestionModel question in questions)
             {
                 string body = "";
@@ -139,8 +140,8 @@ namespace Education_Software.Service
 
                 Tuple<string, string, string, List<string>> el = new Tuple<string, string, string, List<string>>(question.q_id, question.q_type, body, possible_answers);
                 q.Add(el);
-            }
-            return q;
+            }*/
+            return questions;
         }
 
         public List<bool> GetTestAnswers(string username, Dictionary<string,string> responses, string test_type)
@@ -148,6 +149,7 @@ namespace Education_Software.Service
             List<bool> results = new List<bool>();
             bool result = false;
             TestModel test = new TestModel();
+            test.test_id = Guid.NewGuid().ToString();
             foreach (var (key,value) in responses) 
             {
                 string q_id = key;
@@ -164,13 +166,12 @@ namespace Education_Software.Service
                         results.Add(false);
                 }
                 test.username = username;
-                test.test_id = Guid.NewGuid().ToString();
                 test.q_id = q_id;
                 test.test_type = test_type;
                 test.score = result;
+                _context.tests.Add(test);
+                _context.SaveChanges();
             }
-            _context.tests.Add(test);
-            _context.SaveChanges();
             return results;
         }
 
@@ -193,17 +194,40 @@ namespace Education_Software.Service
             return result;
         }
 
+        public GradesModel getGrades(string username, string sub_id)
+        {
+            GradesModel? grades = _context.grades.FirstOrDefault(x => x.username == username && x.sub_id == sub_id);
+            if (grades == null)
+            {
+                grades = new GradesModel();
+                grades.username = username;
+                grades.sub_id = sub_id;
+                grades.grade = null;
+                _context.grades.Add(grades);
+                _context.SaveChanges();
+            }
+            return grades;
+        }
+
         public void AddGrades(List<GradesModel> model, List<string> grades)
         {
             for (int i= 0; i< model.Count; i++)
             {
                 if (grades[i] == "None")
                 {
+                    //model[i].grade = null;
+                    _context.grades.Remove(model[i]);
                     model[i].grade = null;
+                    _context.Add(model[i]);
+                    _context.SaveChanges();
                 }
                 else
                 {
+                    //model[i].grade = int.Parse(grades[i]);
+                    _context.grades.Remove(model[i]);
                     model[i].grade = int.Parse(grades[i]);
+                    _context.Add(model[i]);
+                    _context.SaveChanges();
                 }
             }
         }
