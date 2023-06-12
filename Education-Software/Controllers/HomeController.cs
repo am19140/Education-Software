@@ -174,6 +174,7 @@ namespace Education_Software.Controllers
             {
                 subjects.Add(subject.sub_id, subject.title);
                 GradesModel model = _Service.getGrades(username, subject.sub_id);
+                Debug.WriteLine(username + subject.sub_id);
                 gradesmodels.Add(model);               
             }
             ViewBag.subjects = subjects;
@@ -181,12 +182,13 @@ namespace Education_Software.Controllers
             return View("Grades", gradesmodels);
         }
 
-        public IActionResult SubmitGrades(string grade1, string grade2, List<GradesModel> model)
+        [HttpPost]
+        public IActionResult SubmitGrades(string grade1, string grade2, GradesModel model)
         {
             List<string> grades = new List<string>();
             grades.Add(grade1);
             grades.Add(grade2);
-            _Service.AddGrades(model, grades);
+            //_Service.AddGrades(model, grades);
             return View("Homepage");
         }
 

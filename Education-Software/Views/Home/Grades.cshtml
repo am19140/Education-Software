@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GradesModel>
+﻿@model List<GradesModel>
 
 @{
     ViewData["Title"] = "Grades";
@@ -144,13 +144,19 @@
 
                         @foreach(var md in Model)
                         {
-                    //<input type="hidden" name="model" value="@Model" />
                     <div>
-                        @Html.HiddenFor(m => md.username);
-                        @Html.HiddenFor(m => md.sub_id);
-                        @Html.HiddenFor(m =>md.grade);
+                        <div class="inputs">
+                        <input type="hidden" placeholder="username" class="input" asp-for="@md.username" />
+                        </div>
+                        <div class="inputs">
+                        <input type="hidden" placeholder="sub_id" class="input" asp-for="@md.sub_id" />
+                        </div>
+                                <div class="inputs">
+                        <input type="hidden" placeholder="grade" class="input" asp-for="@md.grade" />
+                        </div>
                     </div>
-                        }
+                    break;
+                }
                         
                        
                     
