@@ -104,20 +104,47 @@
                     <div class="main">
                         <form asp-controller="Home" asp-action="SubmitQuestionnaire" method="post" class="test-btn">
                             <input type="hidden" name="username" value="@ViewBag.username" />
-                            @foreach (var md in Model)
-                            {
-                            <input type="hidden" id="q" name="q_id" value="@md.q_id" />
-                            @md.question<br />
+                            
+                            <input type="hidden" id="q" name="q_id1" value="@Model.ToList()[0].q_id" />
+                            @Model.ToList()[0].question<br />
                             <div class="radios">
-                                @foreach (var answer in md.possible_answers.Split("•"))
+                            @foreach (var answer in Model.ToList()[0].possible_answers.Split("•"))
                             {
 
-                            var ind = md.possible_answers.IndexOf(answer)+1;
-                                <input type="radio" id="mc" name="mc" value="@ind">
+                                var ind = Model.ToList()[0].possible_answers.IndexOf(answer) + 1;
+                                <input type="radio" id="mc" name="answer1" value="@ind">
                                 <label for="mc">@answer</label><br>
                             }
                             </div>
-                            }
+
+                        <input type="hidden" id="q" name="q_id2" value="@Model.ToList()[1].q_id" />
+                        @Model.ToList()[1].question<br />
+                        <div class="radios">
+                        @foreach (var answer in Model.ToList()[1].possible_answers.Split("•"))
+                        {
+
+                            var ind = Model.ToList()[1].possible_answers.IndexOf(answer) + 1;
+                            <input type="radio" id="mc" name="answer2" value="@ind">
+                            <label for="mc">@answer</label>
+
+                        <br>
+                        }
+                        </div>
+
+                        <input type="hidden" id="q" name="q_id3" value="@Model.ToList()[2].q_id" />
+                        @Model.ToList()[2].question<br />
+                        <div class="radios">
+                        @foreach (var answer in Model.ToList()[2].possible_answers.Split("•"))
+                        {
+
+                            var ind = Model.ToList()[2].possible_answers.IndexOf(answer) + 1;
+                            <input type="radio" id="mc" name="answer3" value="@ind">
+                            <label for="mc">@answer</label>
+
+                        <br>
+                        }
+                        </div>
+                            
                             <button id="btnDone" type="submit" class="done buttons icon">
                                 Sumbit
                             </button>

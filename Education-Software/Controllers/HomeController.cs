@@ -169,7 +169,7 @@ namespace Education_Software.Controllers
             List<SubjectModel> subjectmodels = _Service.getSubjects();
             Debug.WriteLine(subjectmodels[0].title);
             Dictionary<string,string> subjects = new Dictionary<string,string>();
-            List<GradesModel> gradesmodels = new List<GradesModel>();
+            var gradesmodels = new List<GradesModel>();
             foreach (var subject in subjectmodels)
             {
                 subjects.Add(subject.sub_id, subject.title);
@@ -179,16 +179,17 @@ namespace Education_Software.Controllers
             }
             ViewBag.subjects = subjects;
             Debug.WriteLine(gradesmodels);
-            return View("Grades", gradesmodels);
+            return View(gradesmodels);
         }
 
         [HttpPost]
-        public IActionResult SubmitGrades(string grade1, string grade2, GradesModel model)
+        public IActionResult SubmitGrades(string grade1, string grade2, string username, string sub_id1, string sub_id2)
         {
+            ViewBag.username = username;
             List<string> grades = new List<string>();
             grades.Add(grade1);
             grades.Add(grade2);
-            //_Service.AddGrades(model, grades);
+            _Service.AddGrades(username, sub_id1, sub_id2, grades);
             return View("Homepage");
         }
 
@@ -201,13 +202,15 @@ namespace Education_Software.Controllers
 
         public IActionResult SubmitQuestionnaire(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3)
         {
-            RecommendationModel recommendation = _Service.getRecommendations(username, q_id1, answer1, q_id2, answer2, q_id3, answer3);
+            ViewBag.username = username;
+            RecommendationModel recommendation = _Service.getRecommendations(username, answer1, answer2, answer3);
             ViewBag.recommendation = true;
             return View("Recommendations", recommendation);
         }
 
         public IActionResult Recommendation(string username)
         {
+            ViewBag.username = username;
             RecommendationModel r = _Service.getRecommendationModel(username);
             if(r.recommendation == null)
             {

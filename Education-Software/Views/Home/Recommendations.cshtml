@@ -40,19 +40,19 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@TempData["Username"]" asp-action="Subjects">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
                             <i class='bx bx-book icon'></i>
                             <span class="text nav-text">Subjects</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a class="profbtn" asp-controller="Home" asp-route-username="@TempData["Username"]" asp-action="Progress">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Progress">
                             <i class='bx bx-book icon'></i>
                             <span class="text nav-text">Progress</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@TempData["Username"]" asp-action="Grades">
+                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Grades">
                             <i class='bx bx-book icon'></i>
                             <span class="text nav-text">Past Grades</span>
                         </a>
@@ -64,13 +64,13 @@
                             </a>
                         </li>
                     <li class="nav-link">
-                        <a class="profbtn" asp-controller="Home" asp-route-username="@TempData["Username"]" asp-action="Recommendations">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Recommendations">
                             <i class='bx bx-book icon'></i>
                             <span class="text nav-text">Career Recommendations</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a class="profbtn" asp-controller="Home" asp-route-username="@TempData["Username"]" asp-action="Profile">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Profile">
                             <i class='bx bx-male icon'></i>
                             <span class="text nav-text">Profile</span>
                         </a>
@@ -98,7 +98,7 @@
                 <div class="text title">Recommendations</div>
             <div class="right-corner">
                 <img src="~/Resources/icons8-male-user-24 (1).png"></img>
-                    <div class="smalltext username ">@TempData["Username"] </div>
+                    <div class="smalltext username ">@ViewBag.username </div>
             </div>
         </div>
         <div class="main">

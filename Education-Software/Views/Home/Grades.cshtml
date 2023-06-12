@@ -1,4 +1,4 @@
-﻿@model List<GradesModel>
+﻿@model IEnumerable<GradesModel>
 
 @{
     ViewData["Title"] = "Grades";
@@ -142,21 +142,14 @@
                         <br />
                         <br />
 
-                        @foreach(var md in Model)
-                        {
-                    <div>
-                        <div class="inputs">
-                        <input type="hidden" placeholder="username" class="input" asp-for="@md.username" />
-                        </div>
-                        <div class="inputs">
-                        <input type="hidden" placeholder="sub_id" class="input" asp-for="@md.sub_id" />
-                        </div>
-                                <div class="inputs">
-                        <input type="hidden" placeholder="grade" class="input" asp-for="@md.grade" />
-                        </div>
-                    </div>
-                    break;
-                }
+                        
+                        <input type="hidden" id="text" name="username" value="@ViewBag.username"/>
+                        
+                        <input type="hidden" id="text" name="sub_id1" value="@Model.ToList()[0].sub_id"/>
+
+                        <input type="hidden" id="text" name="sub_id2" value="@Model.ToList()[1].sub_id"/>
+                        
+                 
                         
                        
                     

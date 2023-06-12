@@ -197,38 +197,56 @@ namespace Education_Software.Service
         public GradesModel getGrades(string username, string sub_id)
         {
             GradesModel? grades = _context.grades.FirstOrDefault(x => x.username == username && x.sub_id == sub_id);
-            if (grades == null)
+            if (grades == default)
             {
-                grades = new GradesModel();
-                grades.username = username;
-                grades.sub_id = sub_id;
-                grades.grade = null;
-                _context.grades.Add(grades);
+                var grade = new GradesModel();
+                grade.username = username;
+                grade.sub_id = sub_id;
+                grade.grade = null;
+                _context.grades.Add(grade);
                 _context.SaveChanges();
+                grades = grade;
             }
             return grades;
         }
 
-        public void AddGrades(List<GradesModel> model, List<string> grades)
+        public void AddGrades(string username, string sub_id1, string sub_id2, List<string> grades)
         {
-            for (int i= 0; i< model.Count; i++)
+            if (grades[0] == "None")
             {
-                if (grades[i] == "None")
-                {
-                    //model[i].grade = null;
-                    _context.grades.Remove(model[i]);
-                    model[i].grade = null;
-                    _context.Add(model[i]);
-                    _context.SaveChanges();
-                }
-                else
-                {
-                    //model[i].grade = int.Parse(grades[i]);
-                    _context.grades.Remove(model[i]);
-                    model[i].grade = int.Parse(grades[i]);
-                    _context.Add(model[i]);
-                    _context.SaveChanges();
-                }
+                var model = _context.grades.FirstOrDefault(x => x.username == username && x.sub_id == sub_id1); 
+                _context.grades.Remove(model);
+                _context.SaveChanges();
+                model.grade = null;
+                _context.grades.Add(model);
+                _context.SaveChanges();
+            }
+            else
+            {
+                var model = _context.grades.FirstOrDefault(x => x.username == username && x.sub_id == sub_id1);
+                _context.grades.Remove(model);
+                _context.SaveChanges();
+                model.grade = Int32.Parse(grades[0]);
+                _context.grades.Add(model);
+                _context.SaveChanges();
+            }
+            if (grades[1] == "None")
+            {
+                var model = _context.grades.FirstOrDefault(x => x.username == username && x.sub_id == sub_id2);
+                _context.grades.Remove(model);
+                _context.SaveChanges();
+                model.grade = null;
+                _context.grades.Add(model);
+                _context.SaveChanges();
+            }
+            else
+            {
+                var model = _context.grades.FirstOrDefault(x => x.username == username && x.sub_id == sub_id2);
+                _context.grades.Remove(model);
+                _context.SaveChanges();
+                model.grade = Int32.Parse(grades[1]);
+                _context.grades.Add(model);
+                _context.SaveChanges();
             }
         }
 
@@ -239,33 +257,33 @@ namespace Education_Software.Service
             return q;
         }
 
-        public RecommendationModel getRecommendations(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3)
+        public RecommendationModel getRecommendations(string username, string answer1, string answer2, string answer3)
         {
             List<string> first = new List<string>();
             List<string> second = new List<string>();
             if(answer1 == "1")
             {
-                first.Append(answer1);
+                first.Add(answer1);
             }
             else if (answer1 == "2")
             {
-                second.Append(answer1);
+                second.Add(answer1);
             }
             if (answer2 == "1")
             {
-                first.Append(answer2);
+                first.Add(answer2);
             }
             else if (answer2 == "2")
             {
-                second.Append(answer2);
+                second.Add(answer2);
             }
             if (answer3 == "1")
             {
-                first.Append(answer3);
+                first.Add(answer3);
             }
             else if (answer3 == "2")
             {
-                second.Append(answer3);
+                second.Add(answer3);
             }
 
             List<GradesModel> grades = _context.grades.Where(x => x.username == username).ToList();

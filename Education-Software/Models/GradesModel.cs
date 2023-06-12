@@ -9,6 +9,7 @@ namespace Education_Software.Models
     {
         [Required]
         [Key]
+        [ForeignKey("UserModel")]
         [MaxLength(6)]
         [RegularExpression(@"^p\d{5}$", ErrorMessage = "Invalid Username.")]
         public string username { get; set; } //takes the primary key of usermodel
