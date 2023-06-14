@@ -137,8 +137,8 @@ namespace Education_Software.Controllers
         public IActionResult Progress(string username)
         {
             ViewBag.username = username;
-            ProgressModel model = new ProgressModel();
-            return View();
+            ProgressViewModel model = _Service.getProgress(username);
+            return View("Progress", model);
 
         }
 

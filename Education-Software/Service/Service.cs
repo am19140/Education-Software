@@ -2,11 +2,14 @@
 using Education_Software.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.CodeAnalysis.Operations;
 using System;
 using System.Diagnostics;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Numerics;
 
 namespace Education_Software.Service
@@ -213,6 +216,78 @@ namespace Education_Software.Service
             return percentage;
         }
         
+        public StatisticsModel UpdateStatistics(string username)
+        {
+            List<TestModel> t = _context.tests.Where(x => x.username == username).ToList();
+            List<QuestionModel> q = getAllQuestions();
+            var join = from question in q 
+                       join test in t 
+                       on question.q_id equals test.q_id
+                       select new
+                       {
+                           test.username,
+                           test.q_id,
+                           test.score,
+                           question.q_type,
+                           question.chapter
+                       };
+            var temp = join.Where(x => x.score == true);
+
+            int correct_description = temp.Where(x => x.chapter == "description").ToList().Count;
+            int count_description = join.Where(x => x.chapter == "description").ToList().Count;
+            double description_score = (correct_description / count_description) * 100;
+
+            int correct_learning_outcomes = temp.Where(x => x.chapter == "learning_outcomes").ToList().Count;
+            int count_learning_outcomes = join.Where(x => x.chapter == "learning_outcomes").ToList().Count;
+            double learning_outcomes_score = (correct_learning_outcomes / count_learning_outcomes) * 100;
+
+            int correct_skills = temp.Where(x => x.chapter == "skills_acquired").ToList().Count;
+            int count_skills = join.Where(x => x.chapter == "skills_acquired").ToList().Count;
+            double skills_score = (correct_skills / count_skills) * 100;
+
+            int correct_specialization = temp.Where(x => x.chapter == "specialization_link").ToList().Count;
+            int count_specialization = join.Where(x => x.chapter == "specialization_link").ToList().Count;
+            double specialization_score = (correct_specialization / count_specialization) * 100;
+
+            int correct_multiple_choice = temp.Where(x => x.q_type == "multiple_choice").ToList().Count;
+            int count_multiple_choice = join.Where(x => x.q_type == "multiple_choice").ToList().Count;
+            double multiple_choice_score = (correct_multiple_choice / count_multiple_choice) * 100;
+
+            int correct_true_false = temp.Where(x => x.q_type == "true/false").ToList().Count;
+            int count_true_false = join.Where(x => x.q_type == "true/false").ToList().Count;
+            double true_false_score = (correct_true_false / count_true_false) * 100;
+
+            int correct_completion = temp.Where(x => x.q_type == "completion").ToList().Count;
+            int count_completion = join.Where(x => x.q_type == "completion").ToList().Count;
+            double completion_score = (correct_completion / count_completion) * 100;
+
+            int correct_matching = temp.Where(x => x.q_type == "matching").ToList().Count;
+            int count_matching = join.Where(x => x.q_type == "matching").ToList().Count;
+            double matching_score = (correct_matching / count_matching) * 100;
+            
+            StatisticsModel s = new StatisticsModel();
+            s.username = username;
+            s.description_score = (int) Math.Floor(description_score);
+            s.learning_outcomes_score = (int)Math.Floor(learning_outcomes_score);
+            s.skills_acquired_score = (int)Math.Floor(skills_score);
+            s.specialization_link_score = (int)Math.Floor(specialization_score);
+            s.multiple_choice_score = (int)Math.Floor(multiple_choice_score);
+            s.true_false_score = (int)Math.Floor(true_false_score);
+            s.completion_score = (int)Math.Floor(completion_score);
+            s.matching_score = (int)Math.Floor(matching_score);
+            return s;
+        }
+
+        public ProgressViewModel getProgress(string username)
+        {
+            StatisticsModel stats = UpdateStatistics(username);
+            List<ProgressModel> progress = _context.progress.Where(x => x.username == username).ToList();
+            ProgressViewModel model = new ProgressViewModel();
+            model.progress_table = progress;
+            model.statistics_table = stats;
+            return model;
+        }
+
         public GradesModel getGrades(string username, string sub_id)
         {
             GradesModel? grades = _context.grades.FirstOrDefault(x => x.username == username && x.sub_id == sub_id);
