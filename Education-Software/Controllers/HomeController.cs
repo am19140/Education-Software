@@ -80,7 +80,6 @@ namespace Education_Software.Controllers
             ViewBag.username = username;
             ViewBag.subject = subject;
             SubjectModel subjectmodel = _Service.RecordReading(subject);
-            TempData["Id"] = subjectmodel.sub_id;
             List<QuestionModel> questionmodel = _Service.SubjectTest(subjectmodel);
             List<QuestionModel> questions = _Service.SplitQuestions(questionmodel, "A");
             //TempData["Questions"] = questions;
@@ -90,40 +89,22 @@ namespace Education_Software.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitTest(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type, List<QuestionModel> questions)
+        public IActionResult SubmitTest(string username, string subject, string sub_id, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type)
         {
             Dictionary<string,string> responses = new Dictionary<string,string>();
             responses.Add(q_id1, answer1);
             responses.Add(q_id2, answer2);
             responses.Add(q_id3, answer3);
-            List<bool> results = _Service.GetTestAnswers(username, responses, test_type);
-            int count = results.Count;
-            List<bool> correct = results.Where(x => x.Equals(true)).ToList();
-            int corr = correct.Count;
-            int percentage = (corr / count) * 100;
+            Dictionary<string,List<bool>> dict = _Service.GetTestAnswers(username, responses, test_type);
+            string test_id = dict.Keys.First();
+            List<bool> results = dict.Values.First();
             ViewBag.results = results;
+            int percentage = _Service.UpdateProgress(username, subject, test_id, test_type, results);
             ViewBag.submitted = true;
             ViewBag.percentage = percentage;
-            //ViewBag.questions = TempData["Questions"];
-            //ViewBag.questions = questions;
-            return View("Test", questions);
-        }
-
-        public IActionResult SubmitSimpleQuestion(TestModel test, string username, string q_id , string response, string test_type, bool last = false)
-        {
-            if(last)
-            {
-                bool result = _Service.AddAnswer(test, username, q_id, response, test_type);
-                TempData["Result"] = result;
-                return View("Test");
-
-            }
-            else
-            {
-                bool result = _Service.AddAnswer(test, username, q_id, response, test_type);
-                TempData["Result"] = result;
-                return View("Test");
-            }
+            List<QuestionModel> model = _Service.getQuestions(q_id1, q_id2, q_id3);
+            ViewBag.subject = subject;
+            return View("Test", model);
         }
 
         public IActionResult EvaluationTest(string username)
@@ -131,34 +112,32 @@ namespace Education_Software.Controllers
             ViewBag.username = username;
             List<QuestionModel> q = _Service.getAllQuestions();
             List<QuestionModel> questions = _Service.SplitQuestions(q, "E");
-            //TempData["Questions"] = questions;
-            //ViewBag.questions = questions;
             ViewBag.submitted = false;
             return View("Evaluation", questions);
         }
 
-        public IActionResult SubmitEvaluationTest(string username, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type, List<QuestionModel> questions)
+        public IActionResult SubmitEvaluationTest(string username, string subject, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type)
         {
             Dictionary<string, string> responses = new Dictionary<string, string>();
             responses.Add(q_id1, answer1);
             responses.Add(q_id2, answer2);
             responses.Add(q_id3, answer3);
-            List<bool> results = _Service.GetTestAnswers(username, responses, test_type);
-            int count = results.Count;
-            List<bool> correct = results.Where(x => x.Equals(true)).ToList();
-            int corr = correct.Count;
-            int percentage = (corr / count) * 100;
-            //ViewBag.results = results;
-            //ViewBag.submitted = true;
-            //ViewBag.percentage = percentage;
-            return View("Subjects");
+            Dictionary<string, List<bool>> dict = _Service.GetTestAnswers(username, responses, test_type);
+            string test_id = dict.Keys.First();
+            List<bool> results = dict.Values.First();
+            ViewBag.results = results;
+            int percentage = _Service.UpdateProgress(username, subject, test_id, test_type, results);
+            ViewBag.submitted = true;
+            ViewBag.percentage = percentage;
+            //List<QuestionModel> model = _Service.getQuestions(q_id1, q_id2, q_id3);
+            ViewBag.subject = subject;
+            return View("Evaluation");
         }
 
         public IActionResult Progress(string username)
         {
             ViewBag.username = username;
-            //_progressService will be like _subjectService but will retrieve the students progress to each subject and present it in the progress page
-            //var progressmodel = _subjectService.getSubjects();
+            ProgressModel model = new ProgressModel();
             return View();
 
         }

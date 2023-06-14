@@ -109,18 +109,19 @@
                 </h2>
                 
                 <form asp-controller="Home" asp-action="SubmitTest" method="post">
-                        <input type="hidden" name="username" value="@ViewBag.username" />
-                        @if ((@ViewBag.results!=null) && (@ViewBag.results[0] == true))
-                        {
-                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
-
-                        }
-                        else if ((@ViewBag.results!=null) && (@ViewBag.results[0] == false))
-                        {
-                        <i class='bx bxs-check-circle' style="color:lightgrey"></i>
-                        }
+                    <input type="hidden" name="username" value="@ViewBag.username" />
+                    <input type="hidden" name="subject" value="@ViewBag.subject" />
                     <input type="hidden" name="q_id1" value= "@Model.ToList()[0].q_id"/>
                         @Model.ToList()[0].question<br />
+                    @if ((@ViewBag.submitted == true) && (@ViewBag.results[0] == true))
+                    {
+                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
+
+                    }
+                    else if ((@ViewBag.submitted == true) && (@ViewBag.results[0] == false))
+                    {
+                        <i class='bx bxs-check-circle' style="color:lightgrey"></i>
+                    }
                         <div class="radios">
                         @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
                             {
@@ -132,6 +133,15 @@
                     <br />
                     <input type="hidden" name="q_id2" value="@Model.ToList()[1].q_id" />
                     @Model.ToList()[1].question<br />
+                    @if ((@ViewBag.submitted == true) && (@ViewBag.results[1] == true))
+                        {
+                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
+
+                        }
+                    else if ((@ViewBag.submitted == true) && (@ViewBag.results[1] == false))
+                        {
+                        <i class='bx bxs-check-circle' style="color:lightgrey"></i>
+                        }
                         <div class="radios">
                         @foreach (var answer in @Model.ToList()[1].possible_answers.Split("•"))
                         {
@@ -145,6 +155,15 @@
                         <br />
                     <input type="hidden" name="q_id3" value="@Model.ToList()[2].q_id" />
                     @Model.ToList()[2].question<br />
+                    @if ((@ViewBag.submitted == true) && (@ViewBag.results[2] == true))
+                        {
+                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
+
+                        }
+                    else if ((@ViewBag.submitted == true) && (@ViewBag.results[2] == false))
+                        {
+                        <i class='bx bxs-check-circle' style="color:lightgrey"></i>
+                        }
                     @foreach (string answer in @Model.ToList()[2].possible_answers.Split("•"))
                         {
                         var s = @answer.Split("#");
@@ -156,22 +175,11 @@
 
                     <input type="hidden" name="test_type" value="A" />
                     <br />
-
-                    @foreach (var md in Model)
-                    {
-                        
-                            <div>
-                                @Html.HiddenFor(m => md.q_id)
-                                @Html.HiddenFor(m => md.question)
-                                @Html.HiddenFor(m => md.possible_answers)
-                                @Html.HiddenFor(m => md.answer)
-                                @Html.HiddenFor(m => md.sub_id)
-                                @Html.HiddenFor(m => md.chapter)
-                                @Html.HiddenFor(m => md.q_type)
-                            </div>
-                        
+                    @if (@ViewBag.submitted != true)
+                    { 
+                        <button type="submit">Submit</button> 
                     }
-                    <button type="submit">Submit</button>    
+                       
                 </form>
                     @if (@ViewBag.submitted)
                     {

@@ -1,11 +1,13 @@
 ﻿using Education_Software.Context;
 using Education_Software.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Operations;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Numerics;
 
 namespace Education_Software.Service
 {
@@ -144,7 +146,7 @@ namespace Education_Software.Service
             return questions;
         }
 
-        public List<bool> GetTestAnswers(string username, Dictionary<string,string> responses, string test_type)
+        public Dictionary<string,List<bool>> GetTestAnswers(string username, Dictionary<string,string> responses, string test_type)
         {
             List<bool> results = new List<bool>();
             bool result = false;
@@ -172,28 +174,45 @@ namespace Education_Software.Service
                 _context.tests.Add(test);
                 _context.SaveChanges();
             }
-            return results;
+            Dictionary<string, List<bool>> d = new Dictionary<string, List<bool>>();
+            d.Add(test.test_id, results);
+            return d;
         }
 
-        public bool AddAnswer(TestModel test, string username, string q_id, string response, string test_type)
+        public List<QuestionModel> getQuestions(string q_id1, string q_id2, string q_id3)
         {
-            bool result = false;
-            var question = _context.questions.FirstOrDefault(x => x.q_id == q_id);
-            if (question.answer == response)
-            {
-                result = true;
-            }
-            else
-            {
-                result = false;
-            }
-            test.username = username;
-            test.q_id = q_id;
-            test.test_type = test_type;
-            test.score = result;
-            return result;
+            List<QuestionModel> model = new List<QuestionModel>();
+            var m1 = _context.questions.First(x => x.q_id == q_id1);
+            var m2 = _context.questions.First(x => x.q_id == q_id2);
+            var m3 = _context.questions.First(x => x.q_id == q_id3);
+            model.Add(m1);
+            model.Add(m2);
+            model.Add(m3);
+            return model;
         }
 
+        public int UpdateProgress(string username, string subject, string test_id, string test_type, List<bool> results)
+        {
+            string sub_id = _context.subjects.Where(x => x.title == subject).First().sub_id;
+
+            int count = results.Count;
+            List<bool> correct = results.Where(x => x.Equals(true)).ToList();
+            int corr = correct.Count;
+            double perc = (double)corr / (double)count * 100;
+            int percentage = (int)Math.Floor(perc);
+            
+            ProgressModel progress = new ProgressModel();
+            progress.username = username;
+            progress.sub_id = sub_id;
+            progress.test_id = test_id;
+            progress.test_type = test_type;
+            progress.score = percentage; 
+            progress.time = DateTime.Now.ToString();
+            _context.progress.Add(progress);
+            _context.SaveChanges();
+            return percentage;
+        }
+        
         public GradesModel getGrades(string username, string sub_id)
         {
             GradesModel? grades = _context.grades.FirstOrDefault(x => x.username == username && x.sub_id == sub_id);

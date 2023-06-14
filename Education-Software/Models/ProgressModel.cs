@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NuGet.Packaging.Signing;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -39,20 +41,8 @@ namespace Education_Software.Models
         [Required]
         public int score { get; set; }
 
-        [Column(TypeName = "NUMERIC")]
+        [Column(TypeName = "TEXT")]
         [Required]
-        public int description_percentage { get; set; }
-
-        [Column(TypeName = "NUMERIC")]
-        [Required]
-        public int learning_outcomes_percentage { get; set; }
-
-        [Column(TypeName = "NUMERIC")]
-        [Required]
-        public int skills_acquired_percentage { get; set; }
-
-        [Column(TypeName = "NUMERIC")]
-        [Required]
-        public int specialization_link_percentage { get; set; }
+        public string time { get; set; }
     }
 }

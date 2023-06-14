@@ -3,6 +3,7 @@ using System;
 using Education_Software.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Education_Software.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230614074117_Progress")]
+    partial class Progress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,10 +66,6 @@ namespace Education_Software.Migrations
                         .IsRequired()
                         .HasMaxLength(1)
                         .HasColumnType("CHAR");
-
-                    b.Property<string>("time")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.HasKey("username", "test_id");
 
