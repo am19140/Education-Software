@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Education_Software.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230612201415_Grades")]
-    partial class Grades
+    [Migration("20230615115327_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,37 @@ namespace Education_Software.Migrations
                     b.HasIndex("sub_id");
 
                     b.ToTable("grades");
+                });
+
+            modelBuilder.Entity("Education_Software.Models.ProgressModel", b =>
+                {
+                    b.Property<string>("username")
+                        .HasMaxLength(6)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("test_id")
+                        .HasMaxLength(20)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<decimal>("score")
+                        .HasColumnType("NUMERIC");
+
+                    b.Property<string>("sub_id")
+                        .HasMaxLength(10)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("test_type")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("CHAR");
+
+                    b.Property<string>("time")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("username", "test_id");
+
+                    b.ToTable("progress");
                 });
 
             modelBuilder.Entity("Education_Software.Models.QuestionModel", b =>
@@ -117,23 +148,39 @@ namespace Education_Software.Migrations
                     b.ToTable("recommendations");
                 });
 
-            modelBuilder.Entity("Education_Software.Models.SpecializationModel", b =>
+            modelBuilder.Entity("Education_Software.Models.StatisticsModel", b =>
                 {
-                    b.Property<string>("spe_id")
-                        .HasMaxLength(50)
+                    b.Property<string>("username")
+                        .HasMaxLength(6)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<string>("spe_name")
-                        .HasMaxLength(50)
-                        .HasColumnType("VARCHAR");
+                    b.Property<decimal>("completion_score")
+                        .HasColumnType("NUMERIC");
 
-                    b.Property<string>("sub_id")
-                        .HasMaxLength(50)
-                        .HasColumnType("VARCHAR");
+                    b.Property<decimal>("description_score")
+                        .HasColumnType("NUMERIC");
 
-                    b.HasKey("spe_id", "spe_name", "sub_id");
+                    b.Property<decimal>("learning_outcomes_score")
+                        .HasColumnType("NUMERIC");
 
-                    b.ToTable("specializations");
+                    b.Property<decimal>("matching_score")
+                        .HasColumnType("NUMERIC");
+
+                    b.Property<decimal>("multiple_choice_score")
+                        .HasColumnType("NUMERIC");
+
+                    b.Property<decimal>("skills_acquired_score")
+                        .HasColumnType("NUMERIC");
+
+                    b.Property<decimal>("specialization_link_score")
+                        .HasColumnType("NUMERIC");
+
+                    b.Property<decimal>("true_false_score")
+                        .HasColumnType("NUMERIC");
+
+                    b.HasKey("username");
+
+                    b.ToTable("statistics");
                 });
 
             modelBuilder.Entity("Education_Software.Models.SubjectModel", b =>

@@ -5,7 +5,7 @@
 }
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/HomepageStyle.css" />
+    <link rel="stylesheet" href="~/css/GradesStyle.css" />
     <link rel="stylesheet" href="~/css/MenuStyle.css" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
@@ -28,47 +28,45 @@
         </header>
         <div class="menu-bar">
             <div class="menu">
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Search...">
-                </li>
+                
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a class="homebtn" href="#">
+                        <a class="homebtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Homepage">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Homepage</span>
                         </a>
                     </li>
+
                     <li class="nav-link">
                         <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
-                            <i class='bx bx-book icon'></i>
+                            <i class='bx bx-list-ul icon'></i>
                             <span class="text nav-text">Subjects</span>
                         </a>
                     </li>
-                        <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Progress">
-                                <i class='bx bx-book icon'></i>
-                                <span class="text nav-text">Progress</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Grades">
-                                <i class='bx bx-book icon'></i>
-                                <span class="text nav-text">Past Grades</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Questionnaire">
-                                <i class='bx bx-book icon'></i>
-                                <span class="text nav-text">Career Test</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Recommendations">
-                                <i class='bx bx-book icon'></i>
-                                <span class="text nav-text">Career Recommendations</span>
-                            </a>
-                        </li>
+                    <li class="nav-link">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Progress">
+                            <i class='bx bx-line-chart icon'></i>
+                            <span class="text nav-text">Progress</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Grades">
+                            <i class='bx bx-history icon'></i>
+                            <span class="text nav-text">Past Grades</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Questionnaire">
+                            <i class='bx bx-pencil icon'></i>
+                            <span class="text nav-text">Career Test</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Recommendations">
+                            <i class='bx bx-check-circle icon'></i>
+                            <span class="text nav-text">Career Recommendations</span>
+                        </a>
+                    </li>
                     <li class="nav-link">
                         <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Profile">
                             <i class='bx bx-male icon'></i>
@@ -76,7 +74,7 @@
                         </a>
                     </li>
 
-                    
+
                 </ul>
             </div>
             <div class="bottom-content">
@@ -102,11 +100,14 @@
             </div>
         </div>
         <div class="main">
-            <h5>Please, update the grades you got when you were taught the following subjects in class.</h5>
-            <h5>Note: The grades refer to the grades you teacher gave you after an exam and are not based on the results you got from the curriculum 
+            <h4>Please submit below the grades you have earned in each of the following courses.</h4>
+            <h5>Note: The grades refer to the grades in your university courses and are not based on the results you got from the curriculum 
                 tests you are taking in this platform.</h5>
-                <form form asp-controller="Home" asp-action="SubmitGrades" method="post" class="grades-btn">                   
-                        <label for="grades">@ViewBag.subjects[Model.ToList()[0].sub_id]:  </label>
+               
+                <form form asp-controller="Home" asp-action="SubmitGrades" method="post" class="grades-btn">
+                    
+                    <div class="course">
+                        <label for="grades" class="title">@ViewBag.subjects[Model.ToList()[0].sub_id]:  </label>
                         <select name="grade1" id="grades">
                             <option value="None" selected="@null == @Model.ToList()[0].grade">I haven't gotten a grade yet</option>
                             <option value="0" selected="@Model.ToList()[0].grade == @Int32.Parse("0")">0</option>
@@ -121,42 +122,36 @@
                             <option value="9" selected="@Model.ToList()[0].grade == @Int32.Parse("9")">9</option>
                             <option value="10" selected="@Model.ToList()[0].grade == @Int32.Parse("10")">10</option>
                         </select>
-                        <br />
-                        <br />
-
-                    <label for="grades">@ViewBag.subjects[Model.ToList()[1].sub_id]:  </label>
+                    </div>
+                    <div class="course">
+                        <label for="grades" class="title">@ViewBag.subjects[Model.ToList()[1].sub_id]:  </label>
                         <select name="grade2" id="grades">
-                        <option value="None" selected="@null == @Model.ToList()[1].grade">I haven't gotten a grade yet</option>
-                        <option value="0" selected="@Model.ToList()[1].grade == @Int32.Parse("0")">0</option>
-                        <option value="1" selected="@Model.ToList()[1].grade == @Int32.Parse("1")">1</option>
-                        <option value="2" selected="@Model.ToList()[1].grade == @Int32.Parse("2")">2</option>
-                        <option value="3" selected="@Model.ToList()[1].grade == @Int32.Parse("3")">3</option>
-                        <option value="4" selected="@Model.ToList()[1].grade == @Int32.Parse("4")">4</option>
-                        <option value="5" selected="@Model.ToList()[1].grade == @Int32.Parse("5")">5</option>
-                        <option value="6" selected="@Model.ToList()[1].grade == @Int32.Parse("6")">6</option>
-                        <option value="7" selected="@Model.ToList()[1].grade == @Int32.Parse("7")">7</option>
-                        <option value="8" selected="@Model.ToList()[1].grade == @Int32.Parse("8")">8</option>
-                        <option value="9" selected="@Model.ToList()[1].grade == @Int32.Parse("9")">9</option>
-                        <option value="10" selected="@Model.ToList()[1].grade == @Int32.Parse("10")">10</option>
+                            <option value="None" selected="@null == @Model.ToList()[1].grade">I haven't gotten a grade yet</option>
+                            <option value="0" selected="@Model.ToList()[1].grade == @Int32.Parse("0")">0</option>
+                            <option value="1" selected="@Model.ToList()[1].grade == @Int32.Parse("1")">1</option>
+                            <option value="2" selected="@Model.ToList()[1].grade == @Int32.Parse("2")">2</option>
+                            <option value="3" selected="@Model.ToList()[1].grade == @Int32.Parse("3")">3</option>
+                            <option value="4" selected="@Model.ToList()[1].grade == @Int32.Parse("4")">4</option>
+                            <option value="5" selected="@Model.ToList()[1].grade == @Int32.Parse("5")">5</option>
+                            <option value="6" selected="@Model.ToList()[1].grade == @Int32.Parse("6")">6</option>
+                            <option value="7" selected="@Model.ToList()[1].grade == @Int32.Parse("7")">7</option>
+                            <option value="8" selected="@Model.ToList()[1].grade == @Int32.Parse("8")">8</option>
+                            <option value="9" selected="@Model.ToList()[1].grade == @Int32.Parse("9")">9</option>
+                            <option value="10" selected="@Model.ToList()[1].grade == @Int32.Parse("10")">10</option>
                         </select>
-                        <br />
-                        <br />
+                    </div>
+                    <input type="hidden" id="text" name="username" value="@ViewBag.username" />
 
-                        
-                        <input type="hidden" id="text" name="username" value="@ViewBag.username"/>
-                        
-                        <input type="hidden" id="text" name="sub_id1" value="@Model.ToList()[0].sub_id"/>
+                    <input type="hidden" id="text" name="sub_id1" value="@Model.ToList()[0].sub_id" />
 
-                        <input type="hidden" id="text" name="sub_id2" value="@Model.ToList()[1].sub_id"/>
-                        
-                 
-                        
-                       
-                    
-                    <button id="btnDone" type="submit" class="done buttons icon">
+                    <input type="hidden" id="text" name="sub_id2" value="@Model.ToList()[1].sub_id" />
+
+                    <button id="btnDone" type="submit" class="done">
                         Update Grades
                     </button>
                 </form>
+
+               
         </div>
 
         

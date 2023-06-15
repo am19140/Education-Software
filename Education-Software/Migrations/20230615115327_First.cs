@@ -5,11 +5,27 @@
 namespace Education_Software.Migrations
 {
     /// <inheritdoc />
-    public partial class Grades : Migration
+    public partial class First : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "progress",
+                columns: table => new
+                {
+                    username = table.Column<string>(type: "VARCHAR", maxLength: 6, nullable: false),
+                    test_id = table.Column<string>(type: "VARCHAR", maxLength: 20, nullable: false),
+                    sub_id = table.Column<string>(type: "VARCHAR", maxLength: 10, nullable: true),
+                    test_type = table.Column<string>(type: "CHAR", maxLength: 1, nullable: false),
+                    score = table.Column<decimal>(type: "NUMERIC", nullable: false),
+                    time = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_progress", x => new { x.username, x.test_id });
+                });
+
             migrationBuilder.CreateTable(
                 name: "questionnaire",
                 columns: table => new
@@ -53,16 +69,22 @@ namespace Education_Software.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "specializations",
+                name: "statistics",
                 columns: table => new
                 {
-                    spe_id = table.Column<string>(type: "VARCHAR", maxLength: 50, nullable: false),
-                    spe_name = table.Column<string>(type: "VARCHAR", maxLength: 50, nullable: false),
-                    sub_id = table.Column<string>(type: "VARCHAR", maxLength: 50, nullable: false)
+                    username = table.Column<string>(type: "VARCHAR", maxLength: 6, nullable: false),
+                    description_score = table.Column<decimal>(type: "NUMERIC", nullable: false),
+                    learning_outcomes_score = table.Column<decimal>(type: "NUMERIC", nullable: false),
+                    skills_acquired_score = table.Column<decimal>(type: "NUMERIC", nullable: false),
+                    specialization_link_score = table.Column<decimal>(type: "NUMERIC", nullable: false),
+                    multiple_choice_score = table.Column<decimal>(type: "NUMERIC", nullable: false),
+                    true_false_score = table.Column<decimal>(type: "NUMERIC", nullable: false),
+                    completion_score = table.Column<decimal>(type: "NUMERIC", nullable: false),
+                    matching_score = table.Column<decimal>(type: "NUMERIC", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_specializations", x => new { x.spe_id, x.spe_name, x.sub_id });
+                    table.PrimaryKey("PK_statistics", x => x.username);
                 });
 
             migrationBuilder.CreateTable(
@@ -155,6 +177,9 @@ namespace Education_Software.Migrations
                 name: "grades");
 
             migrationBuilder.DropTable(
+                name: "progress");
+
+            migrationBuilder.DropTable(
                 name: "questionnaire");
 
             migrationBuilder.DropTable(
@@ -164,7 +189,7 @@ namespace Education_Software.Migrations
                 name: "recommendations");
 
             migrationBuilder.DropTable(
-                name: "specializations");
+                name: "statistics");
 
             migrationBuilder.DropTable(
                 name: "tests");

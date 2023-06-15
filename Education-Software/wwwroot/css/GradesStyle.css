@@ -1,0 +1,67 @@
+﻿:root {
+    /* ===== Colors ===== */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #9370db;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+    --light-text-color: #white;
+    --pink: #FF33CC;
+    --light-pink: #FF66CC;
+    --light-blue: #33CCFF;
+    --yellow: #FFC000;
+    --green: #92D050;
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+
+.main{
+    padding:2%;
+}
+h5{
+    margin-bottom:2%;
+}
+
+.course {
+    padding: 2%;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    font-size: 20px;
+    color: white;
+    margin-bottom:0.5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+    .course select{
+        border:none;
+        border-radius:20px;
+        padding:0.3%;
+    }
+    .grades-btn{
+        display:flex;
+        flex-direction:column;
+        
+
+    }
+    .grades-btn .done {
+        margin-top: 2%;
+        padding: 0.5%;
+        border-radius: 20px;
+        transition: all 0.3s;
+        background-color: var(--primary-color);
+        border: none;
+        color:white;
+        padding-left:2%;
+        padding-right:2%;
+        width:15%;
+        align-self:end;
+    }
+        .done:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+  

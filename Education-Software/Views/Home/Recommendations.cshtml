@@ -28,44 +28,42 @@
         </header>
         <div class="menu-bar">
             <div class="menu">
-                <li class="search-box"> 
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Search...">
-                </li>
+
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a class="homebtn" href="#">
+                        <a class="homebtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Homepage">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Homepage</span>
                         </a>
                     </li>
+
                     <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
-                            <i class='bx bx-book icon'></i>
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
+                            <i class='bx bx-list-ul icon'></i>
                             <span class="text nav-text">Subjects</span>
                         </a>
                     </li>
                     <li class="nav-link">
                         <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Progress">
-                            <i class='bx bx-book icon'></i>
+                            <i class='bx bx-line-chart icon'></i>
                             <span class="text nav-text">Progress</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Grades">
-                            <i class='bx bx-book icon'></i>
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Grades">
+                            <i class='bx bx-history icon'></i>
                             <span class="text nav-text">Past Grades</span>
                         </a>
                     </li>
-                        <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Questionnaire">
-                                <i class='bx bx-book icon'></i>
-                                <span class="text nav-text">Career Test</span>
-                            </a>
-                        </li>
+                    <li class="nav-link">
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Questionnaire">
+                            <i class='bx bx-pencil icon'></i>
+                            <span class="text nav-text">Career Test</span>
+                        </a>
+                    </li>
                     <li class="nav-link">
                         <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Recommendations">
-                            <i class='bx bx-book icon'></i>
+                            <i class='bx bx-check-circle icon'></i>
                             <span class="text nav-text">Career Recommendations</span>
                         </a>
                     </li>

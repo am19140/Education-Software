@@ -1,0 +1,76 @@
+﻿:root {
+    /* ===== Colors ===== */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #9370db;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+    --light-text-color: #white;
+    --pink: #FF33CC;
+    --light-pink: #FF66CC;
+    --light-blue: #33CCFF;
+    --yellow: #FFC000;
+    --green: #92D050;
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+
+.home{
+    height:100vh;
+}
+.main {
+    padding: 2%;
+   display:flex;
+   flex-direction:column;
+   align-items:center;
+   
+}
+.test-btn{
+    background-color:var(--primary-color);
+    padding:1%;
+    height:100%;
+    padding-top:2%;
+    padding-left:2%;
+    padding-right:2%;
+    border-radius:20px;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+}
+h4{
+    margin-bottom:1%;
+    padding-left:1%
+}
+h2{
+    margin-bottom:1%;
+}
+
+.main .question{
+    margin-bottom:5%;
+}
+.form-container{
+    width:50%;
+    height:80%;
+}
+.q{
+    font-weight:500;
+}
+
+.main .done{
+    border:none;
+    border-radius:20px;
+    padding:0.5%;
+    margin-top:1%;
+    margin-bottom:1%;
+    font-size:15px;
+}
+    .main .done:hover{
+        cursor:pointer;
+        transform:scale(1.03);
+        transition:var(--tran-05);
+    }

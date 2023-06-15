@@ -54,6 +54,25 @@ body.dark {
     --yellow: #FFC000;
     --green: #92D050;
 }
+.header {
+    display: flex;
+    flex-direction: row;
+}
+
+.right-corner {
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    font-size: 15px;
+    display: flex;
+    width: 150px;
+    justify-content: center;
+}
+.username{
+    margin-left:5%;
+    font-weight:500;
+    color:var(--text-color);
+}
 
 .sidebar {
     position: fixed;
@@ -341,7 +360,7 @@ body.dark .switch::before {
     top: 0;
     bottom: 0;
     left: 250px;
-    height: 110vh;
+    height: 100vh;
     width: calc(100% - 250px);
     background-color: var(--body-color);
 }
@@ -355,7 +374,7 @@ body.dark .switch::before {
 
 .sidebar.close ~ .home {
     left: 78px;
-    height: 110vh;
+    height: 100vh;
     width: calc(100% - 78px);
 }
 
