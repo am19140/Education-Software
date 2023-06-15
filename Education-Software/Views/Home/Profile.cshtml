@@ -1,11 +1,11 @@
-﻿@model RecommendationModel
+﻿@model UserModel
 
 @{
-    ViewData["Title"] = "Recommendations";
+    ViewData["Title"] = "Profile";
 }
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/RecommendationsStyle.css" />
+    <link rel="stylesheet" href="~/css/ProfileStyle.css" />
     <link rel="stylesheet" href="~/css/MenuStyle.css" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
@@ -84,7 +84,7 @@
                         <span class="text nav-text">Logout</span>
                     </a>
                 </li>
-                
+
 
             </div>
         </div>
@@ -93,41 +93,70 @@
     <section class="home">
 
         <div class="header">
-                <div class="text title">Recommendations</div>
+            <div class="text title">Your Profile</div>
             <div class="right-corner">
                 <img src="~/Resources/icons8-male-user-24 (1).png"></img>
-                    <div class="smalltext username ">@ViewBag.username </div>
+                <div class="smalltext username ">@ViewBag.username </div>
             </div>
         </div>
         <div class="main">
-            @if(ViewBag.recommendation)
-            {
-                <div class="results">
-                    <div class="recom-block">
-                        <h2>Based on the data we collected, we have made the recommendation below:</h2>
-                        @foreach (var split in Model.recommendation.Split("•"))
-                        {
-                            <div>@split</div> <br />
-                        }
-                    </div>
-                    <img src="~/Resources/Version control-cuate.png">
+            <div class="left container">
+                <div class="image">
+                    <img src="~/Resources/5ea7beff28d1daff0d6718f6a4856532.jpg"/>
                 </div>
-                          
-                
+                <table>
+                    <tr>
+                        <td>Full Name</td>
+                        <td class="r">@Model.first_name @Model.last_name</td>
+                    </tr>
+                    <tr>
+                        <td>Username</td>
+                        <td class ="r">@Model.username</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td class="r">@Model.email</td>
+                    </tr>
+                    <tr>
+                        <td>Phone number</td>
+                        <td class="r">@Model.phone_number</td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        @if (Model.gender == "M")
+                        {
+                            <td class="r">Male</td>
+                        }
+                        else if (Model.gender=="F")
+                        {
+                            <td class="r">Female</td>
+                        }
+                        else
+                        {
+                            <td class="r">Other</td>
+                        }
+                    </tr>
 
-            }
-            else
-            {
-                <img src="~/Resources/icons8-attention-96.png">
-                <h2>Oh no! Looks like you haven't completed your Career Questionnaire yet.</h2>
-               <form asp-controller="Home" asp-action="Questionnaire" method="post">
-                   <input type="hidden" name="username" value="@ViewBag.username">
-                   <button id="btnDone" type="submit" class="done">
-                       Go to the questionnaire
-                   </button>
-               </form>
-            }
+
+                    <tr>
+                        <td>Current State</td>
+                        @if(Model.student_state == "U")
+                        {
+                            <td class="r">Undergraduate</td>
+                        }
+                        else
+                        {
+                            <td class="r">Has Graduated</td>
+                        }
+                    </tr>
+                </table>
             </div>
+            <div class="right container">
+                <h3>Statistics</h3>
+            </div>
+        </div>
+
+
     </section>
 
     <script>
@@ -158,7 +187,7 @@
         });
     </script>
 
-    </body>
+</body>
 
 
 

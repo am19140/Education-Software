@@ -28,15 +28,15 @@ namespace Education_Software
         }
 
         // GET: UserModels/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(string username)
         {
-            if (id == null || _context.users == null)
+            if (username == null || _context.users == null)
             {
                 return NotFound();
             }
 
             var userModel = await _context.users
-                .FirstOrDefaultAsync(m => m.username == id);
+                .FirstOrDefaultAsync(m => m.username == username);
             if (userModel == null)
             {
                 return NotFound();

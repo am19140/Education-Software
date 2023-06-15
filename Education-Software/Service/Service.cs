@@ -485,6 +485,11 @@ namespace Education_Software.Service
             var r = _context.recommendations.FirstOrDefault(x => x.username == username);
             return r;
         }
+        public UserModel getInfo(string username)
+        {
+            var user = _context.users.FirstOrDefault(x => x.username == username);
+            return user;
+        }
 
         public bool Login(string username,string password)
         {

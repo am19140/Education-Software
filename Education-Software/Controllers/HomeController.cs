@@ -201,6 +201,13 @@ namespace Education_Software.Controllers
             }
             return View("Recommendations", r);
         }
+
+        public IActionResult Profile(string username)
+        {
+            ViewBag.username = username;
+            var user = _Service.getInfo(username);
+            return View("Profile",user);
+        }
         public IActionResult Privacy()
         {
             return View();
