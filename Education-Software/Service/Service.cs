@@ -395,12 +395,12 @@ namespace Education_Software.Service
                         "an artistic personality and like writing code in C#. You don't habve a grade yet in subjects like Human-Computer Interaction, but this doesn't prevent you to start thinking about your career." +
                         "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
                         "There are some fitting post-graduate programs available to you, like: " +
-                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
-                        "\r\nMSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
-                        "\r\nMSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
-                        "\r\nMSc in Information Systems - Athens University of Economics and Business (AUEB)" +
-                        "\r\nMSc in Computer Science - University of Patras" +
-                        "\r\nMSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
+                        "•MSc in Computer Science and Engineering - University of Piraeus" +
+                        "•MSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Information Systems - Athens University of Economics and Business (AUEB)" +
+                        "•MSc in Computer Science - University of Patras" +
+                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
                 }
                 else if (dict.ElementAt(0).Value > 6)
                 {
@@ -408,12 +408,12 @@ namespace Education_Software.Service
                         "an artistic personality and like writing code in C#. Your Grades in subjects like Human-Computer Interaction are good, and you might prefer that subject among others." +
                         "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
                         "There are some fitting post-graduate programs available to you, like: " +
-                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
-                        "\r\nMSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
-                        "\r\nMSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
-                        "\r\nMSc in Information Systems - Athens University of Economics and Business (AUEB)" +
-                        "\r\nMSc in Computer Science - University of Patras" +
-                        "\r\nMSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
+                        "•MSc in Computer Science and Engineering - University of Piraeus" +
+                        "•MSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Information Systems - Athens University of Economics and Business (AUEB)" +
+                        "•MSc in Computer Science - University of Patras" +
+                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
                 }
                 else
                 {
@@ -421,28 +421,20 @@ namespace Education_Software.Service
                         "an artistic personality and like writing code in C#. However, your Grades in subjects like Human-Computer Interaction are not that good, even though you might prefer that subject among others, but with more experience in the topic you can become an expert later on." +
                         "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
                         "There are some fitting post-graduate programs available to you, like: " +
-                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
-                        "\r\nMSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
-                        "\r\nMSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
-                        "\r\nMSc in Information Systems - Athens University of Economics and Business (AUEB)" +
-                        "\r\nMSc in Computer Science - University of Patras" +
-                        "\r\nMSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
+                        "•MSc in Computer Science and Engineering - University of Piraeus" +
+                        "•MSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Information Systems - Athens University of Economics and Business (AUEB)" +
+                        "•MSc in Computer Science - University of Patras" +
+                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
                 }
             }
             else if (first.Count < second.Count)
             {
                 if (!dict.ElementAt(1).Value.HasValue)
                 {
-                    recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" +
-                        "a practical personality and like writing code in Assembly. You don't habve a grade yet in subjects like Computer Architecture, but this doesn't prevent you to start thinking about your career." +
-                        "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." +
-                        "There are some fitting post-graduate programs available to you, like:" +
-                        "\r\nMSc in Electronic Computer Systems - University of Piraeus" +
-                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
-                        "\r\nMSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
-                        "\r\nMSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
-                        "\r\nMSc in Computer Engineering - University of Patras" +
-                        "\r\nMSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
+                    recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" + 
+                        "a practical personality and like writing code in Assembly. You don't habve a grade yet in subjects like Computer Architecture, but this doesn't prevent you to start thinking about your career." + "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." + "There are some fitting post-graduate programs available to you, like:" + "•MSc in Electronic Computer Systems - University of Piraeus" + "•MSc in Computer Science and Engineering - University of Piraeus" + "•MSc in Electrical Engineering - National Technical University of Athens (NTUA)" + "•MSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" + "•MSc in Computer Engineering - University of Patras" + "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
                 }
                 else if (dict.ElementAt(1).Value > 7)
                 {
@@ -450,12 +442,12 @@ namespace Education_Software.Service
                         "a practical personality and like writing code in Assembly. Your Grades in subjects like Computer Architecture are good and you might prefer these subjects among others." +
                         "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." +
                         "There are some fitting post-graduate programs available to you, like:" +
-                        "\r\nMSc in Electronic Computer Systems - University of Piraeus" +
-                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
-                        "\r\nMSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
-                        "\r\nMSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
-                        "\r\nMSc in Computer Engineering - University of Patras" +
-                        "\r\nMSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
+                        "•MSc in Electronic Computer Systems - University of Piraeus" +
+                        "•MSc in Computer Science and Engineering - University of Piraeus" +
+                        "•MSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
+                        "•MSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
+                        "•MSc in Computer Engineering - University of Patras" +
+                        "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
                 }
                 else
                 {
@@ -463,17 +455,28 @@ namespace Education_Software.Service
                         "a practical personality and like writing code in Assembly. However, your Grades in subjects like Computer Architecture are not that good, even though you might prefer that subject among others, but with more experience in the topic you can become an expert later on." +
                         "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." +
                         "There are some fitting post-graduate programs available to you, like:" +
-                        "\r\nMSc in Electronic Computer Systems - University of Piraeus" +
-                        "\r\nMSc in Computer Science and Engineering - University of Piraeus" +
-                        "\r\nMSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
-                        "\r\nMSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
-                        "\r\nMSc in Computer Engineering - University of Patras" +
-                        "\r\nMSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
+                        "•MSc in Electronic Computer Systems - University of Piraeus" +
+                        "•MSc in Computer Science and Engineering - University of Piraeus" +
+                        "•MSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
+                        "•MSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
+                        "•MSc in Computer Engineering - University of Patras" +
+                        "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
                 }
             }
             RecommendationModel r = new RecommendationModel();
             r.username = username;
             r.recommendation = recommendation;
+            var record = _context.recommendations.FirstOrDefault(x=>x.username == username);
+            if (record != null)
+            {
+                record.recommendation = recommendation;
+            }
+            else
+            {
+                _context.recommendations.Add(r);
+                _context.SaveChanges();
+            }
+            
             return r;
         }
 

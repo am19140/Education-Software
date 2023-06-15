@@ -5,7 +5,7 @@
 }
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/HomepageStyle.css" />
+    <link rel="stylesheet" href="~/css/RecommendationsStyle.css" />
     <link rel="stylesheet" href="~/css/MenuStyle.css" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
@@ -102,15 +102,28 @@
         <div class="main">
             @if(ViewBag.recommendation)
             {
-                <h3>@Model.recommendation</h3>
+                <div class="results">
+                    <div class="recom-block">
+                        <h2>Based on the data we collected, we have made the recommendation below:</h2>
+                        @foreach (var split in Model.recommendation.Split("•"))
+                        {
+                            <div>@split</div> 
+                        }
+                    </div>
+                    <img src="~/Resources/Version control-cuate.png">
+                </div>
+                          
+                
+
             }
             else
             {
-                <h5><i>You haven't completed your Career Test yet.</i></h5>
+                <img src="~/Resources/icons8-attention-96.png">
+                <h2>Oh no! Looks like you haven't completed your Career Questionnaire yet.</h2>
                <form asp-controller="Home" asp-action="Questionnaire" method="post">
                    <input type="hidden" name="username" value="@ViewBag.username">
-                   <button id="btnDone" type="submit" class="done buttons icon">
-                       Career Test
+                   <button id="btnDone" type="submit" class="done">
+                       Go to the questionnaire
                    </button>
                </form>
             }

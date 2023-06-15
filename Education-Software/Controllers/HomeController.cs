@@ -187,11 +187,11 @@ namespace Education_Software.Controllers
             return View("Recommendations", recommendation);
         }
 
-        public IActionResult Recommendation(string username)
+        public IActionResult Recommendations(string username)
         {
             ViewBag.username = username;
             RecommendationModel r = _Service.getRecommendationModel(username);
-            if(r.recommendation == null)
+            if(r == null)
             {
                 ViewBag.recommendation = false;
             }

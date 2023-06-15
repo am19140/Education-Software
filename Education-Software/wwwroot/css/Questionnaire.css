@@ -60,6 +60,9 @@ h2{
 .q{
     font-weight:500;
 }
+i{
+    color:var(--primary-color);
+}
 
 .main .done{
     border:none;
