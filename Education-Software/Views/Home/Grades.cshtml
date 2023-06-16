@@ -108,36 +108,38 @@
                     
                     <div class="course">
                         <label for="grades" class="title">@ViewBag.subjects[Model.ToList()[0].sub_id]:  </label>
-                        <select name="grade1" id="grades">
-                            <option value="None" selected="@null == @Model.ToList()[0].grade">I haven't gotten a grade yet</option>
-                            <option value="0" selected="@Model.ToList()[0].grade == @Int32.Parse("0")">0</option>
-                            <option value="1" selected="@Model.ToList()[0].grade == @Int32.Parse("1")">1</option>
-                            <option value="2" selected="@Model.ToList()[0].grade == @Int32.Parse("2")">2</option>
-                            <option value="3" selected="@Model.ToList()[0].grade == @Int32.Parse("3")">3</option>
-                            <option value="4" selected="@Model.ToList()[0].grade == @Int32.Parse("4")">4</option>
-                            <option value="5" selected="@Model.ToList()[0].grade == @Int32.Parse("5")">5</option>
-                            <option value="6" selected="@Model.ToList()[0].grade == @Int32.Parse("6")">6</option>
-                            <option value="7" selected="@Model.ToList()[0].grade == @Int32.Parse("7")">7</option>
-                            <option value="8" selected="@Model.ToList()[0].grade == @Int32.Parse("8")">8</option>
-                            <option value="9" selected="@Model.ToList()[0].grade == @Int32.Parse("9")">9</option>
-                            <option value="10" selected="@Model.ToList()[0].grade == @Int32.Parse("10")">10</option>
+                        <select name="grade1" id="grades" p>
+                        <option value="" disabled selected>@Model.ToList()[0].grade</option>
+                            <option value="None">I haven't gotten a grade yet</option>
+                            <option value="0">0</option>
+                            <option value="1" >1</option>
+                            <option value="2" >2</option>
+                            <option value="3" >3</option>
+                            <option value="4" >4</option>
+                            <option value="5" >5</option>
+                            <option value="6" >6</option>
+                            <option value="7" >7</option>
+                            <option value="8" >8</option>
+                            <option value="9" >9</option>
+                            <option value="10" >10</option>
                         </select>
                     </div>
                     <div class="course">
                         <label for="grades" class="title">@ViewBag.subjects[Model.ToList()[1].sub_id]:  </label>
-                        <select name="grade2" id="grades">
-                            <option value="None" selected="@null == @Model.ToList()[1].grade">I haven't gotten a grade yet</option>
-                            <option value="0" selected="@Model.ToList()[1].grade == @Int32.Parse("0")">0</option>
-                            <option value="1" selected="@Model.ToList()[1].grade == @Int32.Parse("1")">1</option>
-                            <option value="2" selected="@Model.ToList()[1].grade == @Int32.Parse("2")">2</option>
-                            <option value="3" selected="@Model.ToList()[1].grade == @Int32.Parse("3")">3</option>
-                            <option value="4" selected="@Model.ToList()[1].grade == @Int32.Parse("4")">4</option>
-                            <option value="5" selected="@Model.ToList()[1].grade == @Int32.Parse("5")">5</option>
-                            <option value="6" selected="@Model.ToList()[1].grade == @Int32.Parse("6")">6</option>
-                            <option value="7" selected="@Model.ToList()[1].grade == @Int32.Parse("7")">7</option>
-                            <option value="8" selected="@Model.ToList()[1].grade == @Int32.Parse("8")">8</option>
-                            <option value="9" selected="@Model.ToList()[1].grade == @Int32.Parse("9")">9</option>
-                            <option value="10" selected="@Model.ToList()[1].grade == @Int32.Parse("10")">10</option>
+                    <select name="grade2" id="grades">
+                            <option value="" disabled selected>@Model.ToList()[1].grade</option>
+                            <option value="None" >I haven't gotten a grade yet</option>
+                            <option value="0" >0</option>
+                            <option value="1" >1</option>
+                            <option value="2" >2</option>
+                            <option value="3" >3</option>
+                            <option value="4" >4</option>
+                            <option value="5" >5</option>
+                            <option value="6" >6</option>
+                            <option value="7" >7</option>
+                            <option value="8" >8</option>
+                            <option value="9" >9</option>
+                            <option value="10">10</option>
                         </select>
                     </div>
                     <input type="hidden" id="text" name="username" value="@ViewBag.username" />

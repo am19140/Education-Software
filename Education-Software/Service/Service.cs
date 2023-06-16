@@ -190,35 +190,35 @@ namespace Education_Software.Service
 
             int correct_description = temp.Where(x => x.chapter == "description").ToList().Count;
             int count_description = join.Where(x => x.chapter == "description").ToList().Count;
-            double? description_score = (count_description == 0) ? null : (correct_description / count_description) * 100;
+            double? description_score = (count_description == 0) ? -1.0 : (correct_description / count_description) * 100;
 
             int correct_learning_outcomes = temp.Where(x => x.chapter == "learning_outcomes").ToList().Count;
             int count_learning_outcomes = join.Where(x => x.chapter == "learning_outcomes").ToList().Count;
-            double? learning_outcomes_score = (count_learning_outcomes == 0) ? null : (correct_learning_outcomes / count_learning_outcomes) * 100;
+            double? learning_outcomes_score = (count_learning_outcomes == 0) ? -1.0 : (correct_learning_outcomes / count_learning_outcomes) * 100;
 
             int correct_skills = temp.Where(x => x.chapter == "skills_acquired").ToList().Count;
             int count_skills = join.Where(x => x.chapter == "skills_acquired").ToList().Count;
-            double? skills_score = (count_skills == 0) ? null : (correct_skills / count_skills) * 100;
+            double? skills_score = (count_skills == 0) ? -1.0 : (correct_skills / count_skills) * 100;
 
             int correct_specialization = temp.Where(x => x.chapter == "specialization_link").ToList().Count;
             int count_specialization = join.Where(x => x.chapter == "specialization_link").ToList().Count;
-            double? specialization_score = (count_specialization == 0) ? null : (correct_specialization / count_specialization) * 100;
+            double? specialization_score = (count_specialization == 0) ? -1.0 : (correct_specialization / count_specialization) * 100;
 
             int correct_multiple_choice = temp.Where(x => x.q_type == "multiple_choice").ToList().Count;
             int count_multiple_choice = join.Where(x => x.q_type == "multiple_choice").ToList().Count;
-            double? multiple_choice_score = (count_multiple_choice == 0) ? null : (correct_multiple_choice / count_multiple_choice) * 100;
+            double? multiple_choice_score = (count_multiple_choice == 0) ? -1.0 : (correct_multiple_choice / count_multiple_choice) * 100;
 
             int correct_true_false = temp.Where(x => x.q_type == "true/false").ToList().Count;
             int count_true_false = join.Where(x => x.q_type == "true/false").ToList().Count;
-            double? true_false_score = (count_true_false == 0) ? null : (correct_true_false / count_true_false) * 100;
+            double? true_false_score = (count_true_false == 0) ? -1.0 : (correct_true_false / count_true_false) * 100;
 
             int correct_completion = temp.Where(x => x.q_type == "completion").ToList().Count;
             int count_completion = join.Where(x => x.q_type == "completion").ToList().Count;
-            double? completion_score = (count_completion == 0) ? null : (correct_completion / count_completion) * 100;
+            double? completion_score = (count_completion == 0) ? -1.0 : (correct_completion / count_completion) * 100;
 
             int correct_matching = temp.Where(x => x.q_type == "matching").ToList().Count;
             int count_matching = join.Where(x => x.q_type == "matching").ToList().Count;
-            double? matching_score = (count_matching == 0) ? null : (correct_matching / count_matching) * 100;
+            double? matching_score = (count_matching == 0) ? -1.0 : (correct_matching / count_matching) * 100;
             
             StatisticsModel s = new StatisticsModel();
             s.username = username;
