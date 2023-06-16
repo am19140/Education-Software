@@ -76,11 +76,11 @@ namespace Education_Software.Service
                 var q1 = model.Where(x => x.q_type == "multiple_choice").OrderBy(h => r.Next()).Take(1).First();
                 var q2 = model.Where(x => x.q_type == "true/false").OrderBy(h => r.Next()).Take(1).First();
                 var q3 = model.Where(x => x.q_type == "completion").OrderBy(h => r.Next()).Take(1).First();
-                //var q4 = model.Where(x => x.q_type == "matching").OrderBy(h => r.Next()).Take(1).First();
+                var q4 = model.Where(x => x.q_type == "matching").OrderBy(h => r.Next()).Take(1).First();
                 quest.Add(q1);
                 quest.Add(q2);
                 quest.Add(q3);
-                //quest.Add(q4);
+                quest.Add(q4);
             }
             else
             {
@@ -100,53 +100,6 @@ namespace Education_Software.Service
                 quest.Add(q7);
             }
             return quest;
-        }
-        
-        public List<QuestionModel> SplitQuestions(List<QuestionModel> model, string test_type)
-        {
-            List<QuestionModel> questions = getRandomQuestions(model, test_type);
-            //List<Tuple<string, string, string, List<string>>> q = new List<Tuple<string, string, string, List<string>>>();
-            /*
-            foreach (QuestionModel question in questions)
-            {
-                string body = "";
-                List<string> possible_answers = new List<string>();
-                if (question.q_type == "multiple_choice")
-                {
-                    string[] s = question.question.Split("•");
-                    Debug.WriteLine(s);
-                    body = s[0];
-                    possible_answers = s.Skip(1).ToList();
-                }
-                else if (question.q_type == "true/false")
-                {
-                    string[] s = question.question.Split("•");
-                    body = s[0];
-                    possible_answers = s.Skip(1).ToList();
-                }
-                else if (question.q_type == "ordering")
-                {
-                    string[] s = question.question.Split("•");
-                    body = s[0];
-                    possible_answers = s.Skip(1).ToList();
-                }
-                else if (question.q_type == "completion")
-                {
-                    string[] s = question.question.Split("•");
-                    body = s[0];
-                    possible_answers = s.Skip(1).ToList();
-                }
-                else if (question.q_type == "matching")
-                {
-                    string[] s = question.question.Split("•");
-                    body = s[0];
-                    possible_answers = s.Skip(1).ToList();
-                }
-
-                Tuple<string, string, string, List<string>> el = new Tuple<string, string, string, List<string>>(question.q_id, question.q_type, body, possible_answers);
-                q.Add(el);
-            }*/
-            return questions;
         }
 
         public Dictionary<string,List<bool>> GetTestAnswers(string username, Dictionary<string,string> responses, string test_type)
@@ -182,15 +135,17 @@ namespace Education_Software.Service
             return d;
         }
 
-        public List<QuestionModel> getQuestions(string q_id1, string q_id2, string q_id3)
+        public List<QuestionModel> getQuestions(string q_id1, string q_id2, string q_id3, string q_id4)
         {
             List<QuestionModel> model = new List<QuestionModel>();
             var m1 = _context.questions.First(x => x.q_id == q_id1);
             var m2 = _context.questions.First(x => x.q_id == q_id2);
             var m3 = _context.questions.First(x => x.q_id == q_id3);
+            var m4 = _context.questions.First(x => x.q_id == q_id4);
             model.Add(m1);
             model.Add(m2);
             model.Add(m3);
+            model.Add(m4);
             return model;
         }
 
@@ -235,46 +190,46 @@ namespace Education_Software.Service
 
             int correct_description = temp.Where(x => x.chapter == "description").ToList().Count;
             int count_description = join.Where(x => x.chapter == "description").ToList().Count;
-            double description_score = (correct_description / count_description) * 100;
+            double? description_score = (count_description == 0) ? null : (correct_description / count_description) * 100;
 
             int correct_learning_outcomes = temp.Where(x => x.chapter == "learning_outcomes").ToList().Count;
             int count_learning_outcomes = join.Where(x => x.chapter == "learning_outcomes").ToList().Count;
-            double learning_outcomes_score = (correct_learning_outcomes / count_learning_outcomes) * 100;
+            double? learning_outcomes_score = (count_learning_outcomes == 0) ? null : (correct_learning_outcomes / count_learning_outcomes) * 100;
 
             int correct_skills = temp.Where(x => x.chapter == "skills_acquired").ToList().Count;
             int count_skills = join.Where(x => x.chapter == "skills_acquired").ToList().Count;
-            double skills_score = (correct_skills / count_skills) * 100;
+            double? skills_score = (count_skills == 0) ? null : (correct_skills / count_skills) * 100;
 
             int correct_specialization = temp.Where(x => x.chapter == "specialization_link").ToList().Count;
             int count_specialization = join.Where(x => x.chapter == "specialization_link").ToList().Count;
-            double specialization_score = (correct_specialization / count_specialization) * 100;
+            double? specialization_score = (count_specialization == 0) ? null : (correct_specialization / count_specialization) * 100;
 
             int correct_multiple_choice = temp.Where(x => x.q_type == "multiple_choice").ToList().Count;
             int count_multiple_choice = join.Where(x => x.q_type == "multiple_choice").ToList().Count;
-            double multiple_choice_score = (correct_multiple_choice / count_multiple_choice) * 100;
+            double? multiple_choice_score = (count_multiple_choice == 0) ? null : (correct_multiple_choice / count_multiple_choice) * 100;
 
             int correct_true_false = temp.Where(x => x.q_type == "true/false").ToList().Count;
             int count_true_false = join.Where(x => x.q_type == "true/false").ToList().Count;
-            double true_false_score = (correct_true_false / count_true_false) * 100;
+            double? true_false_score = (count_true_false == 0) ? null : (correct_true_false / count_true_false) * 100;
 
             int correct_completion = temp.Where(x => x.q_type == "completion").ToList().Count;
             int count_completion = join.Where(x => x.q_type == "completion").ToList().Count;
-            double completion_score = (correct_completion / count_completion) * 100;
+            double? completion_score = (count_completion == 0) ? null : (correct_completion / count_completion) * 100;
 
             int correct_matching = temp.Where(x => x.q_type == "matching").ToList().Count;
             int count_matching = join.Where(x => x.q_type == "matching").ToList().Count;
-            double matching_score = (correct_matching / count_matching) * 100;
+            double? matching_score = (count_matching == 0) ? null : (correct_matching / count_matching) * 100;
             
             StatisticsModel s = new StatisticsModel();
             s.username = username;
-            s.description_score = (int) Math.Floor(description_score);
-            s.learning_outcomes_score = (int)Math.Floor(learning_outcomes_score);
-            s.skills_acquired_score = (int)Math.Floor(skills_score);
-            s.specialization_link_score = (int)Math.Floor(specialization_score);
-            s.multiple_choice_score = (int)Math.Floor(multiple_choice_score);
-            s.true_false_score = (int)Math.Floor(true_false_score);
-            s.completion_score = (int)Math.Floor(completion_score);
-            s.matching_score = (int)Math.Floor(matching_score);
+            s.description_score = (int?) Math.Floor((decimal)description_score);
+            s.learning_outcomes_score = (int?)Math.Floor((decimal)learning_outcomes_score);
+            s.skills_acquired_score = (int?)Math.Floor((decimal)skills_score);
+            s.specialization_link_score = (int?)Math.Floor((decimal)specialization_score);
+            s.multiple_choice_score = (int?)Math.Floor((decimal)multiple_choice_score);
+            s.true_false_score = (int?)Math.Floor((decimal)true_false_score);
+            s.completion_score = (int?)Math.Floor((decimal)completion_score);
+            s.matching_score = (int?)Math.Floor((decimal)matching_score);
             return s;
         }
 

@@ -169,7 +169,22 @@
                             <input type="text" id="text" name="answer3">
                             <label>@s[1]</label>
                         }
+                    <input type="hidden" name="q_id4" value="@Model.ToList()[3].q_id" />
+                    @Model.ToList()[3].question<br />
+                    @if ((@ViewBag.submitted == true) && (@ViewBag.results[3] == true))
+                    {
+                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
 
+                    }
+                    else if ((@ViewBag.submitted == true) && (@ViewBag.results[3] == false))
+                    {
+                        <i class='bx bxs-check-circle' style="color:lightgrey"></i>
+                    }
+                    @foreach (string answer in @Model.ToList()[3].possible_answers.Split("•"))
+                    {
+                        <input type="text" id="text" name="answer4">
+                        <label>@answer</label>
+                    }
 
                     <input type="hidden" name="test_type" value="A" />
                     <br />

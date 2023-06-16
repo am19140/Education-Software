@@ -5,7 +5,7 @@
 }
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/HomepageStyle.css" />
+    <link rel="stylesheet" href="~/css/ProfileStyle.css" />
     <link rel="stylesheet" href="~/css/MenuStyle.css" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
@@ -78,21 +78,90 @@
         </div>
     </nav>
 
-    <section class="home">
+        <section class="home">
 
-        <div class="header">
-            <div class="text title">Progress</div>
-            <div class="right-corner">
-                <img src="~/Resources/icons8-male-user-24 (1).png"></img>
-                <div class="smalltext username ">@ViewBag.username </div>
+            <div class="header">
+                <div class="text title">Your Progress</div>
+                <div class="right-corner">
+                    <img src="~/Resources/icons8-male-user-24 (1).png"></img>
+                    <div class="smalltext username ">@ViewBag.username </div>
+                </div>
+            </div>
+            <div class="main">
+                <div class="left container">
+                    <table>
+                        @foreach(var test in @Model.progress_table)
+                        {
+                            <tr>
+                            <td>Test Id</td>
+                            <td class="r">@test.test_id</td>
+                            </tr>
+                            <tr>
+                            <td>Subject</td>
+                            <td class="r">@test.sub_id</td>
+                            </tr>
+                            <tr>
+                            <td>Test Type</td>
+                           @if (test.test_type == "A")
+                           {
+                                <td class="r">Assessment Test</td>
+                            }
+                           else if (test.test_type == "E")
+                           {
+                                <td class="r">Evaluation Test</td>
+                           }
+                           </tr>
+                        <tr>
+                            <td>Score</td>
+                            <td class="r">@test.score %</td>
+                        </tr>
+                        <tr>
+                            <td>Done on</td>
+                            <td class="r">@test.time</td>
+                        </tr>
+                        }
+                </table>
+            </div>
+            <div class="right container">
+                <h3>Statistics</h3>
+                <table>
+                        <tr>
+                            <td>Description</td>
+                            <td class="r">@Model.statistics_table.description_score %</td>
+                        </tr>
+                        <tr>
+                            <td>Learning Outcomes</td>
+                            <td class="r">@Model.statistics_table.learning_outcomes_score %</td>
+                        </tr>
+                        <tr>
+                            <td>Skills Acquired</td>
+                            <td class="r">@Model.statistics_table.skills_acquired_score %</td>
+                        </tr>
+                        <tr>
+                            <td>Specialization</td>
+                            <td class="r">@Model.statistics_table.specialization_link_score %</td>
+                        </tr>
+                        <tr>
+                            <td>Multiple Choice</td>
+                            <td class="r">@Model.statistics_table.multiple_choice_score %</td>
+                    </tr>
+                    <tr>
+                        <td>True/False</td>
+                            <td class="r">@Model.statistics_table.true_false_score %</td>
+                    </tr>
+                    <tr>
+                        <td>Completion</td>
+                            <td class="r">@Model.statistics_table.completion_score %</td>
+                    </tr>
+                    <tr>
+                        <td>Matching</td>
+                            <td class="r">@Model.statistics_table.matching_score %</td>
+                    </tr>
+                </table>
             </div>
         </div>
-        <div class="main">
-            
 
-        </div>
 
-        
     </section>
 
     <script>
