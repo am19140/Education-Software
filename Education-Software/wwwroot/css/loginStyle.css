@@ -108,5 +108,18 @@ h2{
 .image {
     width: 45%;
 }
+.register{
+    margin-top:5%;
+}
+.register a{
+    text-decoration:none;
+    text-align:center;
+    color:var(--primary-color);
+}
+
+.register .signin:hover{
+    transition:var(--tran-04);
+    color:black;
+}
 
 

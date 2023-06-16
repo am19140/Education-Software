@@ -1,0 +1,60 @@
+﻿@model Education_Software.Models.RegistrationModel
+@{
+    ViewData["Title"] = "Register";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/loginStyle.css" />
+}
+<div class="page">
+    <div class="sign-in-form">
+        <form asp-controller="Home" asp-action="Registration" method="post" class="form">
+            <h1>Sign In</h1>
+            <div class="inputs">
+                <input type="text" placeholder="Username" class="input" asp-for="username" />
+            </div>
+            <div class="inputs">
+                <input type="password" placeholder="Password" class="input" asp-for="password" />
+            </div>
+            <div class="inputs">
+                <input type="text" placeholder="First Name" class="input" asp-for="firstname" />
+            </div>
+            <div class="inputs">
+                <input type="text" placeholder="Last Name" class="input" asp-for="lastname" />
+            </div>
+            <div class="inputs">
+                <input type="text" placeholder="Email" class="input" asp-for="email" />
+            </div>
+            <div class="inputs">
+                <input type="text" placeholder="Phone Number" class="input" asp-for="phone_number" />
+            </div>
+
+            <div class="inputs">
+                <input type="submit" class="submit-btn" value="Submit" class="input" />
+
+            </div>
+            <div class="radios1">
+                @Html.RadioButtonFor(r=>r.gender,"Female", new{id="Female"})<label for="Female">Female</label><br>
+                @Html.RadioButtonFor(r=>r.gender,"Male", new{id="Male"})<label for="Male">Male</label><br>
+                @Html.RadioButtonFor(r=>r.gender,"Other", new{id="Other"})<label for="Other">Other</label><br>
+
+            </div>
+            <div class="radios2">
+                @Html.RadioButtonFor(r=>r.gender,"U", new{id="U"})<label for="U">Undergraduate</label><br>
+                @Html.RadioButtonFor(r=>r.gender,"G", new{id="G"})<label for="G">Has Graduated</label><br>
+
+            </div>
+        </form>
+        <div class="register">
+            <h4>Don't have an account yet?</h4>
+            <a class="signin" asp-controller="Home" asp-action="Registration">
+                <h5>Sign up</h5>
+            </a>
+
+        </div>
+    </div>
+    <div class="shape-container">
+        <img src="@Url.Content("~/Resources/login-image.png")" class="image" />
+
+        <h2 class="text">We help you find your <i>dream career</i></h2>
+    </div>
+</div>

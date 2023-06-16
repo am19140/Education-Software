@@ -16,10 +16,20 @@
                     <input type="password" placeholder="Password" class="input" asp-for="password" />
                 </div>
                 <div class="inputs">
-                    <input type="submit" class="submit-btn" value="Submit" class="input" />
+                    <input type="submit" class="submit-btn" value="Sign In" class="input" />
 
                 </div>
             </form>
+            <div class="register">
+
+            <h4>Don't have an account yet?</h4>
+            <a class="signin" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Registration">                
+                <span class="text nav-text">
+                    <h5>Create an account</h5>
+                </span>
+            </a>
+            
+        </div>
         </div>
         <div class="shape-container">
         <img src="@Url.Content("~/Resources/login-image.png")" class="image" />
