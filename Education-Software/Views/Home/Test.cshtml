@@ -5,7 +5,7 @@
 }
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/HomepageStyle.css" />
+    <link rel="stylesheet" href="~/css/Questionnaire.css" />
     <link rel="stylesheet" href="~/css/MenuStyle.css" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
@@ -100,37 +100,45 @@
             </div>
         </div>
         <div class="main">
-            <div class="Questions">
+            <div class="questions">
 
-                <h2>
-                    Questions
-                </h2>
                 
-                <form asp-controller="Home" asp-action="SubmitTest" method="post">
+                
+                <form asp-controller="Home" asp-action="SubmitTest" method="post" class="test-btn">
+                    <h2>
+                        Questions
+                    </h2>
                     <input type="hidden" name="username" value="@ViewBag.username" />
                     <input type="hidden" name="subject" value="@ViewBag.subject" />
                     <input type="hidden" name="q_id1" value= "@Model.ToList()[0].q_id"/>
-                        @Model.ToList()[0].question<br />
-                    @if ((@ViewBag.submitted == true) && (@ViewBag.results[0] == true))
-                    {
-                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
 
-                    }
-                    else if ((@ViewBag.submitted == true) && (@ViewBag.results[0] == false))
-                    {
-                        <i class='bx bxs-check-circle' style="color:lightgrey"></i>
-                    }
+
+                    <div class="q">@Model.ToList()[0].question</div>   
+                    <div>
+                        @if ((@ViewBag.submitted == true) && (@ViewBag.results[0] == true))
+                        {
+                            <i class='bx bxs-check-circle' style="color:#92D050"></i>
+
+                        }
+                        else if ((@ViewBag.submitted == true) && (@ViewBag.results[0] == false))
+                        {
+                            <i class='bx bxs-check-circle' style="color:lightgrey"></i>
+                        }
                         <div class="radios">
-                        @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
+                            @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
                             {
-                        var ind = @Model.ToList()[0].possible_answers.IndexOf(@answer)+1;
-                        <input type="radio" id="mc" name="answer1" value="@ind"/>
-                        <label for="mc">@answer</label><br>
+                                var ind = @Model.ToList()[0].possible_answers.IndexOf(@answer) + 1;
+                                <input type="radio" id="mc" name="answer1" value="@ind" />
+                                <label for="mc">@answer</label>
+
+                                <br>
                             }
+                        </div>
                     </div>
-                    <br />
+                    
+
                     <input type="hidden" name="q_id2" value="@Model.ToList()[1].q_id" />
-                    @Model.ToList()[1].question<br />
+                    <div class="q">@Model.ToList()[1].question</div>
                     @if ((@ViewBag.submitted == true) && (@ViewBag.results[1] == true))
                         {
                         <i class='bx bxs-check-circle' style="color:#92D050"></i>
@@ -150,9 +158,8 @@
                         <label for="t">False</label><br>
                         }
                         </div>
-                        <br />
                     <input type="hidden" name="q_id3" value="@Model.ToList()[2].q_id" />
-                    @Model.ToList()[2].question<br />
+                    <div class="q">@Model.ToList()[2].question</div>
                     @if ((@ViewBag.submitted == true) && (@ViewBag.results[2] == true))
                         {
                         <i class='bx bxs-check-circle' style="color:#92D050"></i>
@@ -166,8 +173,8 @@
                         {
                         var s = @answer.Split("#");
                         <label>@s[0]</label>
-                            <input type="text" id="text" name="answer3">
-                            <label>@s[1]</label>
+                            <input type="text" id="text" name="answer3" class="input">
+                            //<label>@s[1]</label>
                         }
 
 
@@ -175,7 +182,7 @@
                     <br />
                     @if (@ViewBag.submitted != true)
                     { 
-                        <button type="submit">Submit</button> 
+                        <button type="submit" class="done">Submit</button> 
                     }
                        
                 </form>
@@ -193,11 +200,11 @@
                             You have to read again the chapter and make the test again.
                             </i>
                             </h5>
-                            <form asp-controller="Home" asp-action="Subject" method="post" class="test-btn">
+                            <form asp-controller="Home" asp-action="Subject" method="post" class="back-btn">
                             <input type="hidden" name="username" value="@ViewBag.username" />
                             <input type="hidden" name="subject" value="@ViewBag.subject" />
-                            <button id="btnDone" type="submit" class="done buttons icon">
-                            Go to the subject's content.
+                            <button id="btnDone" type="submit" class="back">
+                                <i class='bx bx-arrow-back icon'></i> Back to subject's content.
                             </button>
                             </form>
                         }
