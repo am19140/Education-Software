@@ -1,4 +1,4 @@
-﻿@model TestModel
+﻿@model IEnumerable<QuestionModel>
 
 @{
     ViewData["Title"] = "Evaluation";
@@ -102,12 +102,485 @@
                 </div>
             </div>
             <div class="main">
+                @if(!ViewBag.submitted)
+                {
+                     <div class="Questions">
+
+                <h2>
+                    Questions
+                </h2>
+                
+                <form asp-controller="Home" asp-action="SubmitEvaluationTest" method="post">
+                    <input type="hidden" name="username" value="@ViewBag.username" />
+            <!--Question 1-->
+                    <input type="hidden" name="q_id1" value= "@Model.ToList()[0].q_id"/>
+                        @Model.ToList()[0].question<br />
+                        @if(@Model.ToList()[0].q_type == "multiple_choice")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
+                                {
+                                    var ind = @Model.ToList()[0].possible_answers.IndexOf(@answer) + 1;
+                                    <input type="radio" id="mc" name="answer1" value="@ind" />
+                                    <label for="mc">@answer</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if (@Model.ToList()[0].q_type== "true/false")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
+                                {
+                                    @answer
+
+                                    <br />
+                                    <input type="radio" id="t" name="answer1" value="true" />
+                                    <label for="t">True</label>
+
+                                    <br>
+                                    <input type="radio" id="f" name="answer1" value="false" />
+                                    <label for="t">False</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if(@Model.ToList()[0].q_type == "completion")
+                        {
+                            @foreach (string answer in @Model.ToList()[0].possible_answers.Split("•"))
+                            {
+                                var s = @answer.Split("#");
+                                <label>@s[0]</label>
+                                <input type="text" id="text" name="answer1">
+                                <label>@s[1]</label>
+                            }
+                        }
+                        else if (@Model.ToList()[0].q_type == "matching")
+                        {
+                            @foreach (string answer in @Model.ToList()[0].possible_answers.Split("•"))
+                            {
+                                <input type="text" id="text" name="answer1">
+                                <label>@answer</label>
+                            }
+                        }
+
+
+            <!--Question 2-->
+                        <input type="hidden" name="q_id2" value="@Model.ToList()[1].q_id" />
+                        @Model.ToList()[1].question<br />
+                        @if (@Model.ToList()[1].q_type == "multiple_choice")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[1].possible_answers.Split("•"))
+                                {
+                                    var ind = @Model.ToList()[1].possible_answers.IndexOf(@answer) + 1;
+                                    <input type="radio" id="mc" name="answer2" value="@ind" />
+                                    <label for="mc">@answer</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if (@Model.ToList()[1].q_type == "true/false")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[1].possible_answers.Split("•"))
+                                {
+                                    @answer
+
+                                    <br />
+                                    <input type="radio" id="t" name="answer2" value="true" />
+                                    <label for="t">True</label>
+
+                                    <br>
+                                    <input type="radio" id="f" name="answer2" value="false" />
+                                    <label for="t">False</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if (@Model.ToList()[1].q_type == "completion")
+                        {
+                            @foreach (string answer in @Model.ToList()[1].possible_answers.Split("•"))
+                            {
+                                var s = @answer.Split("#");
+                                <label>@s[0]</label>
+                                <input type="text" id="text" name="answer2">
+                                <label>@s[1]</label>
+                            }
+                        }
+                        else if (@Model.ToList()[1].q_type == "matching")
+                        {
+                            @foreach (string answer in @Model.ToList()[1].possible_answers.Split("•"))
+                            {
+                                <input type="text" id="text" name="answer2">
+                                <label>@answer</label>
+                            }
+                        }
+
+            <!--Question 3-->
+                    <input type="hidden" name="q_id3" value= "@Model.ToList()[2].q_id"/>
+                        @Model.ToList()[2].question<br />
+                        @if(@Model.ToList()[2].q_type == "multiple_choice")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[2].possible_answers.Split("•"))
+                                {
+                                    var ind = @Model.ToList()[2].possible_answers.IndexOf(@answer) + 1;
+                                    <input type="radio" id="mc" name="answer3" value="@ind" />
+                                    <label for="mc">@answer</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if (@Model.ToList()[2].q_type== "true/false")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[2].possible_answers.Split("•"))
+                                {
+                                    @answer
+
+                                    <br />
+                                    <input type="radio" id="t" name="answer3" value="true" />
+                                    <label for="t">True</label>
+
+                                    <br>
+                                    <input type="radio" id="f" name="answer3" value="false" />
+                                    <label for="t">False</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if(@Model.ToList()[2].q_type == "completion")
+                        {
+                            @foreach (string answer in @Model.ToList()[2].possible_answers.Split("•"))
+                            {
+                                var s = @answer.Split("#");
+                                <label>@s[0]</label>
+                                <input type="text" id="text" name="answer3">
+                                <label>@s[1]</label>
+                            }
+                        }
+                        else if (@Model.ToList()[2].q_type == "matching")
+                        {
+                            @foreach (string answer in @Model.ToList()[2].possible_answers.Split("•"))
+                            {
+                                <input type="text" id="text" name="answer3">
+                                <label>@answer</label>
+                            }
+                        }
+
+            <!--Question 4-->
+                        <input type="hidden" name="q_id4" value="@Model.ToList()[3].q_id" />
+                        @Model.ToList()[3].question<br />
+                        @if (@Model.ToList()[3].q_type == "multiple_choice")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[3].possible_answers.Split("•"))
+                                {
+                                    var ind = @Model.ToList()[3].possible_answers.IndexOf(@answer) + 1;
+                                    <input type="radio" id="mc" name="answer4" value="@ind" />
+                                    <label for="mc">@answer</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if (@Model.ToList()[3].q_type == "true/false")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[3].possible_answers.Split("•"))
+                                {
+                                    @answer
+
+                                    <br />
+                                    <input type="radio" id="t" name="answer4" value="true" />
+                                    <label for="t">True</label>
+
+                                    <br>
+                                    <input type="radio" id="f" name="answer4" value="false" />
+                                    <label for="t">False</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if (@Model.ToList()[3].q_type == "completion")
+                        {
+                            @foreach (string answer in @Model.ToList()[3].possible_answers.Split("•"))
+                            {
+                                var s = @answer.Split("#");
+                                <label>@s[0]</label>
+                                <input type="text" id="text" name="answer4">
+                                <label>@s[1]</label>
+                            }
+                        }
+                        else if (@Model.ToList()[3].q_type == "matching")
+                        {
+                            @foreach (string answer in @Model.ToList()[3].possible_answers.Split("•"))
+                            {
+                                <input type="text" id="text" name="answer4">
+                                <label>@answer</label>
+                            }
+                        }
+
+        <!--Question 5-->
+                        <input type="hidden" name="q_id5" value="@Model.ToList()[4].q_id" />
+                        @Model.ToList()[4].question<br />
+                        @if (@Model.ToList()[4].q_type == "multiple_choice")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[4].possible_answers.Split("•"))
+                                {
+                                    var ind = @Model.ToList()[4].possible_answers.IndexOf(@answer) + 1;
+                                    <input type="radio" id="mc" name="answer5" value="@ind" />
+                                    <label for="mc">@answer</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if (@Model.ToList()[4].q_type == "true/false")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[4].possible_answers.Split("•"))
+                                {
+                                    @answer
+
+                                    <br />
+                                    <input type="radio" id="t" name="answer5" value="true" />
+                                    <label for="t">True</label>
+
+                                    <br>
+                                    <input type="radio" id="f" name="answer5" value="false" />
+                                    <label for="t">False</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if (@Model.ToList()[4].q_type == "completion")
+                        {
+                            @foreach (string answer in @Model.ToList()[4].possible_answers.Split("•"))
+                            {
+                                var s = @answer.Split("#");
+                                <label>@s[0]</label>
+                                <input type="text" id="text" name="answer5">
+                                <label>@s[1]</label>
+                            }
+                        }
+                        else if (@Model.ToList()[4].q_type == "matching")
+                        {
+                            @foreach (string answer in @Model.ToList()[4].possible_answers.Split("•"))
+                            {
+                                <input type="text" id="text" name="answer5">
+                                <label>@answer</label>
+                            }
+                        }
+
+        <!--Question 6-->
+                    <input type="hidden" name="q_id6" value= "@Model.ToList()[5].q_id"/>
+                        @Model.ToList()[5].question<br />
+                        @if(@Model.ToList()[5].q_type == "multiple_choice")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[5].possible_answers.Split("•"))
+                                {
+                                    var ind = @Model.ToList()[5].possible_answers.IndexOf(@answer) + 1;
+                                    <input type="radio" id="mc" name="answer6" value="@ind" />
+                                    <label for="mc">@answer</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if (@Model.ToList()[5].q_type== "true/false")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[5].possible_answers.Split("•"))
+                                {
+                                    @answer
+
+                                    <br />
+                                    <input type="radio" id="t" name="answer6" value="true" />
+                                    <label for="t">True</label>
+
+                                    <br>
+                                    <input type="radio" id="f" name="answer6" value="false" />
+                                    <label for="t">False</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if(@Model.ToList()[5].q_type == "completion")
+                        {
+                            @foreach (string answer in @Model.ToList()[5].possible_answers.Split("•"))
+                            {
+                                var s = @answer.Split("#");
+                                <label>@s[0]</label>
+                                <input type="text" id="text" name="answer1">
+                                <label>@s[1]</label>
+                            }
+                        }
+                        else if (@Model.ToList()[5].q_type == "matching")
+                        {
+                            @foreach (string answer in @Model.ToList()[5].possible_answers.Split("•"))
+                            {
+                                <input type="text" id="text" name="answer6">
+                                <label>@answer</label>
+                            }
+                        }
+
+        <!--Question 7-->
+                    <input type="hidden" name="q_id7" value= "@Model.ToList()[6].q_id"/>
+                        @Model.ToList()[6].question<br />
+                        @if(@Model.ToList()[6].q_type == "multiple_choice")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[6].possible_answers.Split("•"))
+                                {
+                                    var ind = @Model.ToList()[6].possible_answers.IndexOf(@answer) + 1;
+                                    <input type="radio" id="mc" name="answer7" value="@ind" />
+                                    <label for="mc">@answer</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if (@Model.ToList()[6].q_type== "true/false")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[6].possible_answers.Split("•"))
+                                {
+                                    @answer
+
+                                    <br />
+                                    <input type="radio" id="t" name="answer7" value="true" />
+                                    <label for="t">True</label>
+
+                                    <br>
+                                    <input type="radio" id="f" name="answer7" value="false" />
+                                    <label for="t">False</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if(@Model.ToList()[6].q_type == "completion")
+                        {
+                            @foreach (string answer in @Model.ToList()[6].possible_answers.Split("•"))
+                            {
+                                var s = @answer.Split("#");
+                                <label>@s[0]</label>
+                                <input type="text" id="text" name="answer7">
+                                <label>@s[1]</label>
+                            }
+                        }
+                        else if (@Model.ToList()[6].q_type == "matching")
+                        {
+                            @foreach (string answer in @Model.ToList()[6].possible_answers.Split("•"))
+                            {
+                                <input type="text" id="text" name="answer7">
+                                <label>@answer</label>
+                            }
+                        }
+
+        <!--Question 8-->
+                    <input type="hidden" name="q_id8" value= "@Model.ToList()[7].q_id"/>
+                        @Model.ToList()[7].question<br />
+                        @if(@Model.ToList()[7].q_type == "multiple_choice")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[7].possible_answers.Split("•"))
+                                {
+                                    var ind = @Model.ToList()[7].possible_answers.IndexOf(@answer) + 1;
+                                    <input type="radio" id="mc" name="answer8" value="@ind" />
+                                    <label for="mc">@answer</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if (@Model.ToList()[7].q_type== "true/false")
+                        {
+                            <div class="radios">
+                                @foreach (var answer in @Model.ToList()[7].possible_answers.Split("•"))
+                                {
+                                    @answer
+
+                                    <br />
+                                    <input type="radio" id="t" name="answer8" value="true" />
+                                    <label for="t">True</label>
+
+                                    <br>
+                                    <input type="radio" id="f" name="answer8" value="false" />
+                                    <label for="t">False</label>
+
+                                    <br>
+                                }
+                            </div>
+                            <br />
+                        }
+                        else if(@Model.ToList()[7].q_type == "completion")
+                        {
+                            @foreach (string answer in @Model.ToList()[7].possible_answers.Split("•"))
+                            {
+                                var s = @answer.Split("#");
+                                <label>@s[0]</label>
+                                <input type="text" id="text" name="answer8">
+                                <label>@s[1]</label>
+                            }
+                        }
+                        else if (@Model.ToList()[7].q_type == "matching")
+                        {
+                            @foreach (string answer in @Model.ToList()[7].possible_answers.Split("•"))
+                            {
+                                <input type="text" id="text" name="answer8">
+                                <label>@answer</label>
+                            }
+                        }
+
+                        <button type="submit">Submit</button>
+                    </form>
+                    </div>
+                }
+                else
+                {
+                    <h5><i>You have submitted the evaluation test.</i></h5>
                 <form asp-controller="Home" asp-action="Subjects" method="post">
                     <input type="hidden" name="username" value="@ViewBag.username" />
                     <button id="btnDone" type="submit" class="done buttons icon">
                         Go to HomePage
-                        </button>
+                    </button>
                 </form>
+                <form asp-controller="Home" asp-action="Progress" method="post">
+                    <input type="hidden" name="username" value="@ViewBag.username" />
+                    <button id="btnDone" type="submit" class="done buttons icon">
+                        See your Progress
+                    </button>
+                </form>
+                }
             </div>
 
 

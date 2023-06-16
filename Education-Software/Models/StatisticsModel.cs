@@ -16,35 +16,27 @@ namespace Education_Software.Models
         public string username { get; set; }
 
         [Column(TypeName = "NUMERIC")]
-        [Required]
-        public int description_score { get; set; }
+        public int? description_score { get; set; }
 
         [Column(TypeName = "NUMERIC")]
-        [Required]
-        public int learning_outcomes_score { get; set; }
+        public int? learning_outcomes_score { get; set; }
 
         [Column(TypeName = "NUMERIC")]
-        [Required]
-        public int skills_acquired_score { get; set; }
+        public int? skills_acquired_score { get; set; }
 
         [Column(TypeName = "NUMERIC")]
-        [Required]
-        public int specialization_link_score { get; set; }
+        public int? specialization_link_score { get; set; }
 
         [Column(TypeName = "NUMERIC")]
-        [Required]
-        public int multiple_choice_score { get; set; }
+        public int? multiple_choice_score { get; set; }
 
         [Column(TypeName = "NUMERIC")]
-        [Required]
-        public int true_false_score { get; set; }
+        public int? true_false_score { get; set; }
 
         [Column(TypeName = "NUMERIC")]
-        [Required]
-        public int completion_score { get; set; }
+        public int? completion_score { get; set; }
 
         [Column(TypeName = "NUMERIC")]
-        [Required]
-        public int matching_score { get; set; }
+        public int? matching_score { get; set; }
     }
 }

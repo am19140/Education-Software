@@ -81,20 +81,19 @@ namespace Education_Software.Controllers
             ViewBag.subject = subject;
             SubjectModel subjectmodel = _Service.RecordReading(subject);
             List<QuestionModel> questionmodel = _Service.SubjectTest(subjectmodel);
-            List<QuestionModel> questions = _Service.SplitQuestions(questionmodel, "A");
-            //TempData["Questions"] = questions;
-            //ViewBag.questions = questions;
+            List<QuestionModel> questions = _Service.getRandomQuestions(questionmodel, "A");
             ViewBag.submitted = false;
             return View("Test", questions);
         }
 
         [HttpPost]
-        public IActionResult SubmitTest(string username, string subject, string sub_id, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type)
+        public IActionResult SubmitTest(string username, string subject, string sub_id, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string q_id4, string answer4, string test_type)
         {
             Dictionary<string,string> responses = new Dictionary<string,string>();
             responses.Add(q_id1, answer1);
             responses.Add(q_id2, answer2);
             responses.Add(q_id3, answer3);
+            responses.Add(q_id4, answer4);
             Dictionary<string,List<bool>> dict = _Service.GetTestAnswers(username, responses, test_type);
             string test_id = dict.Keys.First();
             List<bool> results = dict.Values.First();
@@ -102,8 +101,9 @@ namespace Education_Software.Controllers
             int percentage = _Service.UpdateProgress(username, subject, test_id, test_type, results);
             ViewBag.submitted = true;
             ViewBag.percentage = percentage;
-            List<QuestionModel> model = _Service.getQuestions(q_id1, q_id2, q_id3);
+            List<QuestionModel> model = _Service.getQuestions(q_id1, q_id2, q_id3, q_id4);
             ViewBag.subject = subject;
+            ViewBag.username = username;
             return View("Test", model);
         }
 
@@ -111,17 +111,21 @@ namespace Education_Software.Controllers
         {
             ViewBag.username = username;
             List<QuestionModel> q = _Service.getAllQuestions();
-            List<QuestionModel> questions = _Service.SplitQuestions(q, "E");
+            List<QuestionModel> questions = _Service.getRandomQuestions(q, "E");
             ViewBag.submitted = false;
             return View("Evaluation", questions);
         }
 
-        public IActionResult SubmitEvaluationTest(string username, string subject, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string test_type)
+        public IActionResult SubmitEvaluationTest(string username, string subject, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string q_id4, string answer4, string q_id5, string answer5, string q_id6, string answer6, string q_id7, string answer7, string test_type)
         {
             Dictionary<string, string> responses = new Dictionary<string, string>();
             responses.Add(q_id1, answer1);
             responses.Add(q_id2, answer2);
             responses.Add(q_id3, answer3);
+            responses.Add(q_id4, answer4);
+            responses.Add(q_id5, answer5);
+            responses.Add(q_id6, answer6);
+            responses.Add(q_id7, answer7);
             Dictionary<string, List<bool>> dict = _Service.GetTestAnswers(username, responses, test_type);
             string test_id = dict.Keys.First();
             List<bool> results = dict.Values.First();
