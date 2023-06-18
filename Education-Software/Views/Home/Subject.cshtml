@@ -106,6 +106,7 @@
                     <h3>Code: @Model.sub_id</h3>
 
                     <h3>No. of semester: @Model.semester</h3>
+
                 </div>
                  <div class="indicator">
                      <form asp-controller="Home" asp-action="ReadSubject" method="post" class="read-btn">
@@ -137,13 +138,21 @@
                     </h2>
                     
                
-               
-                <div class="info">                    
-                        @foreach (var d in @Model.description.Split("•"))
+                @{
+                    string[] items = Model.description.Split("•");
+
+                }
+                <div class="info">   
+                        @items[0];
+                        
+                        @foreach (var d in items)
                         {
-                            <span>•</span>
+                        if (d != items.First()){
+                             <span>•</span>
 
                             @d <br />
+                        }
+                       
                         }                   
                     
                 </div>

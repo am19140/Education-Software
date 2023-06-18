@@ -460,6 +460,23 @@ namespace Education_Software.Service
             
         }
 
+        public void RegisterUser(RegistrationModel registration)
+        {
+            var user = new UserModel
+            {
+                username = registration.username,
+                pass = registration.password,
+                first_name = registration.firstname,
+                last_name = registration.lastname,
+                email = registration.email,
+                gender = registration.gender,
+                student_state = registration.student_state,
+                phone_number= registration.phone_number
+            };
+            _context.users.Add(user);
+            _context.SaveChanges();
+        }
+
 
     }
 }

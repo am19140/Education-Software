@@ -68,6 +68,9 @@ body.dark {
     width: 150px;
     justify-content: center;
 }
+    .right-corner img{
+        display:none;
+    }
 .username{
     margin-left:5%;
     font-weight:500;
@@ -161,6 +164,7 @@ header .image-text .profession {
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
     .sidebar header .image img {

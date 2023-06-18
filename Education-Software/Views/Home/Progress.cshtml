@@ -5,7 +5,7 @@
 }
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/ProfileStyle.css" />
+    <link rel="stylesheet" href="~/css/ProgressStyle.css" />
     <link rel="stylesheet" href="~/css/MenuStyle.css" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
@@ -89,73 +89,161 @@
             </div>
             <div class="main">
                 <div class="left container">
-                    <table>
-                        @foreach(var test in @Model.progress_table)
-                        {
-                            <tr>
-                            <td>Test Id</td>
-                            <td class="r">@test.test_id</td>
-                            </tr>
-                            <tr>
-                            <td>Subject</td>
-                            <td class="r">@test.sub_id</td>
-                            </tr>
-                            <tr>
-                            <td>Test Type</td>
-                           @if (test.test_type == "A")
-                           {
-                                <td class="r">Assessment Test</td>
-                            }
-                           else if (test.test_type == "E")
-                           {
-                                <td class="r">Evaluation Test</td>
-                           }
-                           </tr>
-                        <tr>
-                            <td>Score</td>
-                            <td class="r">@test.score %</td>
-                        </tr>
-                        <tr>
-                            <td>Done on</td>
-                            <td class="r">@test.time</td>
-                        </tr>
-                        }
-                </table>
+                @if (Model.progress_table.Count() != 0)
+                {
+                     @foreach(var test in @Model.progress_table)
+                        
+                     {
+                            <div class="test">
+                                <h2>Test Info</h2>
+                                <table>
+                                    <tr>
+                                        <td class="l">Test Id</td>
+                                        <td class="r">@test.test_id</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="l">Subject</td>
+                                        <td class="r">@test.sub_id</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="l">Test Type</td>
+                                        @if (test.test_type == "A")
+                                        {
+                                            <td class="r">Assessment Test</td>
+                                        }
+                                        else if (test.test_type == "E")
+                                        {
+                                            <td class="r">Evaluation Test</td>
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td class="l">Score</td>
+                                        <td class="r">@test.score %</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="l">Done on</td>
+                                        <td class="r">@test.time</td>
+                                    </tr>
+                                </table>
+                            </div>                                  
+                           
+                                                
+                    }
+                }
+                else
+                {
+                    <div class="empty-progress">
+                        <h2>Looks like you haven't taken any tests</h2>
+
+                        <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
+                            Go to subjects and take a test
+                        </a>
+                    </div>
+                    
+                   
+                }
+
             </div>
             <div class="right container">
-                <h3>Statistics</h3>
+                <h2>Statistics</h2>
                 <table>
                         <tr>
-                            <td>Description</td>
+                        <td class="l">Description</td>
+                        @if (@Model.statistics_table.description_score == -1)
+                        {
+                            <td class="r">Hasn't been checked yet</td>
+                        }
+                        else
+                        {                                 
                             <td class="r">@Model.statistics_table.description_score %</td>
+
+                        }
                         </tr>
+
                         <tr>
-                            <td>Learning Outcomes</td>
+                        <td class="l">Learning Outcomes</td>
+                        @if (@Model.statistics_table.completion_score == -1)
+                        {
+                            <td class="r">Hasn't been checked yet</td>
+                        }
+                        else
+                        {
                             <td class="r">@Model.statistics_table.learning_outcomes_score %</td>
+
+                        }
                         </tr>
+
                         <tr>
-                            <td>Skills Acquired</td>
+                        <td class="l">Skills Acquired</td>
+                        @if (@Model.statistics_table.skills_acquired_score == -1)
+                        {
+                            <td class="r">Hasn't been checked yet</td>
+                        }
+                        else
+                        {
                             <td class="r">@Model.statistics_table.skills_acquired_score %</td>
+
+                        }
                         </tr>
+
                         <tr>
-                            <td>Specialization</td>
+                        <td class="l">Specialization</td>
+                        @if (@Model.statistics_table.specialization_link_score == -1)
+                        {
+                            <td class="r">Hasn't been checked yet</td>
+                        }
+                        else
+                        {
                             <td class="r">@Model.statistics_table.specialization_link_score %</td>
-                        </tr>
+
+                        }
+                    </tr>
                         <tr>
-                            <td>Multiple Choice</td>
+                        <td class="l">Multiple Choice</td>
+                        @if (@Model.statistics_table.multiple_choice_score == -1)
+                        {
+                            <td class="r">Hasn't been checked yet</td>
+                        }
+                        else
+                        {
                             <td class="r">@Model.statistics_table.multiple_choice_score %</td>
+
+                        }
                     </tr>
                     <tr>
-                        <td>True/False</td>
+                        <td class="l">True/False</td>
+                        @if (@Model.statistics_table.true_false_score == -1)
+                        {
+                            <td class="r">Hasn't been checked yet</td>
+                        }
+                        else
+                        {
                             <td class="r">@Model.statistics_table.true_false_score %</td>
-                    </tr>
+
+                        }                    </tr>
                     <tr>
-                        <td>Completion</td>
+                        <td class="l">Completion</td>
+                        @if (@Model.statistics_table.completion_score == -1)
+                        {
+                            <td class="r">Hasn't been checked yet</td>
+                        }
+                        else
+                        {
                             <td class="r">@Model.statistics_table.completion_score %</td>
+
+                        }
                     </tr>
                     <tr>
-                        <td>Matching</td>
+                        <td class="l">Matching</td>
+                        @if (@Model.statistics_table.matching_score == -1)
+                        {
+                            <td class="r">Hasn't been checked yet</td>
+                        }
+                        else
+                        {
                             <td class="r">@Model.statistics_table.matching_score %</td>
+
+                        }
                     </tr>
                 </table>
             </div>

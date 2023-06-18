@@ -101,7 +101,21 @@
         <div class="main">
             <div class="left container">
                 <div class="image">
-                    <img src="~/Resources/5ea7beff28d1daff0d6718f6a4856532.jpg"/>
+                    @if (Model.gender == "M")
+                    {                                            
+                        <img src="~/Resources/boy.png"/>
+
+                    }
+                    else if (Model.gender == "F")
+                    {
+                        <img src="~/Resources/daughter.png" />
+
+                    }
+                    else
+                    {
+                        <img src="~/Resources/icons8-male-user-96.png" />
+
+                    }
                 </div>
                 <table>
                     <tr>
@@ -150,9 +164,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="right container">
-                <h3>Statistics</h3>
-            </div>
+            
         </div>
 
 

@@ -222,7 +222,25 @@ namespace Education_Software.Controllers
             ViewBag.username = username;
             return View();
         }
+        public IActionResult Registration()
+        {
+            return View("Registration");
+        }
 
+        [HttpPost]
+        public IActionResult Registration(RegistrationModel registrationModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _Service.RegisterUser(registrationModel);
+                return View("Login");
+
+            }
+            else { return View("Registration"); }
+
+            return View();
+        }
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

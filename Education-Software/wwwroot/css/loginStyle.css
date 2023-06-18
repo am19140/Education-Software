@@ -121,5 +121,20 @@ h2{
     transition:var(--tran-04);
     color:black;
 }
+.radios{
+    display:flex;
+    width:80%;
+    align-content:space-between;
+    justify-content:space-between;
+    margin-bottom:4%;
+}
+.placeholder{
+    width:80%;
+    color:var(--text-color);
 
+}
+.labels{
+    justify-content:space-between;
+    align-content:center;
+}
 

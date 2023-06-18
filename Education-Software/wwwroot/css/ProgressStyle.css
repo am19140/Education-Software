@@ -1,0 +1,85 @@
+﻿:root {
+    /* ===== Colors ===== */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #9370db;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+    --light-text-color: #white;
+    --pink: #FF33CC;
+    --light-pink: #FF66CC;
+    --light-blue: #33CCFF;
+    --yellow: #FFC000;
+    --green: #92D050;
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+
+.home {
+    height: 100vh;
+}
+
+.main {
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    width:100%;
+}
+.container{
+    width:100%;
+}
+
+.test{
+    background-color:var(--primary-color);
+    color:white;
+    margin-bottom:2%;
+    margin-right:2%;
+    border-radius:20px;
+    padding:2%;
+}
+h2{
+    color:black;
+}
+
+.test table{
+    width:100%;
+}
+
+     .r {
+        text-align: right;
+    }
+     .l{
+         color:black;
+     }
+   
+.right{
+    background-color:var(--primary-color);
+    padding:2%;
+    border-radius:20px;
+    color:white;
+
+}
+.right table{
+    width:100%;
+}
+.empty-progress{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+    .empty-progress a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+    .empty-progress a:hover{
+        color:black;
+        transition:var(--tran-05);
+    }

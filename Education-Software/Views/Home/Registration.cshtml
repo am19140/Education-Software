@@ -1,6 +1,7 @@
 ﻿@model Education_Software.Models.RegistrationModel
+
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Registration";
 }
 @section Styles {
     <link rel="stylesheet" href="~/css/loginStyle.css" />
@@ -28,26 +29,42 @@
                 <input type="text" placeholder="Phone Number" class="input" asp-for="phone_number" />
             </div>
 
+            <div class="placeholder">Gender</div>
+            <div class="radios">
+                <div class="labels">
+                    @Html.RadioButtonFor(r=>r.gender,"F", new{id="F"})<label for="F"> Female</label><br>
+                </div>
+                <div class="labels">
+                    @Html.RadioButtonFor(r=>r.gender,"M", new{id="F"})<label for="M"> Male</label><br>
+                </div>
+                <div class="labels">
+                    @Html.RadioButtonFor(r=>r.gender,"O", new{id="F"})<label for="O"> Other</label><br>
+                </div>
+
+            </div>
+            <div class="placeholder">Current State</div>
+
+            <div class="radios">
+                <div class="labels">
+                    @Html.RadioButtonFor(r=>r.student_state,"U", new{id="U"})<label for="U"> Undergraduate</label><br>
+                </div>
+                <div class="labels">
+                    @Html.RadioButtonFor(r=>r.student_state,"G", new{id="G"})<label for="G"> Has Graduated</label><br>
+                </div>
+
+            </div>
+
             <div class="inputs">
                 <input type="submit" class="submit-btn" value="Submit" class="input" />
 
             </div>
-            <div class="radios1">
-                @Html.RadioButtonFor(r=>r.gender,"Female", new{id="Female"})<label for="Female">Female</label><br>
-                @Html.RadioButtonFor(r=>r.gender,"Male", new{id="Male"})<label for="Male">Male</label><br>
-                @Html.RadioButtonFor(r=>r.gender,"Other", new{id="Other"})<label for="Other">Other</label><br>
 
-            </div>
-            <div class="radios2">
-                @Html.RadioButtonFor(r=>r.gender,"U", new{id="U"})<label for="U">Undergraduate</label><br>
-                @Html.RadioButtonFor(r=>r.gender,"G", new{id="G"})<label for="G">Has Graduated</label><br>
 
-            </div>
         </form>
         <div class="register">
-            <h4>Don't have an account yet?</h4>
-            <a class="signin" asp-controller="Home" asp-action="Registration">
-                <h5>Sign up</h5>
+            <h4>Already have an account?</h4>
+            <a class="signin" asp-controller="Home" asp-action="Login">
+                <h5>Sign In</h5>
             </a>
 
         </div>

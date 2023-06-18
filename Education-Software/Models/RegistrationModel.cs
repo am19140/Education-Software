@@ -15,8 +15,10 @@ namespace Education_Software.Models
         [Required]
         public string lastname { get; set; }
 
-        public string? profileImage { get; set; }
-
+        [Required]
+        [MaxLength(1)]
+        [RegularExpression(@"U|G", ErrorMessage = "Please enter 'U' or 'G'.")]
+        public string student_state { get; set; }
         [Required]
         [RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$", ErrorMessage = "Insert a valid email address")]
 
