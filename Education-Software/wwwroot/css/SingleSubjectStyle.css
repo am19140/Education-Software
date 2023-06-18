@@ -39,11 +39,14 @@ table {
     justify-content: space-between;
 }
 
+
 .main{
     padding-left:3%;
-    height:100%;
     padding-right:2%;
     
+}
+.note{
+    margin-bottom:2%;
 }
     .main h3{
         font-size:16px;
@@ -73,6 +76,9 @@ h2{
 }
 h5{
     padding-left:1%;
+}
+.info h4 {
+    color: black;
 }
 
 .indicator{
@@ -104,5 +110,35 @@ h5{
     transform:scale(1.08);
 }
 
+.boxes{
+    display:flex;
+    flex-direction:row;
 
+}
+.left{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+}
+.right{
+    width:50%;
+    padding-left:1%;
+
+}
+.spec_box{
+    background-color:black;
+    margin-bottom:1%;
+    border-radius:20px;
+    padding:3%;
+    color:white;
+}
+.spec_title{
+    color:var(--primary-color);
+
+}
+.more-info{
+    text-decoration:none;
+    color:var(--primary-color);
+    font-weight:500;
+}
 

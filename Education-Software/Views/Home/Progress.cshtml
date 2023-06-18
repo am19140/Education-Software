@@ -94,13 +94,60 @@
                      @foreach(var test in @Model.progress_table)
                         
                      {
-                            <div class="test">
+                        <div class="test">
+                            <div class="head">
                                 <h2>Test Info</h2>
+                                @{
+                                    var diff = DateTime.Now - Convert.ToDateTime(test.time);
+                                }
+                                @if (diff.TotalDays < 1 && diff.TotalMinutes>60)
+                                {
+                                    <div class="date">@diff.Hours h ago</div>
+                                }
+                                else if (diff.TotalMinutes < 60 && diff.TotalSeconds>60)
+                                {                                                          
+                                    <div class="date">@diff.Minutes min ago</div>
+
+                                }
+                                else if (diff.TotalSeconds < 59)
+                                {
+                                    <div class="date">@diff.Seconds sec ago</div>
+
+
+                                }
+                                else
+                                {
+                                    
+                                    <div class="date">@diff</div>
+
+                                }
+
+                                </div>
+                                <div style="text-align:right">
+                                @if (@test.score >= 74)
+                                {
+                                    <div class="score" style="color:#92D050">
+                                        <i class='bx bx-happy' style="color:#92D050"></i>
+                                        @test.score %
+                                    </div>
+                                }
+                                else if (@test.score < 74 && @test.score > 49)
+                                {
+                                    <div class="score" style="color:orange"><i class='bx bx-confused'></i>@test.score %</div>
+                                }
+                                else
+                                {
+                                    <div class="score" style="color:orangered">
+                                        <i class='bx bx-sad' style="color:orangered"></i>
+                                        @test.score %
+                                    </div>
+
+                                }
+                                </div>
+                               
+                            
                                 <table>
-                                    <tr>
-                                        <td class="l">Test Id</td>
-                                        <td class="r">@test.test_id</td>
-                                    </tr>
+                                    
                                     <tr>
                                         <td class="l">Subject</td>
                                         <td class="r">@test.sub_id</td>
@@ -116,14 +163,8 @@
                                             <td class="r">Evaluation Test</td>
                                         }
                                     </tr>
-                                    <tr>
-                                        <td class="l">Score</td>
-                                        <td class="r">@test.score %</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="l">Done on</td>
-                                        <td class="r">@test.time</td>
-                                    </tr>
+                                    
+                                   
                                 </table>
                             </div>                                  
                            
@@ -147,6 +188,7 @@
             <div class="right container">
                 <h2>Statistics</h2>
                 <table>
+                        <tr><td><h4>Units</h4></td></tr>
                         <tr>
                         <td class="l">Description</td>
                         @if (@Model.statistics_table.description_score == -1)
@@ -162,7 +204,7 @@
 
                         <tr>
                         <td class="l">Learning Outcomes</td>
-                        @if (@Model.statistics_table.completion_score == -1)
+                        @if (@Model.statistics_table.learning_outcomes_score == -1)
                         {
                             <td class="r">Hasn't been checked yet</td>
                         }
@@ -198,6 +240,8 @@
 
                         }
                     </tr>
+                    <tr><td><h4>Questions Types</h4></td></tr>
+
                         <tr>
                         <td class="l">Multiple Choice</td>
                         @if (@Model.statistics_table.multiple_choice_score == -1)
@@ -241,7 +285,7 @@
                         }
                         else
                         {
-                            <td class="r">@Model.statistics_table.matching_score %</td>
+                            <td class="r" >@Model.statistics_table.matching_score %</td>
 
                         }
                     </tr>

@@ -125,71 +125,121 @@
                       
                     </div>
             </div>
-            <div class="explanation">
+            <div class="note">
                 <h5><i>Note: Everytime you read the subject, please remember to click the 'Done' button to be redirected to the subject's test.
                         The test is compulsory.</i></h5>
                     <h5><i>Read the educational content carefully and press the 'Done' button only when you are ready for the test, as you cannot stop during the test to read the content again. </i></h5>
 
             </div>
-            <div class="description box">
-                
-                    <h2>
-                        Description
-                    </h2>
-                    
-               
+            <div class="boxes">
                 @{
-                    string[] items = Model.description.Split("•");
+                    string[] descr_items = Model.description.Split("•");
+                    string[] outc_items = Model.learning_outcomes.Split("•");
+                    string[] skills_items = Model.skills_acquired.Split("•");
+                    string[] spec_items = Model.specialization_link.Split("•");
 
                 }
-                <div class="info">   
-                        @items[0];
-                        
-                        @foreach (var d in items)
-                        {
-                        if (d != items.First()){
-                             <span>•</span>
+                <div class="left">
+                    <div class="description box">
 
-                            @d <br />
-                        }
+                        <h2>
+                            Description
+                        </h2>
+
+
                        
-                        }                   
-                    
-                </div>
-                
-            </div>
-            <div class="outcomes box">
-                <h2>Learning Outcomes</h2>
+                        <div class="info">
+                            <h4 class="explanation">@descr_items[0]</h4>
 
-                <div class="info">
-                
-                        @foreach (var outcome in @Model.learning_outcomes.Split("•"))
-                        {
-                            <span>•</span> @outcome
-                            <br />
-                        }
-                
-               
-                
+                            @foreach (var d in descr_items)
+                            {
+                                if (d != descr_items.First())
+                                {
+                                    <span>•</span>
+
+                                    @d <br />
+                                }
+
+                            }
+
+                        </div>
+
+                    </div>
+                    <div class="outcomes box">
+                        <h2>Learning Outcomes</h2>
+
+                        <div class="info">
+                            <h4 class="explanation">@outc_items[0]</h4>
+
+                            @foreach (var o in outc_items)
+                            {
+                                if (o != outc_items.First())
+                                {
+                                    <span>•</span>
+
+                                    @o <br />
+                                }
+
+                            }
+
+
+
+                        </div>
+                    </div>
+                    <div class="skills box">
+                        <h2>Acquired Skills</h2>
+                        <div class="info">
+
+                            <h4 class="explanation">@skills_items[0]</h4>
+
+                            @foreach (var s in skills_items)
+                            {
+                                if (s != skills_items.First())
+                                {
+                                    <span>•</span>
+
+                                    @s <br />
+                                }
+
+                            }
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="right">
+                    <h2>Specialisations</h2>
+                    @foreach (var spec in spec_items)
+                    {
+
+                        <div class="spec_box">
+                            <h4 class="spec_title">
+                                @spec.Split("#")[0]
+                            </h4>
+                            @foreach (var i in spec.Split("#"))
+                            {
+                                if (i != spec.Split("#").First()&& i!=spec.Split("#").Last())
+                                {
+                                    <div>@i</div>
+                                    <a class="more-info" href="@spec.Split("#").Last()">
+                                        <i class='bx bx-link-alt'></i> More
+                                    </a>
+
+                                }
+                            }
+
+
+                            
+                        </div>
+
+                    }
+
                 </div>
             </div>
-            <div class="skills box">
-                <h2>Acquired Skills</h2>
-                <div class="info">
-                    
-                        @foreach (var skill in @Model.skills_acquired.Split("•"))
-                        {
-                            <span>•</span>
+            
 
-                            @skill
-                            <br />
-                        }
-                    
-                    
-                </div>
-               
 
-            </div>
             <div class="subject-list">
                 <table>
                    

@@ -27,6 +27,7 @@ namespace Education_Software.Service
         public List<SubjectModel> getSubjects()
         {
             var subjects = (from s in _context.subjects
+                            orderby s.sub_id
                             select s).ToList();
             return subjects;
         }

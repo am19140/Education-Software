@@ -37,9 +37,9 @@
         padding: 2%;
         margin-top: 1%;
         margin-bottom: 1%;
-        font-size: 15px;
-        background-color:var(--primary-color);
-        color:white;
+        font-size: 18px;
+        background-color:white;
+        color:var(--primary-color);
         width:100%;
     }
     
@@ -50,8 +50,8 @@
 
         .main .done:hover {
             cursor: pointer;
-            transform: scale(1.03);
             transition: var(--tran-05);
+            color:black;
         }
 
         h2{
@@ -69,8 +69,8 @@
     justify-content:space-between;
     padding-bottom:3%;
 }
-.main img{
-    width:40%;
+.results img {
+    width: 40%;
 }
 .results{
     display:flex;

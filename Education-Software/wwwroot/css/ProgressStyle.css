@@ -47,6 +47,30 @@ h2{
     color:black;
 }
 
+.test h2{
+}
+.head{
+    display:flex;
+    justify-content:space-between;
+}
+
+.date {
+    color: lightgrey;
+    margin-top:-1%;
+}
+.score{
+    font-size:50px;
+    font-weight:700;
+    display:flex;
+    justify-content:end;
+    align-items:center;
+   
+
+}
+.score i{
+    margin-right:1%;
+}
+
 .test table{
     width:100%;
 }
