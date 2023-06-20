@@ -240,7 +240,12 @@ namespace Education_Software.Controllers
 
             return View();
         }
-        
+
+        public string OpenModelPopup()
+        {
+            return "<h1>Help</h1>";
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

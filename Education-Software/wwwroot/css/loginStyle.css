@@ -31,15 +31,24 @@
 }
 .container {
     width: 100%;
+    max-width:100%;
+    padding:0;
+    max-height:110vh;
 }
-
+.pb-3{
+    padding-bottom:0!important;
+}
 .page {
     width:100%;
     position:relative;
+    height:110vh;
     display:flex;
     flex-direction:row-reverse;
     align-items:center;
     justify-content:space-between;
+}
+.main{
+    padding:0;
 }
 h1{
     margin-bottom:2%;
@@ -60,6 +69,8 @@ h1{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top:4%;
+    padding-bottom:3%;
 }
 .input {
     padding: 2%;
@@ -71,7 +82,7 @@ h1{
 .shape-container {
     display: flex;
     width: 100%;
-    height: 110vh;
+    height: 120vh;
     flex-direction: column;
     flex: 2;
     align-items: center;
@@ -131,10 +142,46 @@ h2{
 .placeholder{
     width:80%;
     color:var(--text-color);
+    background-color:transparent;
 
 }
 .labels{
     justify-content:space-between;
     align-content:center;
 }
+.help-container {
+    display: flex;
+    justify-content: center;
+    width:100%;
+
+}
+
+.modal-body h5 {
+    color: var(--primary-color);
+    text-align: justify;
+}
+
+.help-container .help-button {
+    background-color: var(--primary-color);
+    border: none;
+    font-size: 25px;
+    color: white;
+    padding: 0.5%;
+    border-radius: 20px;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.colored{
+    color:var(--primary-color);
+    font-weight:bold;
+}
+
 

@@ -4,6 +4,9 @@
     ViewData["Title"] = "Registration";
 }
 @section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
     <link rel="stylesheet" href="~/css/loginStyle.css" />
 }
 <div class="page">
@@ -55,7 +58,7 @@
             </div>
 
             <div class="inputs">
-                <input type="submit" class="submit-btn" value="Submit" class="input" />
+                <input type="submit" class="submit-btn" value="Sign Up" class="input" />
 
             </div>
 
@@ -68,6 +71,36 @@
             </a>
 
         </div>
+
+        <div class="help-container">
+            <button href="#" class="help-button" data-bs-toggle="modal" data-bs-target="#mymodal"><i class='bx bx-help-circle'></i></button>
+        </div>
+        <div class="modal" tabindex="-1" role="dialog" id="mymodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><i class='bx bx-help-circle'></i> Help</h4>
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>-->
+                    </div>
+                    <div class="modal-body">
+                        <h5>This is the Sign Up page</h5>
+                        <h6><b>To Sign Up:</b></h6>
+                        <h6>•Fill in a <span class="colored">username</span>, a <span class="colored">password</span>, your
+                            <span class="colored">fullname</span>, <span class="colored">email</span>,
+                            <span class="colored">phone number</span>, <span class="colored">gender</span> and <span class="colored">current state</span>
+                            </h6>
+                        <h6>•Click on the <span class="colored">'Sign Up'</span>  button</h6>
+                        <h6><b>If you have already an account:</b></h6>
+                        <h6>Click on the <span class="colored">'Sign In' </span>button</h6>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="shape-container">
         <img src="@Url.Content("~/Resources/login-image.png")" class="image" />
