@@ -153,7 +153,7 @@ h2{
     display: flex;
     justify-content: center;
     width:100%;
-
+    color:var(--primary-color);
 }
 
 .modal-body h5 {
@@ -162,15 +162,24 @@ h2{
 }
 
 .help-container .help-button {
-    background-color: var(--primary-color);
+    background-color: transparent;
     border: none;
     font-size: 25px;
-    color: white;
+    color: var(--primary-color);
     padding: 0.5%;
     border-radius: 20px;
     display: flex;
     align-items:center;
     justify-content:center;
+}
+.help-container .help-button:hover{
+    transition:var(--tran-05);
+    transform:rotateY(-180deg);
+}
+.help-container .help-button-inner{
+    color:black;
+    transition:var(--tran-05);
+    transform:rotateY(-360deg);
 }
 
 .modal-title {

@@ -5,6 +5,8 @@
 }
 
 @section Styles{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="~/css/GradesStyle.css" />
     <link rel="stylesheet" href="~/css/MenuStyle.css" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -93,7 +95,11 @@
     <section class="home">
 
         <div class="header">
-            <div class="text title">Past Grades</div>
+            <div class="text title">
+                Past Grades   <div class="help-container">
+                    <button href="#" class="help-button" data-bs-toggle="modal" data-bs-target="#mymodal"><i class='bx bx-help-circle'></i></button>
+                </div>
+            </div>
             <div class="right-corner">
                 <img src="~/Resources/icons8-male-user-24 (1).png">
                 <div class="smalltext username ">@ViewBag.username </div>
@@ -101,13 +107,17 @@
         </div>
         <div class="main">
             <h4>Please submit below the grades you have earned in each of the following courses.</h4>
-            <h5>Note: The grades refer to the grades in your university courses and are not based on the results you got from the curriculum 
-                tests you are taking in this platform.</h5>
+            <h5>
+                <i>
+                    Note: The grades refer to the grades in your university courses and are not based on the results you got from the curriculum
+                    tests you are taking in this platform.
+                </i>
+            </h5>
                
                 <form form asp-controller="Home" asp-action="SubmitGrades" method="post" class="grades-btn">
                     
                     <div class="course">
-                        <label for="grades" class="title">@ViewBag.subjects[Model.ToList()[0].sub_id]:  </label>
+                        <label for="grades" class="gr-title">@ViewBag.subjects[Model.ToList()[0].sub_id]:  </label>
                         <select name="grade1" id="grades" p>
                         <option value="" disabled selected>@Model.ToList()[0].grade</option>
                             <option value="None">I haven't gotten a grade yet</option>
@@ -125,7 +135,7 @@
                         </select>
                     </div>
                     <div class="course">
-                        <label for="grades" class="title">@ViewBag.subjects[Model.ToList()[1].sub_id]:  </label>
+                        <label for="grades" class="gr-title">@ViewBag.subjects[Model.ToList()[1].sub_id]:  </label>
                     <select name="grade2" id="grades">
                             <option value="" disabled selected>@Model.ToList()[1].grade</option>
                             <option value="None" >I haven't gotten a grade yet</option>
@@ -156,6 +166,25 @@
                
         </div>
 
+        <div class="modal" tabindex="-1" role="dialog" id="mymodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title"><i class='bx bx-help-circle'></i>Help</h3>
+                        
+                    </div>
+                    <div class="modal-body">
+                        <h5>In this page you are kindly asked to submit your official grades from the Univeristy</h5>
+                        <h6><b>To submit a grade:</b> </h6>
+                        <h6>•Select your grade from the dropdown list</h6>
+                        <h6>•Repeat for each course</h6>
+                        <h6>•Click on the <span class="colored">'Update Grades'</span> button</h6>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
         
     </section>
 

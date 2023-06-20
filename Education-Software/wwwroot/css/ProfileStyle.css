@@ -35,7 +35,6 @@
         background-color:var(--primary-color);
         color:white;
         width:70%;
-        margin-right:2%;
         border-radius:20px;
         padding:1%;
     }
@@ -67,6 +66,12 @@
         text-align:right;
         font-weight:500;
         font-size:17px;
+    }
+    h3{
+        color:black;
+    }
+    h6{
+        color:black;
     }
 
 

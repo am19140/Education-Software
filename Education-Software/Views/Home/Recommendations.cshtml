@@ -5,6 +5,8 @@
 }
 
 @section Styles{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="~/css/RecommendationsStyle.css" />
     <link rel="stylesheet" href="~/css/MenuStyle.css" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -93,7 +95,12 @@
     <section class="home">
 
         <div class="header">
-                <div class="text title">Recommendations</div>
+                <div class="text title">Recommendations
+                <div class="help-container">
+                    <button href="#" class="help-button" data-bs-toggle="modal" data-bs-target="#mymodal"><i class='bx bx-help-circle'></i></button>
+                </div>
+
+                </div>
             <div class="right-corner">
                 <img src="~/Resources/icons8-male-user-24 (1).png"></img>
                     <div class="smalltext username ">@ViewBag.username </div>
@@ -128,6 +135,29 @@
                </form>
             }
             </div>
+        <div class="modal" tabindex="-1" role="dialog" id="mymodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title"><i class='bx bx-help-circle'></i>Help</h3>
+
+                    </div>
+                    <div class="modal-body">
+                        <h5>In this page you can view your career recommendation.</h5>
+                        <h6><b>If you <span class="colored">haven't</span>  completed the final questionnaire:</b> </h6>
+                        <h6>•The message <span class="colored">'Looks like you haven't completed your Career Questionnaire yet' </span>appears on your screen.</h6>
+                        <h6>•Click on the <span class="colored">'Go to the questionnaire'</span> button.</h6>
+                        <h6><b>If you <span class="colored">have</span> completed the questionnaire:</b> </h6>
+                        <h6>
+                            The suggested career in Computer Science, based on the data we collected from tests, grades and the final questionnaire is displayed on the purple box. 
+                        </h6>
+                       
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </section>
 
     <script>
