@@ -41,7 +41,8 @@ namespace Education_Software.Service
         public SubjectModel getNextSubjectDetails(string title)
         {
             List<SubjectModel> subject = _context.subjects.ToList();
-            int ind = subject.IndexOf(x => x.title == title);
+            SubjectModel s = _context.subjects.Single(x => x.title == title);
+            int ind = subject.IndexOf(s);
             SubjectModel nextsubject = null;
             if (ind == -1)
             {
@@ -109,9 +110,9 @@ namespace Education_Software.Service
             return quest;
         }
 
-        bool evaluationCheck(string username)
+        public bool evaluationCheck(string username)
         {
-            List<string> tests_done = _context.tests.Where(x => x.username == username).Select(x => x.sub_id).Distinct().ToList();
+            List<string?> tests_done = _context.progress.Where(x => x.username == username).Select(x => x.sub_id).Distinct().ToList();
             List<string> subjects = _context.subjects.Select(x => x.sub_id).Distinct().ToList();
             if(subjects == tests_done)
             {
@@ -156,17 +157,14 @@ namespace Education_Software.Service
             return d;
         }
 
-        public List<QuestionModel> getQuestions(string q_id1, string q_id2, string q_id3, string q_id4)
+        public List<QuestionModel> getQuestions(List<string> questions)
         {
             List<QuestionModel> model = new List<QuestionModel>();
-            var m1 = _context.questions.First(x => x.q_id == q_id1);
-            var m2 = _context.questions.First(x => x.q_id == q_id2);
-            var m3 = _context.questions.First(x => x.q_id == q_id3);
-            var m4 = _context.questions.First(x => x.q_id == q_id4);
-            model.Add(m1);
-            model.Add(m2);
-            model.Add(m3);
-            model.Add(m4);
+            foreach (var q in questions)
+            {
+                var m = _context.questions.First(x => x.q_id == q);
+                model.Add(m);
+            }
             return model;
         }
 
@@ -266,7 +264,7 @@ namespace Education_Software.Service
 
         public int getAverageScore(string username, string sub_id)
         {
-            List<int> subject_progress = _context.progress.Where(x => x.username == username and x.sub_id == sub_id).Select(x => x.score).ToList();
+            List<int> subject_progress = _context.progress.Where(x => x.username == username & x.sub_id == sub_id).Select(x => x.score).ToList();
             int count = subject_progress.Count();
             int sum = subject_progress.Sum();
             double average_score = (sum/count) * 100;
@@ -442,7 +440,7 @@ namespace Education_Software.Service
                         "But, if you choose a career in front-end development, you should first understand the principles of the relevant subjects, ex. Human-Computer Interaction," +
                         "by reading the educational content presented on this plaform and ameliorating your test results.";
                 }
-                else if (if (dict.ElementAt(0).Value <= 7 & average_score[0] > 50))
+                else if (dict.ElementAt(0).Value <= 7 & average_score[0] > 50)
                 {
                     recommendation = "Your profile and preferences seem to associate you to front-end development, as you are more likely" +
                         "an artistic personality and like writing code in C#. Your test results in this platform show that you have understood the basic principles of the subjects related to front-end development." +
@@ -495,7 +493,7 @@ namespace Education_Software.Service
                 else if (!dict.ElementAt(1).Value.HasValue & average_score[1] <= 50)
                 {
                     recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" + 
-                        "a practical personality and like writing code in Assembly. Your test results in this platform show that you have not quite understood the basic principles of the subjects related to computer hardware."
+                        "a practical personality and like writing code in Assembly. Your test results in this platform show that you have not quite understood the basic principles of the subjects related to computer hardware." +
                         "You don't have a grade yet in subjects like Computer Architecture, but this doesn't prevent you to start thinking about your career." + 
                         "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." + 
                         "There are some fitting post-graduate programs available to you, like:" + 

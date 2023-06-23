@@ -66,20 +66,31 @@ namespace Education_Software.Controllers
             return View("Subject", subjectmodel); 
         }
 
-        public IActionResult NextSubject(string username,string subject)
+        public IActionResult NextSubject(string username, string subject)
         {
             ViewBag.username = username;
             ViewBag.subject = subject;
-            SubjectModel subjectmodel = _Service.getNextSubjectDetails(subject);           
-            if(subjectmodel != null)
+            SubjectModel subjectmodel = _Service.getNextSubjectDetails(subject);
+            if (subjectmodel != null)
             {
-                return View("Subject", subjectmodel); 
+                return View("Subject", subjectmodel);
             }
             else
             {
-                EvaluationTest(username);
+                ViewBag.username = username;
+                ViewBag.submitted = false;
+                bool all_assessment_tests_done = _Service.evaluationCheck(username);
+                if (all_assessment_tests_done)
+                {
+                    List<QuestionModel> q = _Service.getAllQuestions();
+                    List<QuestionModel> questions = _Service.getRandomQuestions(q, "E");
+                    return View("Evaluation", questions);
+                }
+                else
+                {
+                    return View("Evaluation", null);
+                }
             }
-            
         }
 
         [HttpPost]
@@ -101,7 +112,7 @@ namespace Education_Software.Controllers
             responses.Add(q_id1, answer1);
             responses.Add(q_id2, answer2);
             responses.Add(q_id3, answer3);
-            string answer4 = option1+"a"+optionb+"b"+optionc+"c"+optiond+"d";
+            string answer4 = optiona+"a"+optionb+"b"+optionc+"c"+optiond+"d";
             Debug.WriteLine(answer4);
             responses.Add(q_id4, answer4);
             Dictionary<string,List<bool>> dict = _Service.GetTestAnswers(username, responses, test_type);
@@ -111,7 +122,7 @@ namespace Education_Software.Controllers
             int percentage = _Service.UpdateProgress(username, subject, test_id, test_type, results);
             ViewBag.submitted = true;
             ViewBag.percentage = percentage;
-            List<QuestionModel> model = _Service.getQuestions(q_id1, q_id2, q_id3, q_id4);
+            List<QuestionModel> model = _Service.getQuestions(responses.Keys.ToList());
             ViewBag.subject = subject;
             ViewBag.username = username;
             return View("Test", model);
@@ -151,9 +162,9 @@ namespace Education_Software.Controllers
             int percentage = _Service.UpdateProgress(username, subject, test_id, test_type, results);
             ViewBag.submitted = true;
             ViewBag.percentage = percentage;
-            List<QuestionModel> model = _Service.getQuestions(q_id1, q_id2, q_id3);
+            List<QuestionModel> model = _Service.getQuestions(responses.Keys.ToList());
             ViewBag.subject = subject;
-            return View("Evaluation", μοδελ);
+            return View("Evaluation", model);
         }
 
         public IActionResult Progress(string username)
