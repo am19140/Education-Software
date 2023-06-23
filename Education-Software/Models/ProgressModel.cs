@@ -29,7 +29,7 @@ namespace Education_Software.Models
         [MaxLength(10)]
         [RegularExpression(@"^CS\d*$", ErrorMessage = "Id must start with 'CS'")]
         [ForeignKey("SubjectModel")]
-        public string sub_id { get; set; }
+        public string? sub_id { get; set; }
 
         [Column(TypeName = "CHAR")]
         [Required]

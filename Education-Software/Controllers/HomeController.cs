@@ -71,7 +71,15 @@ namespace Education_Software.Controllers
             ViewBag.username = username;
             ViewBag.subject = subject;
             SubjectModel subjectmodel = _Service.getNextSubjectDetails(subject);           
-            return View("Subject", subjectmodel); 
+            if(subjectmodel != null)
+            {
+                return View("Subject", subjectmodel); 
+            }
+            else
+            {
+                EvaluationTest(username);
+            }
+            
         }
 
         [HttpPost]
@@ -87,12 +95,14 @@ namespace Education_Software.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitTest(string username, string subject, string sub_id, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string q_id4, string answer4, string test_type)
+        public IActionResult SubmitTest(string username, string subject, string sub_id, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string q_id4, string optiona, string optionb, string optionc, string optiond, string test_type)
         {
             Dictionary<string,string> responses = new Dictionary<string,string>();
             responses.Add(q_id1, answer1);
             responses.Add(q_id2, answer2);
             responses.Add(q_id3, answer3);
+            string answer4 = option1+"a"+optionb+"b"+optionc+"c"+optiond+"d";
+            Debug.WriteLine(answer4);
             responses.Add(q_id4, answer4);
             Dictionary<string,List<bool>> dict = _Service.GetTestAnswers(username, responses, test_type);
             string test_id = dict.Keys.First();
@@ -110,10 +120,18 @@ namespace Education_Software.Controllers
         public IActionResult EvaluationTest(string username)
         {
             ViewBag.username = username;
-            List<QuestionModel> q = _Service.getAllQuestions();
-            List<QuestionModel> questions = _Service.getRandomQuestions(q, "E");
             ViewBag.submitted = false;
-            return View("Evaluation", questions);
+            bool all_assessment_tests_done = _Service.evaluationCheck(username);
+            if(all_assessment_tests_done)
+            {
+                List<QuestionModel> q = _Service.getAllQuestions();
+                List<QuestionModel> questions = _Service.getRandomQuestions(q, "E");
+                return View("Evaluation", questions);
+            }
+            else
+            {
+                return View("Evaluation", null);
+            }
         }
 
         public IActionResult SubmitEvaluationTest(string username, string subject, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string q_id4, string answer4, string q_id5, string answer5, string q_id6, string answer6, string q_id7, string answer7, string test_type)
@@ -133,9 +151,9 @@ namespace Education_Software.Controllers
             int percentage = _Service.UpdateProgress(username, subject, test_id, test_type, results);
             ViewBag.submitted = true;
             ViewBag.percentage = percentage;
-            //List<QuestionModel> model = _Service.getQuestions(q_id1, q_id2, q_id3);
+            List<QuestionModel> model = _Service.getQuestions(q_id1, q_id2, q_id3);
             ViewBag.subject = subject;
-            return View("Evaluation");
+            return View("Evaluation", μοδελ);
         }
 
         public IActionResult Progress(string username)
