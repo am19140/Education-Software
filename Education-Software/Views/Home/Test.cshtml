@@ -196,41 +196,37 @@
                     {
                         <i class='bx bxs-x-circle' style="color:red"></i>
                     }
-                    <label for="option1">@Model.ToList()[3].possible_answers.Split('•')[0]</label>
-                    <select name="option1" id="option1">
-                            <option value="a">1</option>
-                            <option value="b">2</option>
-                            <option value="c">3</option>
-                            <option value="d">4</option>
+                    <label for="optiona">@Model.ToList()[3].possible_answers.Split('•')[0]</label>
+                    <select name="optiona" id="optiona">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
                         </select>
 
-                    <label for="option1">@Model.ToList()[3].possible_answers.Split('•')[1]</label>
-                    <select name="option1" id="option1">
-                            <option value="a">1</option>
-                            <option value="b">2</option>
-                            <option value="c">3</option>
-                            <option value="d">4</option>
+                    <label for="optionb">@Model.ToList()[3].possible_answers.Split('•')[1]</label>
+                    <select name="optionb" id="optionb">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
                         </select>
                     
-                    <label for="option1">@Model.ToList()[3].possible_answers.Split('•')[2]</label>
-                    <select name="option1" id="option1">
-                        <option value="a">1</option>
-                        <option value="b">2</option>
-                        <option value="c">3</option>
-                        <option value="d">4</option>
+                    <label for="optionc">@Model.ToList()[3].possible_answers.Split('•')[2]</label>
+                    <select name="optionc" id="optionc">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
                     </select>
 
-                    <label for="option1">@Model.ToList()[3].possible_answers.Split('•')[3]</label>
-                    <select name="option1" id="option1">
-                        <option value="a">1</option>
-                        <option value="b">2</option>
-                        <option value="c">3</option>
-                        <option value="d">4</option>
-                    </select>
-                    
-                        <input type="hidden" id="answer4" name="answer4" readonly/>
-                    
-
+                    <label for="optiond">@Model.ToList()[3].possible_answers.Split('•')[3]</label>
+                    <select name="optiond" id="optiond">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>               
                     <input type="hidden" name="test_type" value="A" />
                     <br />
                     @if (@ViewBag.submitted != true)
@@ -238,23 +234,6 @@
                         <button type="submit" class="done" id="submit">Submit</button>
                         
                     }
-                    <!---->
-                       <script type="text/javascript">
-                            $('#submit').click(function () {
-                                document.getElementById("answer4") = document.getElementById("option1") + 'a' +
-                                    document.getElementById("option2") + 'b' +
-                                    document.getElementById("option3") + 'c' +
-                                    document.getElementById("option4") + 'd';
-                            });
-                        </script>
-                    <script>
-                        myfunction(){
-                            document.getElementById("answer4") = document.getElementById("option1") + 'a' +
-                                document.getElementById("option2") + 'b' +
-                                document.getElementById("option3") + 'c' +
-                                document.getElementById("option4") + 'd';
-                        };
-                    </script>
                 </form>
                     @if (@ViewBag.submitted)
                     {

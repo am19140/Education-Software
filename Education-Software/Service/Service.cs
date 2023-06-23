@@ -40,12 +40,18 @@ namespace Education_Software.Service
 
         public SubjectModel getNextSubjectDetails(string title)
         {
-            var subject = _context.subjects.ToList();
-            var nextsubject = subject[0];
-            //var ind = subject.IndexOf(x => x.title == title);
-            //var nextsubject = subject.[ind];
+            List<SubjectModel> subject = _context.subjects.ToList();
+            int ind = subject.IndexOf(x => x.title == title);
+            SubjectModel nextsubject = null;
+            if (ind == -1)
+            {
+                nextsubject = null;
+            }
+            else
+            {
+                nextsubject = subject[ind];
+            }
             return nextsubject;
-
         }
 
         public SubjectModel RecordReading(string title)
@@ -101,6 +107,20 @@ namespace Education_Software.Service
                 quest.Add(q7);
             }
             return quest;
+        }
+
+        bool evaluationCheck(string username)
+        {
+            List<string> tests_done = _context.tests.Where(x => x.username == username).Select(x => x.sub_id).Distinct().ToList();
+            List<string> subjects = _context.subjects.Select(x => x.sub_id).Distinct().ToList();
+            if(subjects == tests_done)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Dictionary<string,List<bool>> GetTestAnswers(string username, Dictionary<string,string> responses, string test_type)
@@ -244,6 +264,16 @@ namespace Education_Software.Service
             return model;
         }
 
+        public int getAverageScore(string username, string sub_id)
+        {
+            List<int> subject_progress = _context.progress.Where(x => x.username == username and x.sub_id == sub_id).Select(x => x.score).ToList();
+            int count = subject_progress.Count();
+            int sum = subject_progress.Sum();
+            double average_score = (sum/count) * 100;
+            int average = (int)Math.Floor(average_score);
+            return average;
+        }
+
         public GradesModel getGrades(string username, string sub_id)
         {
             GradesModel? grades = _context.grades.FirstOrDefault(x => x.username == username && x.sub_id == sub_id);
@@ -337,18 +367,22 @@ namespace Education_Software.Service
             }
 
             List<GradesModel> grades = _context.grades.Where(x => x.username == username).ToList();
-            Dictionary<string, int?> dict = new Dictionary<string, int?>(); 
+            Dictionary<string, int?> dict = new Dictionary<string, int?>();
+            List<int> average_score = new List<int>(); 
             foreach (var gr in grades)
             {
                 dict[gr.sub_id] = gr.grade;
+                int score = getAverageScore(username, gr.sub_id);
+                average_score.Add(score);
             }
             string recommendation = "";
             if (first.Count > second.Count)
             {
-                if (!dict.ElementAt(0).Value.HasValue)
+                if (!dict.ElementAt(0).Value.HasValue & average_score[0] > 50)
                 {
                     recommendation = "Your profile and preferences seem to associate you to front-end development, as you are more likely" +
-                        "an artistic personality and like writing code in C#. You don't habve a grade yet in subjects like Human-Computer Interaction, but this doesn't prevent you to start thinking about your career." +
+                        "an artistic personality and like writing code in C#. Your test results in this platform show that you have understood the basic principles of the subjects related to front-end development." +
+                        "You don't have a grade yet in subjects like Human-Computer Interaction, but this doesn't prevent you to start thinking about your career." +
                         "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
                         "There are some fitting post-graduate programs available to you, like: " +
                         "•MSc in Computer Science and Engineering - University of Piraeus" +
@@ -356,12 +390,14 @@ namespace Education_Software.Service
                         "•MSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
                         "•MSc in Information Systems - Athens University of Economics and Business (AUEB)" +
                         "•MSc in Computer Science - University of Patras" +
-                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
+                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)" + 
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests.";
                 }
-                else if (dict.ElementAt(0).Value > 6)
+                else if (!dict.ElementAt(0).Value.HasValue & average_score[0] <= 50)
                 {
                     recommendation = "Your profile and preferences seem to associate you to front-end development, as you are more likely" +
-                        "an artistic personality and like writing code in C#. Your Grades in subjects like Human-Computer Interaction are good, and you might prefer that subject among others." +
+                        "an artistic personality and like writing code in C#. Your test results in this platform show that you have not quite understood the basic principles of the subjects related to front-end development."+
+                        "You don't have a grade yet in subjects like Human-Computer Interaction, but this doesn't prevent you to start thinking about your career." +
                         "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
                         "There are some fitting post-graduate programs available to you, like: " +
                         "•MSc in Computer Science and Engineering - University of Piraeus" +
@@ -369,12 +405,16 @@ namespace Education_Software.Service
                         "•MSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
                         "•MSc in Information Systems - Athens University of Economics and Business (AUEB)" +
                         "•MSc in Computer Science - University of Patras" +
-                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
+                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)" + 
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests." +
+                        "But, if you choose a career in front-end development, you should first understand the principles of the relevant subjects, ex. Human-Computer Interaction," +
+                        "by reading the educational content presented on this plaform and ameliorating your test results.";
                 }
-                else
+                else if (dict.ElementAt(0).Value > 7 & average_score[0] > 50)
                 {
                     recommendation = "Your profile and preferences seem to associate you to front-end development, as you are more likely" +
-                        "an artistic personality and like writing code in C#. However, your Grades in subjects like Human-Computer Interaction are not that good, even though you might prefer that subject among others, but with more experience in the topic you can become an expert later on." +
+                        "an artistic personality and like writing code in C#. Your test results in this platform show that you have understood the basic principles of the subjects related to front-end development." +
+                        "Your Grades in subjects like Human-Computer Interaction are good, and you might prefer that subject among others." +
                         "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
                         "There are some fitting post-graduate programs available to you, like: " +
                         "•MSc in Computer Science and Engineering - University of Piraeus" +
@@ -382,20 +422,98 @@ namespace Education_Software.Service
                         "•MSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
                         "•MSc in Information Systems - Athens University of Economics and Business (AUEB)" +
                         "•MSc in Computer Science - University of Patras" +
-                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)";
+                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)"+
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests.";
+                }
+                else if (dict.ElementAt(0).Value > 7 & average_score[0] <= 50)
+                {
+                    recommendation = "Your profile and preferences seem to associate you to front-end development, as you are more likely" +
+                        "an artistic personality and like writing code in C#. Your test results in this platform show that you have not quite understood the basic principles of the subjects related to front-end development." +
+                        "Your Grades in subjects like Human-Computer Interaction are good, and you might prefer that subject among others." +
+                        "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
+                        "There are some fitting post-graduate programs available to you, like: " +
+                        "•MSc in Computer Science and Engineering - University of Piraeus" +
+                        "•MSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Information Systems - Athens University of Economics and Business (AUEB)" +
+                        "•MSc in Computer Science - University of Patras" +
+                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)"+
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests." +
+                        "But, if you choose a career in front-end development, you should first understand the principles of the relevant subjects, ex. Human-Computer Interaction," +
+                        "by reading the educational content presented on this plaform and ameliorating your test results.";
+                }
+                else if (if (dict.ElementAt(0).Value <= 7 & average_score[0] > 50))
+                {
+                    recommendation = "Your profile and preferences seem to associate you to front-end development, as you are more likely" +
+                        "an artistic personality and like writing code in C#. Your test results in this platform show that you have understood the basic principles of the subjects related to front-end development." +
+                        "However, your Grades in subjects like Human-Computer Interaction are not that good, even though you might prefer that subject among others, but with more experience in the topic you can become an expert later on." +
+                        "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
+                        "There are some fitting post-graduate programs available to you, like: " +
+                        "•MSc in Computer Science and Engineering - University of Piraeus" +
+                        "•MSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Information Systems - Athens University of Economics and Business (AUEB)" +
+                        "•MSc in Computer Science - University of Patras" +
+                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)"+
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests.";
+                }
+                else if (dict.ElementAt(0).Value <= 7 & average_score[0] <= 50)
+                {
+                    recommendation = "Your profile and preferences seem to associate you to front-end development, as you are more likely" +
+                        "an artistic personality and like writing code in C#. Your test results in this platform show that you have nt quite understood the basic principles of the subjects related to front-end development." +
+                        "However, your Grades in subjects like Human-Computer Interaction are not that good, even though you might prefer that subject among others, but with more experience in the topic you can become an expert later on." +
+                        "Knowing all this, you can follow the Carreer Paths of UX Design, Web Development, Video Game Design or Software Engineering." +
+                        "There are some fitting post-graduate programs available to you, like: " +
+                        "•MSc in Computer Science and Engineering - University of Piraeus" +
+                        "•MSc in Human-Computer Interaction - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Game Design and Development - National and Kapodistrian University of Athens (NKUA)" +
+                        "•MSc in Information Systems - Athens University of Economics and Business (AUEB)" +
+                        "•MSc in Computer Science - University of Patras" +
+                        "•MSc in Multimedia and Graphics - National and Kapodistrian University of Athens (NKUA)"+
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests." +
+                        "But, if you choose a career in front-end development, you should first understand the principles of the relevant subjects, ex. Human-Computer Interaction," +
+                        "by reading the educational content presented on this plaform and ameliorating your test results.";
                 }
             }
             else if (first.Count < second.Count)
             {
-                if (!dict.ElementAt(1).Value.HasValue)
+                if (!dict.ElementAt(1).Value.HasValue & average_score[1] > 50)
                 {
                     recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" + 
-                        "a practical personality and like writing code in Assembly. You don't habve a grade yet in subjects like Computer Architecture, but this doesn't prevent you to start thinking about your career." + "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." + "There are some fitting post-graduate programs available to you, like:" + "•MSc in Electronic Computer Systems - University of Piraeus" + "•MSc in Computer Science and Engineering - University of Piraeus" + "•MSc in Electrical Engineering - National Technical University of Athens (NTUA)" + "•MSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" + "•MSc in Computer Engineering - University of Patras" + "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
+                        "a practical personality and like writing code in Assembly. Your test results in this platform show that you have understood the basic principles of the subjects related to computer hardware." +
+                        "You don't have a grade yet in subjects like Computer Architecture, but this doesn't prevent you to start thinking about your career." + 
+                        "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." + 
+                        "There are some fitting post-graduate programs available to you, like:" + 
+                        "•MSc in Electronic Computer Systems - University of Piraeus" + 
+                        "•MSc in Computer Science and Engineering - University of Piraeus" + 
+                        "•MSc in Electrical Engineering - National Technical University of Athens (NTUA)" + 
+                        "•MSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" + 
+                        "•MSc in Computer Engineering - University of Patras" + 
+                        "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki"+
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests.";
                 }
-                else if (dict.ElementAt(1).Value > 7)
+                else if (!dict.ElementAt(1).Value.HasValue & average_score[1] <= 50)
+                {
+                    recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" + 
+                        "a practical personality and like writing code in Assembly. Your test results in this platform show that you have not quite understood the basic principles of the subjects related to computer hardware."
+                        "You don't have a grade yet in subjects like Computer Architecture, but this doesn't prevent you to start thinking about your career." + 
+                        "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." + 
+                        "There are some fitting post-graduate programs available to you, like:" + 
+                        "•MSc in Electronic Computer Systems - University of Piraeus" + 
+                        "•MSc in Computer Science and Engineering - University of Piraeus" + 
+                        "•MSc in Electrical Engineering - National Technical University of Athens (NTUA)" + 
+                        "•MSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" + 
+                        "•MSc in Computer Engineering - University of Patras" + 
+                        "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki"+
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests." +
+                        "But, if you choose a career in computer hardware, you should first understand the principles of the relevant subjects, ex. Computer Architecture," +
+                        "by reading the educational content presented on this plaform and ameliorating your test results.";
+                }
+                else if (dict.ElementAt(1).Value > 7 & average_score[1] > 50)
                 {
                     recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" +
-                        "a practical personality and like writing code in Assembly. Your Grades in subjects like Computer Architecture are good and you might prefer these subjects among others." +
+                        "a practical personality and like writing code in Assembly. Your test results in this platform show that you have understood the basic principles of the subjects related to computer hardware." +
+                        "Your Grades in subjects like Computer Architecture are good and you might prefer these subjects among others." +
                         "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." +
                         "There are some fitting post-graduate programs available to you, like:" +
                         "•MSc in Electronic Computer Systems - University of Piraeus" +
@@ -403,12 +521,14 @@ namespace Education_Software.Service
                         "•MSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
                         "•MSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
                         "•MSc in Computer Engineering - University of Patras" +
-                        "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
+                        "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki"+
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests.";
                 }
-                else
+                else if (dict.ElementAt(1).Value > 7 & average_score[1] <= 50)
                 {
                     recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" +
-                        "a practical personality and like writing code in Assembly. However, your Grades in subjects like Computer Architecture are not that good, even though you might prefer that subject among others, but with more experience in the topic you can become an expert later on." +
+                        "a practical personality and like writing code in Assembly. Your test results in this platform show that you have not quite understood the basic principles of the subjects related to computer hardware."+
+                        "Your Grades in subjects like Computer Architecture are good and you might prefer these subjects among others." +
                         "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." +
                         "There are some fitting post-graduate programs available to you, like:" +
                         "•MSc in Electronic Computer Systems - University of Piraeus" +
@@ -416,7 +536,42 @@ namespace Education_Software.Service
                         "•MSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
                         "•MSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
                         "•MSc in Computer Engineering - University of Patras" +
-                        "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki";
+                        "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki"+
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests." +
+                        "But, if you choose a career in computer hardware, you should first understand the principles of the relevant subjects, ex. Computer Architecture," +
+                        "by reading the educational content presented on this plaform and ameliorating your test results.";
+                }
+                else if (dict.ElementAt(1).Value <= 7 & average_score[1] > 50)
+                {
+                    recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" +
+                        "a practical personality and like writing code in Assembly. Your test results in this platform show that you have understood the basic principles of the subjects related to computer hardware." +
+                        "However, your Grades in subjects like Computer Architecture are not that good, even though you might prefer that subject among others, but with more experience in the topic you can become an expert later on." +
+                        "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." +
+                        "There are some fitting post-graduate programs available to you, like:" +
+                        "•MSc in Electronic Computer Systems - University of Piraeus" +
+                        "•MSc in Computer Science and Engineering - University of Piraeus" +
+                        "•MSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
+                        "•MSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
+                        "•MSc in Computer Engineering - University of Patras" +
+                        "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki"+
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests.";
+                }
+                else if (dict.ElementAt(1).Value <= 7 & average_score[1] <= 50)
+                {
+                    recommendation = "Your profile and preferences seem to associate you to computer hardware field, as you are more likely" +
+                        "a practical personality and like writing code in Assembly. Your test results in this platform show that you have understood the basic principles of the subjects related to computer hardware." +
+                        "However, your Grades in subjects like Computer Architecture are not that good, even though you might prefer that subject among others, but with more experience in the topic you can become an expert later on." +
+                        "Knowing all this, you can follow the Carreer Paths of Hardware Engineering or IT Service." +
+                        "There are some fitting post-graduate programs available to you, like:" +
+                        "•MSc in Electronic Computer Systems - University of Piraeus" +
+                        "•MSc in Computer Science and Engineering - University of Piraeus" +
+                        "•MSc in Electrical Engineering - National Technical University of Athens (NTUA)" +
+                        "•MSc in Electrical and Computer Engineering - Aristotle University of Thessaloniki" +
+                        "•MSc in Computer Engineering - University of Patras" +
+                        "•MSc in Information Systems and Services Engineering - Aristotle University of Thessaloniki"+
+                        "All in all, the above suggestions are indicative and are consistent with the data you entered on the platform and the answers to the tests." +
+                        "But, if you choose a career in computer hardware, you should first understand the principles of the relevant subjects, ex. Computer Architecture," +
+                        "by reading the educational content presented on this plaform and ameliorating your test results.";
                 }
             }
             RecommendationModel r = new RecommendationModel();
