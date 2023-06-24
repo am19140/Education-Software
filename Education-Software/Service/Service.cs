@@ -92,31 +92,25 @@ namespace Education_Software.Service
             }
             else
             {
-                var q1 = model.Where(x=> x.sub_id == "CS0001").OrderBy(h => r.Next()).Take(1).First();
-                var q2 = model.Where(x => x.sub_id == "CS0001").OrderBy(h => r.Next()).Take(1).First();
-                var q3 = model.Where(x => x.sub_id == "CS0001").OrderBy(h => r.Next()).Take(1).First();
-                var q4 = model.Where(x => x.sub_id == "CS0001").OrderBy(h => r.Next()).Take(1).First();
-                var q5 = model.Where(x => x.sub_id == "CS0002").OrderBy(h => r.Next()).Take(1).First();
-                var q6 = model.Where(x => x.sub_id == "CS0002").OrderBy(h => r.Next()).Take(1).First();
-                var q7 = model.Where(x => x.sub_id == "CS0002").OrderBy(h => r.Next()).Take(1).First();
-                quest.Add(q1);
-                quest.Add(q2);
-                quest.Add(q3);
-                quest.Add(q4);
-                quest.Add(q5);
-                quest.Add(q6);
-                quest.Add(q7);
+                quest.Capacity = 7;
+                while(quest.Count < 7)
+                {
+                    var q = model.OrderBy(h => r.Next()).Take(1).First();
+                    if(!quest.Contains(q))
+                    {
+                        quest.Add(q);
+                    }
+                }
             }
             return quest;
         }
 
         public bool evaluationCheck(string username)
         {
-            List<string?> tests_done = _context.progress.Where(x => x.username == username).Select(x => x.sub_id).Distinct().ToList();
-            tests_done.Sort();
-            List<string> subjects = _context.subjects.Select(x => x.sub_id).Distinct().ToList();
-            subjects.Sort();
-            if(subjects == tests_done)
+            List<string> tests_done = _context.progress.Where(x => x.username == username).OrderBy(x => x.sub_id).Select(x => x.sub_id).Distinct().ToList();
+            List<string> subjects = _context.subjects.OrderBy(x => x.sub_id).Select(x => x.sub_id).Distinct().ToList();
+            subjects.Remove("CS1000");
+            if(!subjects.Except(tests_done).Any())
             {
                 return true;
             }
@@ -180,12 +174,21 @@ namespace Education_Software.Service
             double perc = (double)corr / (double)count * 100;
             int percentage = (int)Math.Floor(perc);
             
+            if(sub_id == "CS1000")
+            {
+                ProgressModel? pr = _context.progress.FirstOrDefault(x => x.sub_id == "CS1000");
+                if (pr != default)
+                {
+                    _context.progress.Remove(pr);
+                    _context.SaveChanges();
+                }
+            }
             ProgressModel progress = new ProgressModel();
             progress.username = username;
             progress.sub_id = sub_id;
             progress.test_id = test_id;
             progress.test_type = test_type;
-            progress.score = percentage; 
+            progress.score = percentage;
             progress.time = DateTime.Now.ToString();
             _context.progress.Add(progress);
             _context.SaveChanges();
@@ -211,35 +214,35 @@ namespace Education_Software.Service
 
             int correct_description = temp.Where(x => x.chapter == "description").ToList().Count;
             int count_description = join.Where(x => x.chapter == "description").ToList().Count;
-            double? description_score = (count_description == 0) ? -1.0 : (correct_description / count_description) * 100;
+            double? description_score = (count_description == 0) ? -1.0 : (((double)correct_description / (double)count_description) * 100);
 
             int correct_learning_outcomes = temp.Where(x => x.chapter == "learning_outcomes").ToList().Count;
             int count_learning_outcomes = join.Where(x => x.chapter == "learning_outcomes").ToList().Count;
-            double? learning_outcomes_score = (count_learning_outcomes == 0) ? -1.0 : (correct_learning_outcomes / count_learning_outcomes) * 100;
+            double? learning_outcomes_score = (count_learning_outcomes == 0) ? -1.0 : (((double)correct_learning_outcomes / (double)count_learning_outcomes) * 100);
 
             int correct_skills = temp.Where(x => x.chapter == "skills_acquired").ToList().Count;
             int count_skills = join.Where(x => x.chapter == "skills_acquired").ToList().Count;
-            double? skills_score = (count_skills == 0) ? -1.0 : (correct_skills / count_skills) * 100;
+            double? skills_score = (count_skills == 0) ? -1.0 : (((double)correct_skills / (double)count_skills) * 100);
 
             int correct_specialization = temp.Where(x => x.chapter == "specialization_link").ToList().Count;
             int count_specialization = join.Where(x => x.chapter == "specialization_link").ToList().Count;
-            double? specialization_score = (count_specialization == 0) ? -1.0 : (correct_specialization / count_specialization) * 100;
+            double? specialization_score = (count_specialization == 0) ? -1.0 : (((double)correct_specialization / (double)count_specialization) * 100);
 
             int correct_multiple_choice = temp.Where(x => x.q_type == "multiple_choice").ToList().Count;
             int count_multiple_choice = join.Where(x => x.q_type == "multiple_choice").ToList().Count;
-            double? multiple_choice_score = (count_multiple_choice == 0) ? -1.0 : (correct_multiple_choice / count_multiple_choice) * 100;
+            double? multiple_choice_score = (count_multiple_choice == 0) ? -1.0 : (((double)correct_multiple_choice / (double)count_multiple_choice) * 100);
 
             int correct_true_false = temp.Where(x => x.q_type == "true/false").ToList().Count;
             int count_true_false = join.Where(x => x.q_type == "true/false").ToList().Count;
-            double? true_false_score = (count_true_false == 0) ? -1.0 : (correct_true_false / count_true_false) * 100;
+            double? true_false_score = (count_true_false == 0) ? -1.0 : (((double)correct_true_false / (double)count_true_false) * 100);
 
             int correct_completion = temp.Where(x => x.q_type == "completion").ToList().Count;
             int count_completion = join.Where(x => x.q_type == "completion").ToList().Count;
-            double? completion_score = (count_completion == 0) ? -1.0 : (correct_completion / count_completion) * 100;
+            double? completion_score = (count_completion == 0) ? -1.0 : (((double)correct_completion / (double)count_completion) * 100);
 
             int correct_matching = temp.Where(x => x.q_type == "matching").ToList().Count;
             int count_matching = join.Where(x => x.q_type == "matching").ToList().Count;
-            double? matching_score = (count_matching == 0) ? -1.0 : (correct_matching / count_matching) * 100;
+            double? matching_score = (count_matching == 0) ? -1.0 : (((double)correct_matching / (double)count_matching) * 100);
             
             StatisticsModel s = new StatisticsModel();
             s.username = username;

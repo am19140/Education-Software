@@ -63,6 +63,7 @@ namespace Education_Software.Controllers
             if(subject == "Evaluation")
             {
                 ViewBag.username = username;
+                ViewBag.subject = subject;
                 ViewBag.submitted = false;
                 bool all_assessment_tests_done = _Service.evaluationCheck(username);
                 if (all_assessment_tests_done)
@@ -97,6 +98,7 @@ namespace Education_Software.Controllers
             else
             {
                 ViewBag.username = username;
+                ViewBag.subject = subject;
                 ViewBag.submitted = false;
                 bool all_assessment_tests_done = _Service.evaluationCheck(username);
                 if (all_assessment_tests_done)

@@ -106,6 +106,7 @@
             {
                     <form asp-controller="Home" asp-action="Subjects" method="post">
                         <input type="hidden" name="username" value="@ViewBag.username" />
+                        <input type="hidden" name="subject" value="@ViewBag.subject" />
                         <div>
                             <h5><i>In order to take the evaluation test you need first to have completed the
                             assessment tests of all the subjects.
@@ -127,9 +128,13 @@
                 
                 <form asp-controller="Home" asp-action="SubmitEvaluationTest" method="post">
                     <input type="hidden" name="username" value="@ViewBag.username" />
+                            <input type="hidden" name="subject" value="@ViewBag.subject" />
             <!--Question 1-->
                     <input type="hidden" name="q_id1" value= "@Model.ToList()[0].q_id"/>
-                        @Model.ToList()[0].question<br />
+                        @foreach(var q in @Model.ToList()[0].question.Split("•"))
+                        {
+                        <div class="q">@q</div>
+                        }
                         @if(@Model.ToList()[0].q_type == "multiple_choice")
                         {
                             <div class="radios">
@@ -176,17 +181,46 @@
                         }
                         else if (@Model.ToList()[0].q_type == "matching")
                         {
-                            @foreach (string answer in @Model.ToList()[0].possible_answers.Split("•"))
-                            {
-                                <input type="text" id="text" name="answer1">
-                                <label>@answer</label>
-                            }
+                    <label for="optiona">@Model.ToList()[0].possible_answers.Split('•')[0]</label>
+                    <select name="optiona" id="optiona">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+
+                    <label for="optionb">@Model.ToList()[0].possible_answers.Split('•')[1]</label>
+                    <select name="optionb" id="optionb">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    
+                    <label for="optionc">@Model.ToList()[0].possible_answers.Split('•')[2]</label>
+                    <select name="optionc" id="optionc">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+                    <label for="optiond">@Model.ToList()[0].possible_answers.Split('•')[3]</label>
+                    <select name="optiond" id="optiond">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select> 
                         }
 
 
             <!--Question 2-->
                         <input type="hidden" name="q_id2" value="@Model.ToList()[1].q_id" />
-                        @Model.ToList()[1].question<br />
+                        @foreach(var q in @Model.ToList()[1].question.Split("•"))
+                        {
+                        <div class="q">@q</div>
+                        }
                         @if (@Model.ToList()[1].q_type == "multiple_choice")
                         {
                             <div class="radios">
@@ -233,16 +267,45 @@
                         }
                         else if (@Model.ToList()[1].q_type == "matching")
                         {
-                            @foreach (string answer in @Model.ToList()[1].possible_answers.Split("•"))
-                            {
-                                <input type="text" id="text" name="answer2">
-                                <label>@answer</label>
-                            }
+                            <label for="optiona">@Model.ToList()[1].possible_answers.Split('•')[0]</label>
+                    <select name="optiona" id="optiona">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+
+                    <label for="optionb">@Model.ToList()[1].possible_answers.Split('•')[1]</label>
+                    <select name="optionb" id="optionb">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    
+                    <label for="optionc">@Model.ToList()[1].possible_answers.Split('•')[2]</label>
+                    <select name="optionc" id="optionc">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+                    <label for="optiond">@Model.ToList()[1].possible_answers.Split('•')[3]</label>
+                    <select name="optiond" id="optiond">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
                         }
 
             <!--Question 3-->
                     <input type="hidden" name="q_id3" value= "@Model.ToList()[2].q_id"/>
-                        @Model.ToList()[2].question<br />
+                        @foreach(var q in @Model.ToList()[2].question.Split("•"))
+                        {
+                        <div class="q">@q</div>
+                        }
                         @if(@Model.ToList()[2].q_type == "multiple_choice")
                         {
                             <div class="radios">
@@ -289,16 +352,45 @@
                         }
                         else if (@Model.ToList()[2].q_type == "matching")
                         {
-                            @foreach (string answer in @Model.ToList()[2].possible_answers.Split("•"))
-                            {
-                                <input type="text" id="text" name="answer3">
-                                <label>@answer</label>
-                            }
+                            <label for="optiona">@Model.ToList()[2].possible_answers.Split('•')[0]</label>
+                    <select name="optiona" id="optiona">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+
+                    <label for="optionb">@Model.ToList()[2].possible_answers.Split('•')[1]</label>
+                    <select name="optionb" id="optionb">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    
+                    <label for="optionc">@Model.ToList()[2].possible_answers.Split('•')[2]</label>
+                    <select name="optionc" id="optionc">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+                    <label for="optiond">@Model.ToList()[2].possible_answers.Split('•')[3]</label>
+                    <select name="optiond" id="optiond">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
                         }
 
             <!--Question 4-->
                         <input type="hidden" name="q_id4" value="@Model.ToList()[3].q_id" />
-                        @Model.ToList()[3].question<br />
+                        @foreach(var q in @Model.ToList()[3].question.Split("•"))
+                        {
+                        <div class="q">@q</div>
+                        }
                         @if (@Model.ToList()[3].q_type == "multiple_choice")
                         {
                             <div class="radios">
@@ -345,16 +437,45 @@
                         }
                         else if (@Model.ToList()[3].q_type == "matching")
                         {
-                            @foreach (string answer in @Model.ToList()[3].possible_answers.Split("•"))
-                            {
-                                <input type="text" id="text" name="answer4">
-                                <label>@answer</label>
-                            }
+                           <label for="optiona">@Model.ToList()[3].possible_answers.Split('•')[0]</label>
+                    <select name="optiona" id="optiona">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+
+                    <label for="optionb">@Model.ToList()[3].possible_answers.Split('•')[1]</label>
+                    <select name="optionb" id="optionb">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    
+                    <label for="optionc">@Model.ToList()[3].possible_answers.Split('•')[2]</label>
+                    <select name="optionc" id="optionc">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+                    <label for="optiond">@Model.ToList()[3].possible_answers.Split('•')[3]</label>
+                    <select name="optiond" id="optiond">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
                         }
 
         <!--Question 5-->
                         <input type="hidden" name="q_id5" value="@Model.ToList()[4].q_id" />
-                        @Model.ToList()[4].question<br />
+                        @foreach(var q in @Model.ToList()[4].question.Split("•"))
+                        {
+                        <div class="q">@q</div>
+                        }
                         @if (@Model.ToList()[4].q_type == "multiple_choice")
                         {
                             <div class="radios">
@@ -401,16 +522,45 @@
                         }
                         else if (@Model.ToList()[4].q_type == "matching")
                         {
-                            @foreach (string answer in @Model.ToList()[4].possible_answers.Split("•"))
-                            {
-                                <input type="text" id="text" name="answer5">
-                                <label>@answer</label>
-                            }
+                            <label for="optiona">@Model.ToList()[4].possible_answers.Split('•')[0]</label>
+                    <select name="optiona" id="optiona">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+
+                    <label for="optionb">@Model.ToList()[4].possible_answers.Split('•')[1]</label>
+                    <select name="optionb" id="optionb">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    
+                    <label for="optionc">@Model.ToList()[4].possible_answers.Split('•')[2]</label>
+                    <select name="optionc" id="optionc">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+                    <label for="optiond">@Model.ToList()[4].possible_answers.Split('•')[3]</label>
+                    <select name="optiond" id="optiond">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
                         }
 
         <!--Question 6-->
                     <input type="hidden" name="q_id6" value= "@Model.ToList()[5].q_id"/>
-                        @Model.ToList()[5].question<br />
+                        @foreach(var q in @Model.ToList()[5].question.Split("•"))
+                        {
+                        <div class="q">@q</div>
+                        }
                         @if(@Model.ToList()[5].q_type == "multiple_choice")
                         {
                             <div class="radios">
@@ -457,16 +607,45 @@
                         }
                         else if (@Model.ToList()[5].q_type == "matching")
                         {
-                            @foreach (string answer in @Model.ToList()[5].possible_answers.Split("•"))
-                            {
-                                <input type="text" id="text" name="answer6">
-                                <label>@answer</label>
-                            }
+                            <label for="optiona">@Model.ToList()[5].possible_answers.Split('•')[0]</label>
+                    <select name="optiona" id="optiona">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+
+                    <label for="optionb">@Model.ToList()[5].possible_answers.Split('•')[1]</label>
+                    <select name="optionb" id="optionb">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    
+                    <label for="optionc">@Model.ToList()[5].possible_answers.Split('•')[2]</label>
+                    <select name="optionc" id="optionc">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+                    <label for="optiond">@Model.ToList()[5].possible_answers.Split('•')[3]</label>
+                    <select name="optiond" id="optiond">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
                         }
 
         <!--Question 7-->
                     <input type="hidden" name="q_id7" value= "@Model.ToList()[6].q_id"/>
-                        @Model.ToList()[6].question<br />
+                        @foreach(var q in @Model.ToList()[6].question.Split("•"))
+                        {
+                        <div class="q">@q</div>
+                        }
                         @if(@Model.ToList()[6].q_type == "multiple_choice")
                         {
                             <div class="radios">
@@ -513,69 +692,41 @@
                         }
                         else if (@Model.ToList()[6].q_type == "matching")
                         {
-                            @foreach (string answer in @Model.ToList()[6].possible_answers.Split("•"))
-                            {
-                                <input type="text" id="text" name="answer7">
-                                <label>@answer</label>
-                            }
+                            <label for="optiona">@Model.ToList()[6].possible_answers.Split('•')[0]</label>
+                    <select name="optiona" id="optiona">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+
+                    <label for="optionb">@Model.ToList()[6].possible_answers.Split('•')[1]</label>
+                    <select name="optionb" id="optionb">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    
+                    <label for="optionc">@Model.ToList()[6].possible_answers.Split('•')[2]</label>
+                    <select name="optionc" id="optionc">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+                    <label for="optiond">@Model.ToList()[6].possible_answers.Split('•')[3]</label>
+                    <select name="optiond" id="optiond">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
                         }
-
-        <!--Question 8-->
-                    <input type="hidden" name="q_id8" value= "@Model.ToList()[7].q_id"/>
-                        @Model.ToList()[7].question<br />
-                        @if(@Model.ToList()[7].q_type == "multiple_choice")
-                        {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[7].possible_answers.Split("•"))
-                                {
-                                    var ind = @Model.ToList()[7].possible_answers.IndexOf(@answer) + 1;
-                                    <input type="radio" id="mc" name="answer8" value="@ind" />
-                                    <label for="mc">@answer</label>
-
-                                    <br>
-                                }
-                            </div>
-                            <br />
-                        }
-                        else if (@Model.ToList()[7].q_type== "true/false")
-                        {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[7].possible_answers.Split("•"))
-                                {
-                                    @answer
-
-                                    <br />
-                                    <input type="radio" id="t" name="answer8" value="true" />
-                                    <label for="t">True</label>
-
-                                    <br>
-                                    <input type="radio" id="f" name="answer8" value="false" />
-                                    <label for="t">False</label>
-
-                                    <br>
-                                }
-                            </div>
-                            <br />
-                        }
-                        else if(@Model.ToList()[7].q_type == "completion")
-                        {
-                            @foreach (string answer in @Model.ToList()[7].possible_answers.Split("•"))
-                            {
-                                var s = @answer.Split("#");
-                                <label>@s[0]</label>
-                                <input type="text" id="text" name="answer8">
-                                <label>@s[1]</label>
-                            }
-                        }
-                        else if (@Model.ToList()[7].q_type == "matching")
-                        {
-                            @foreach (string answer in @Model.ToList()[7].possible_answers.Split("•"))
-                            {
-                                <input type="text" id="text" name="answer8">
-                                <label>@answer</label>
-                            }
-                        }
-
+                        <br />    
+                        <input type="hidden" name="test_type" value="E" />
+                        <br />
                         <button type="submit">Submit</button>
                     </form>
                     </div>
