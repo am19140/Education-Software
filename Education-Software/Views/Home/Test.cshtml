@@ -179,7 +179,7 @@
                         var s = @answer.Split("#");
                         <label>@s[0]</label>
                             <input type="text" id="text" name="answer3" class="input">
-                            //<label>@s[1]</label>
+                            <label>@s[1]</label>
                         }
                     <input type="hidden" name="q_id4" value="@Model.ToList()[3].q_id" />
                     @foreach(var q in @Model.ToList()[3].question.Split("•"))

@@ -60,10 +60,29 @@ namespace Education_Software.Controllers
 
         public IActionResult Subject(string username,string subject)
         {
-            ViewBag.username = username;
-            ViewBag.subject = subject;
-            SubjectModel subjectmodel = _Service.getSubjectDetails(subject);           
-            return View("Subject", subjectmodel); 
+            if(subject == "Evaluation")
+            {
+                ViewBag.username = username;
+                ViewBag.submitted = false;
+                bool all_assessment_tests_done = _Service.evaluationCheck(username);
+                if (all_assessment_tests_done)
+                {
+                    List<QuestionModel> q = _Service.getAllQuestions();
+                    List<QuestionModel> questions = _Service.getRandomQuestions(q, "E");
+                    return View("Evaluation", questions);
+                }
+                else
+                {
+                    return View("Evaluation", null);
+                }
+            }
+            else
+            {
+                ViewBag.username = username;
+                ViewBag.subject = subject;
+                SubjectModel subjectmodel = _Service.getSubjectDetails(subject);
+                return View("Subject", subjectmodel);
+            }
         }
 
         public IActionResult NextSubject(string username, string subject)

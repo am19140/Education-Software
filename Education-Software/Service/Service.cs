@@ -40,17 +40,17 @@ namespace Education_Software.Service
 
         public SubjectModel getNextSubjectDetails(string title)
         {
-            List<SubjectModel> subject = _context.subjects.ToList();
+            List<SubjectModel> subject = _context.subjects.OrderBy(x=> x.sub_id).ToList();
             SubjectModel s = _context.subjects.Single(x => x.title == title);
             int ind = subject.IndexOf(s);
             SubjectModel nextsubject = null;
-            if (ind == -1)
+            if (ind < subject.Count)
             {
-                nextsubject = null;
+                nextsubject = subject[ind+1];
             }
             else
             {
-                nextsubject = subject[ind];
+                nextsubject = null;
             }
             return nextsubject;
         }
@@ -113,7 +113,9 @@ namespace Education_Software.Service
         public bool evaluationCheck(string username)
         {
             List<string?> tests_done = _context.progress.Where(x => x.username == username).Select(x => x.sub_id).Distinct().ToList();
+            tests_done.Sort();
             List<string> subjects = _context.subjects.Select(x => x.sub_id).Distinct().ToList();
+            subjects.Sort();
             if(subjects == tests_done)
             {
                 return true;
@@ -267,7 +269,7 @@ namespace Education_Software.Service
             List<int> subject_progress = _context.progress.Where(x => x.username == username & x.sub_id == sub_id).Select(x => x.score).ToList();
             int count = subject_progress.Count();
             int sum = subject_progress.Sum();
-            double average_score = (sum/count) * 100;
+            double average_score = (sum/count);
             int average = (int)Math.Floor(average_score);
             return average;
         }
