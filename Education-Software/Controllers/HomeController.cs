@@ -127,13 +127,13 @@ namespace Education_Software.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitTest(string username, string subject, string sub_id, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string q_id4, string optiona, string optionb, string optionc, string optiond, string test_type)
+        public IActionResult SubmitTest(string username, string subject, string sub_id, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string q_id4, string answer4, string test_type)
         {
             Dictionary<string,string> responses = new Dictionary<string,string>();
             responses.Add(q_id1, answer1);
             responses.Add(q_id2, answer2);
             responses.Add(q_id3, answer3);
-            string answer4 = optiona+"a"+optionb+"b"+optionc+"c"+optiond+"d";
+            //string answer4 = optiona+"a"+optionb+"b"+optionc+"c"+optiond+"d";
             Debug.WriteLine(answer4);
             responses.Add(q_id4, answer4);
             Dictionary<string,List<bool>> dict = _Service.GetTestAnswers(username, responses, test_type);

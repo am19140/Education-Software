@@ -115,103 +115,103 @@
                     </h2>
                     <input type="hidden" name="username" value="@ViewBag.username" />
                     <input type="hidden" name="subject" value="@ViewBag.subject" />
-                    <input type="hidden" name="q_id1" value= "@Model.ToList()[0].q_id"/>
+                    <input type="hidden" name="q_id1" value="@Model.ToList()[0].q_id" />
 
 
-                    <div class="q">@Model.ToList()[0].question</div>   
+                    <div class="q">@Model.ToList()[0].question</div>
                     <div>
                         @if ((@ViewBag.submitted == true) && (@ViewBag.results[0] == true))
                         {
-                            <i class='bx bxs-check-circle' style="color:#92D050"></i>
+                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
 
                         }
                         else if ((@ViewBag.submitted == true) && (@ViewBag.results[0] == false))
                         {
-                            <i class='bx bxs-x-circle' style="color:red"></i>
+                        <i class='bx bxs-x-circle' style="color:red"></i>
                         }
                         <div class="radios">
                             @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
                             {
                                 var ind = @Model.ToList()[0].possible_answers.IndexOf(@answer) + 1;
-                                <input type="radio" id="mc" name="answer1" value="@ind" />
-                                <label for="mc">@answer</label>
+                            <input type="radio" id="mc" name="answer1" value="@ind" />
+                            <label for="mc">@answer</label>
 
-                                <br>
+                            <br>
                             }
                         </div>
                     </div>
-                    
+
 
                     <input type="hidden" name="q_id2" value="@Model.ToList()[1].q_id" />
                     <div class="q">@Model.ToList()[1].question</div>
                     @if ((@ViewBag.submitted == true) && (@ViewBag.results[1] == true))
                         {
-                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
+                    <i class='bx bxs-check-circle' style="color:#92D050"></i>
 
                         }
                     else if ((@ViewBag.submitted == true) && (@ViewBag.results[1] == false))
                         {
-                        <i class='bx bxs-x-circle' style="color:red"></i>
+                    <i class='bx bxs-x-circle' style="color:red"></i>
                         }
-                        <div class="radios">
+                    <div class="radios">
                         @foreach (var answer in @Model.ToList()[1].possible_answers.Split("•"))
                         {
-                            @answer<br/>
-                        <input type="radio" id="t" name="answer2" value="true"/>
+                        @answer<br />
+                        <input type="radio" id="t" name="answer2" value="true" />
                         <label for="t">True</label><br>
-                        <input type="radio" id="f" name="answer2" value="false"/>
+                        <input type="radio" id="f" name="answer2" value="false" />
                         <label for="t">False</label><br>
                         }
-                        </div>
+                    </div>
                     <input type="hidden" name="q_id3" value="@Model.ToList()[2].q_id" />
                     <div class="q">@Model.ToList()[2].question</div>
                     @if ((@ViewBag.submitted == true) && (@ViewBag.results[2] == true))
                         {
-                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
+                    <i class='bx bxs-check-circle' style="color:#92D050"></i>
 
                         }
                     else if ((@ViewBag.submitted == true) && (@ViewBag.results[2] == false))
                         {
-                        <i class='bx bxs-x-circle' style="color:red"></i>
+                    <i class='bx bxs-x-circle' style="color:red"></i>
                         }
                     @foreach (string answer in @Model.ToList()[2].possible_answers.Split("•"))
                         {
                         var s = @answer.Split("#");
-                        <label>@s[0]</label>
-                            <input type="text" id="text" name="answer3" class="input">
-                            <label>@s[1]</label>
+                    <label>@s[0]</label>
+                    <input type="text" id="text" name="answer3" class="input">
+                    <label>@s[1]</label>
                         }
                     <input type="hidden" name="q_id4" value="@Model.ToList()[3].q_id" />
                     @foreach(var q in @Model.ToList()[3].question.Split("•"))
                     {
-                        <div class="q">@q</div>
+                    <div class="q">@q</div>
                     }
-                    
+
                     @if ((@ViewBag.submitted == true) && (@ViewBag.results[3] == true))
                     {
-                        <i class='bx bxs-check-circle' style="color:#92D050"></i>
+                    <i class='bx bxs-check-circle' style="color:#92D050"></i>
 
                     }
                     else if ((@ViewBag.submitted == true) && (@ViewBag.results[3] == false))
                     {
-                        <i class='bx bxs-x-circle' style="color:red"></i>
+                    <i class='bx bxs-x-circle' style="color:red"></i>
                     }
                     <label for="optiona">@Model.ToList()[3].possible_answers.Split('•')[0]</label>
                     <select name="optiona" id="optiona">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
 
                     <label for="optionb">@Model.ToList()[3].possible_answers.Split('•')[1]</label>
                     <select name="optionb" id="optionb">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
                     <label for="optionc">@Model.ToList()[3].possible_answers.Split('•')[2]</label>
                     <select name="optionc" id="optionc">
                         <option value="1">1</option>
@@ -226,14 +226,38 @@
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
-                    </select>               
+                    </select>
+                    <input type="hidden" id="answer4" name="answer4" />
                     <input type="hidden" name="test_type" value="A" />
                     <br />
                     @if (@ViewBag.submitted != true)
-                    { 
-                        <button type="submit" class="done" id="submit">Submit</button>
-                        
+                    {
+                    <button type="submit" class="done" id="submit" onclick="gatherValues()">Submit</button>
+
                     }
+                    <script>
+                        function gatherValues() {
+                            
+                            const answera = document.getElementById('optiona').value;
+                            const answerb = document.getElementById('optionb').value;
+                            const answerc = document.getElementById('optionc').value;
+                            const answerd = document.getElementById('optiond').value;
+
+                            let answer4 = document.getElementById('answer4').value;
+
+                            answer4 = answera.concat("a");
+                            answer4 = answer4.concat(answerb);
+                            answer4 = answer4.concat("b");
+                            answer4 = answer4.concat(answerc);
+                            answer4 = answer4.concat("c");
+                            answer4 = answer4.concat(answerd);
+                            answer4 = answer4.concat("d");
+
+                            document..value = temp;
+                            console.log(answer4);
+                        }
+
+                    </script>
                 </form>
                     @if (@ViewBag.submitted)
                     {
