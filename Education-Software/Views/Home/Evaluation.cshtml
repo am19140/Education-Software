@@ -1,787 +1,817 @@
 ﻿@model IEnumerable<QuestionModel>
 
-@{
+    @{
     ViewData["Title"] = "Evaluation";
-}
+    }
 
-@section Styles{
-    <link rel="stylesheet" href="~/css/HomepageStyle.css" />
-    <link rel="stylesheet" href="~/css/MenuStyle.css" />
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    @section Styles{
+        <link rel="stylesheet" href="~/css/HomepageStyle.css" />
+        <link rel="stylesheet" href="~/css/MenuStyle.css" />
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
-}
+    }
 
     <!--Side Menu-->
-    <body>
-        <nav class="sidebar close">
-            <header>
-                <div class="image-text">
-                    <span class="image">
-                        <!--<img src="logo.png" alt="">-->
-                    </span>
-                    <div class="text logo-text">
-                        <span class="name">Job orientation</span>
-                        <span class="profession"><i>Computer Science</i> </span>
-                    </div>
-                </div>
-                <i class='bx bx-chevron-right toggle'></i>
-            </header>
-            <div class="menu-bar">
-                <div class="menu">
-                    <li class="search-box">
-                        <i class='bx bx-search icon'></i>
-                        <input type="text" placeholder="Search...">
-                    </li>
-                    <ul class="menu-links">
-                        <li class="nav-link">
-                            <a class="homebtn" href="#">
-                                <i class='bx bx-home-alt icon'></i>
-                                <span class="text nav-text">Homepage</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
-                                <i class='bx bx-book icon'></i>
-                                <span class="text nav-text">Subjects</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Progress">
-                                <i class='bx bx-book icon'></i>
-                                <span class="text nav-text">Progress</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Grades">
-                                <i class='bx bx-book icon'></i>
-                                <span class="text nav-text">Past Grades</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Questionnaire">
-                                <i class='bx bx-book icon'></i>
-                                <span class="text nav-text">Career Test</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Recommendations">
-                                <i class='bx bx-book icon'></i>
-                                <span class="text nav-text">Career Recommendations</span>
-                            </a>
-                        </li>
-                        <li class="nav-link">
-                            <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Profile">
-                                <i class='bx bx-male icon'></i>
-                                <span class="text nav-text">Profile</span>
-                            </a>
-                        </li>
+                  <body>
+                      <nav class="sidebar close">
+                          <header>
+                              <div class="image-text">
+                                  <span class="image">
+                                      <!--<img src="logo.png" alt="">-->
+                                  </span>
+                                  <div class="text logo-text">
+                                      <span class="name">Job orientation</span>
+                                      <span class="profession"><i>Computer Science</i> </span>
+                                  </div>
+                              </div>
+                              <i class='bx bx-chevron-right toggle'></i>
+                          </header>
+                          <div class="menu">
+
+                              <ul class="menu-links">
+                                  <li class="nav-link">
+                                      <a class="homebtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Homepage">
+                                          <i class='bx bx-home-alt icon'></i>
+                                          <span class="text nav-text">Homepage</span>
+                                      </a>
+                                  </li>
+
+                                  <li class="nav-link">
+                                      <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Subjects">
+                                          <i class='bx bx-list-ul icon'></i>
+                                          <span class="text nav-text">Subjects</span>
+                                      </a>
+                                  </li>
+                                  <li class="nav-link">
+                                      <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Progress">
+                                          <i class='bx bx-line-chart icon'></i>
+                                          <span class="text nav-text">Progress</span>
+                                      </a>
+                                  </li>
+                                  <li class="nav-link">
+                                      <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Grades">
+                                          <i class='bx bx-history icon'></i>
+                                          <span class="text nav-text">Past Grades</span>
+                                      </a>
+                                  </li>
+                                  <li class="nav-link">
+                                      <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Questionnaire">
+                                          <i class='bx bx-pencil icon'></i>
+                                          <span class="text nav-text">Career Test</span>
+                                      </a>
+                                  </li>
+                                  <li class="nav-link">
+                                      <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Recommendations">
+                                          <i class='bx bx-check-circle icon'></i>
+                                          <span class="text nav-text">Career Recommendations</span>
+                                      </a>
+                                  </li>
+                                  <li class="nav-link">
+                                      <a class="profbtn" asp-controller="Home" asp-route-username="@ViewBag.username" asp-action="Profile">
+                                          <i class='bx bx-male icon'></i>
+                                          <span class="text nav-text">Profile</span>
+                                      </a>
+                                  </li>
 
 
-                    </ul>
-                </div>
-                <div class="bottom-content">
-                    <li class="">
-                        <a class="logoutbtn" asp-controller="Home" asp-action="Login">
-                            <i class='bx bx-log-out icon'></i>
-                            <span class="text nav-text">Logout</span>
-                        </a>
-                    </li>
+                              </ul>
+                          </div>
+                      </nav>
 
+                      <section class="home">
 
-                </div>
-            </div>
-        </nav>
+                          <div class="header">
+                              <div class="text title">Evaluation</div>
+                              <div class="right-corner">
+                                  <img src="~/Resources/icons8-male-user-24 (1).png"></img>
+                                  <div class="smalltext username ">@ViewBag.username </div>
+                              </div>
+                          </div>
+                          <div class="main">
+                              <form>
+                                  @if(@Model==null)
+                                {
+                              <form asp-controller="Home" asp-action="Subjects" method="post">
+                                  <input type="hidden" name="username" value="@ViewBag.username" />
+                                  <input type="hidden" name="subject" value="@ViewBag.subject" />
+                                  <div>
+                                      <h5>
+                                          <i>
+                                              In order to take the evaluation test you need first to have completed the
+                                              assessment tests of all the subjects.
+                                          </i>
+                                      </h5>
+                                  </div>
+                                  <button type="submit" class="done" id="submit">See the subjects</button>
+                              </form>
 
-        <section class="home">
+                                }
+                                else
+                                {
+                                    @if(!ViewBag.submitted)
+                                    {
+                                    <div class="Questions">
 
-            <div class="header">
-                <div class="text title">Evaluation</div>
-                <div class="right-corner">
-                    <img src="~/Resources/icons8-male-user-24 (1).png"></img>
-                    <div class="smalltext username ">@ViewBag.username </div>
-                </div>
-            </div>
-            <div class="main">
-            @if(Model==null)
-            {
-                    <form asp-controller="Home" asp-action="Subjects" method="post">
-                        <input type="hidden" name="username" value="@ViewBag.username" />
-                        <input type="hidden" name="subject" value="@ViewBag.subject" />
-                        <div>
-                            <h5><i>In order to take the evaluation test you need first to have completed the
-                            assessment tests of all the subjects.
-                            </i></h5>
-                        </div>
-                        <button type="submit" class="done" id="submit">See the subjects</button>
-                    </form>
-                    
-            }
-            else
-            {
-                @if(!ViewBag.submitted)
-                {
-                     <div class="Questions">
+                                  <h2>
+                                      Questions
+                                  </h2>
 
-                <h2>
-                    Questions
-                </h2>
-                
-                <form asp-controller="Home" asp-action="SubmitEvaluationTest" method="post">
-                    <input type="hidden" name="username" value="@ViewBag.username" />
-                            <input type="hidden" name="subject" value="@ViewBag.subject" />
-            <!--Question 1-->
-                    <input type="hidden" name="q_id1" value= "@Model.ToList()[0].q_id"/>
-                        @foreach(var q in @Model.ToList()[0].question.Split("•"))
+                                  <form asp-controller="Home" asp-action="SubmitEvaluationTest" method="post" onsubmit="gatherAllValues()">
+                                      <input type="hidden" name="username" value="@ViewBag.username" />
+                                      <input type="hidden" name="subject" value="@ViewBag.subject" />
+                                      <!--Question 1-->
+                                      <input type="hidden" name="q_id1" value="@Model.ToList()[0].q_id" />
+                                      @foreach(var q in @Model.ToList()[0].question.Split("•"))
                         {
-                        <div class="q">@q</div>
+                                      <div class="q">@q</div>
                         }
-                        @if(@Model.ToList()[0].q_type == "multiple_choice")
+                                      @if(@Model.ToList()[0].q_type == "multiple_choice")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[0].possible_answers.IndexOf(@answer) + 1;
-                                    <input type="radio" id="mc" name="answer1" value="@ind" />
-                                    <label for="mc">@answer</label>
+                                          <input type="radio" id="mc" name="answer1" value="@ind" />
+                                          <label for="mc">@answer</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if (@Model.ToList()[0].q_type== "true/false")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
                                 {
-                                    @answer
+                                          @answer
 
-                                    <br />
-                                    <input type="radio" id="t" name="answer1" value="true" />
-                                    <label for="t">True</label>
+                                          <br />
+                                          <input type="radio" id="t" name="answer1" value="true" />
+                                          <label for="t">True</label>
 
-                                    <br>
-                                    <input type="radio" id="f" name="answer1" value="false" />
-                                    <label for="t">False</label>
+                                          <br>
+                                          <input type="radio" id="f" name="answer1" value="false" />
+                                          <label for="t">False</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if(@Model.ToList()[0].q_type == "completion")
                         {
-                            @foreach (string answer in @Model.ToList()[0].possible_answers.Split("•"))
+                                      @foreach (string answer in @Model.ToList()[0].possible_answers.Split("•"))
                             {
                                 var s = @answer.Split("#");
-                                <label>@s[0]</label>
-                                <input type="text" id="text" name="answer1">
-                                <label>@s[1]</label>
+                                      <label>@s[0]</label>
+                                      <input type="text" id="text" name="answer1">
+                                      <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[0].q_type == "matching")
                         {
-                    <label for="optiona">@Model.ToList()[0].possible_answers.Split('•')[0]</label>
-                    <select name="optiona" id="optiona">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                                      <label for="optiona">@Model.ToList()[0].possible_answers.Split('•')[0]</label>
+                                      <select name="optiona" id="optiona1">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optionb">@Model.ToList()[0].possible_answers.Split('•')[1]</label>
-                    <select name="optionb" id="optionb">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    
-                    <label for="optionc">@Model.ToList()[0].possible_answers.Split('•')[2]</label>
-                    <select name="optionc" id="optionc">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionb">@Model.ToList()[0].possible_answers.Split('•')[1]</label>
+                                      <select name="optionb" id="optionb1">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optiond">@Model.ToList()[0].possible_answers.Split('•')[3]</label>
-                    <select name="optiond" id="optiond">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select> 
+                                      <label for="optionc">@Model.ToList()[0].possible_answers.Split('•')[2]</label>
+                                      <select name="optionc" id="optionc1">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+
+                                      <label for="optiond">@Model.ToList()[0].possible_answers.Split('•')[3]</label>
+                                      <select name="optiond" id="optiond1">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+                                      <input type="hidden" id="answerm1" name="answer1"/>
                         }
 
 
-            <!--Question 2-->
-                        <input type="hidden" name="q_id2" value="@Model.ToList()[1].q_id" />
-                        @foreach(var q in @Model.ToList()[1].question.Split("•"))
+                                      <!--Question 2-->
+                                      <input type="hidden" name="q_id2" value="@Model.ToList()[1].q_id" />
+                                      @foreach(var q in @Model.ToList()[1].question.Split("•"))
                         {
-                        <div class="q">@q</div>
+                                      <div class="q">@q</div>
                         }
-                        @if (@Model.ToList()[1].q_type == "multiple_choice")
+                                      @if (@Model.ToList()[1].q_type == "multiple_choice")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[1].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[1].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[1].possible_answers.IndexOf(@answer) + 1;
-                                    <input type="radio" id="mc" name="answer2" value="@ind" />
-                                    <label for="mc">@answer</label>
+                                          <input type="radio" id="mc" name="answer2" value="@ind" />
+                                          <label for="mc">@answer</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if (@Model.ToList()[1].q_type == "true/false")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[1].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[1].possible_answers.Split("•"))
                                 {
-                                    @answer
+                                          @answer
 
-                                    <br />
-                                    <input type="radio" id="t" name="answer2" value="true" />
-                                    <label for="t">True</label>
+                                          <br />
+                                          <input type="radio" id="t" name="answer2" value="true" />
+                                          <label for="t">True</label>
 
-                                    <br>
-                                    <input type="radio" id="f" name="answer2" value="false" />
-                                    <label for="t">False</label>
+                                          <br>
+                                          <input type="radio" id="f" name="answer2" value="false" />
+                                          <label for="t">False</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if (@Model.ToList()[1].q_type == "completion")
                         {
-                            @foreach (string answer in @Model.ToList()[1].possible_answers.Split("•"))
+                                      @foreach (string answer in @Model.ToList()[1].possible_answers.Split("•"))
                             {
                                 var s = @answer.Split("#");
-                                <label>@s[0]</label>
-                                <input type="text" id="text" name="answer2">
-                                <label>@s[1]</label>
+                                      <label>@s[0]</label>
+                                      <input type="text" id="text" name="answer2">
+                                      <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[1].q_type == "matching")
                         {
-                            <label for="optiona">@Model.ToList()[1].possible_answers.Split('•')[0]</label>
-                    <select name="optiona" id="optiona">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                                      <label for="optiona">@Model.ToList()[1].possible_answers.Split('•')[0]</label>
+                                      <select name="optiona" id="optiona2">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optionb">@Model.ToList()[1].possible_answers.Split('•')[1]</label>
-                    <select name="optionb" id="optionb">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    
-                    <label for="optionc">@Model.ToList()[1].possible_answers.Split('•')[2]</label>
-                    <select name="optionc" id="optionc">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionb">@Model.ToList()[1].possible_answers.Split('•')[1]</label>
+                                      <select name="optionb" id="optionb2">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optiond">@Model.ToList()[1].possible_answers.Split('•')[3]</label>
-                    <select name="optiond" id="optiond">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionc">@Model.ToList()[1].possible_answers.Split('•')[2]</label>
+                                      <select name="optionc" id="optionc2">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+
+                                      <label for="optiond">@Model.ToList()[1].possible_answers.Split('•')[3]</label>
+                                      <select name="optiond" id="optiond2">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+                                      <input type="hidden" id="answerm2" name="answer2"/>
                         }
 
-            <!--Question 3-->
-                    <input type="hidden" name="q_id3" value= "@Model.ToList()[2].q_id"/>
-                        @foreach(var q in @Model.ToList()[2].question.Split("•"))
+                                      <!--Question 3-->
+                                      <input type="hidden" name="q_id3" value="@Model.ToList()[2].q_id" />
+                                      @foreach(var q in @Model.ToList()[2].question.Split("•"))
                         {
-                        <div class="q">@q</div>
+                                      <div class="q">@q</div>
                         }
-                        @if(@Model.ToList()[2].q_type == "multiple_choice")
+                                      @if(@Model.ToList()[2].q_type == "multiple_choice")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[2].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[2].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[2].possible_answers.IndexOf(@answer) + 1;
-                                    <input type="radio" id="mc" name="answer3" value="@ind" />
-                                    <label for="mc">@answer</label>
+                                          <input type="radio" id="mc" name="answer3" value="@ind" />
+                                          <label for="mc">@answer</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if (@Model.ToList()[2].q_type== "true/false")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[2].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[2].possible_answers.Split("•"))
                                 {
-                                    @answer
+                                          @answer
 
-                                    <br />
-                                    <input type="radio" id="t" name="answer3" value="true" />
-                                    <label for="t">True</label>
+                                          <br />
+                                          <input type="radio" id="t" name="answer3" value="true" />
+                                          <label for="t">True</label>
 
-                                    <br>
-                                    <input type="radio" id="f" name="answer3" value="false" />
-                                    <label for="t">False</label>
+                                          <br>
+                                          <input type="radio" id="f" name="answer3" value="false" />
+                                          <label for="t">False</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if(@Model.ToList()[2].q_type == "completion")
                         {
-                            @foreach (string answer in @Model.ToList()[2].possible_answers.Split("•"))
+                                      @foreach (string answer in @Model.ToList()[2].possible_answers.Split("•"))
                             {
                                 var s = @answer.Split("#");
-                                <label>@s[0]</label>
-                                <input type="text" id="text" name="answer3">
-                                <label>@s[1]</label>
+                                      <label>@s[0]</label>
+                                      <input type="text" id="text" name="answer3">
+                                      <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[2].q_type == "matching")
                         {
-                            <label for="optiona">@Model.ToList()[2].possible_answers.Split('•')[0]</label>
-                    <select name="optiona" id="optiona">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                                      <label for="optiona">@Model.ToList()[2].possible_answers.Split('•')[0]</label>
+                                      <select name="optiona" id="optiona3">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optionb">@Model.ToList()[2].possible_answers.Split('•')[1]</label>
-                    <select name="optionb" id="optionb">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    
-                    <label for="optionc">@Model.ToList()[2].possible_answers.Split('•')[2]</label>
-                    <select name="optionc" id="optionc">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionb">@Model.ToList()[2].possible_answers.Split('•')[1]</label>
+                                      <select name="optionb" id="optionb3">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optiond">@Model.ToList()[2].possible_answers.Split('•')[3]</label>
-                    <select name="optiond" id="optiond">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionc">@Model.ToList()[2].possible_answers.Split('•')[2]</label>
+                                      <select name="optionc" id="optionc3">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+
+                                      <label for="optiond">@Model.ToList()[2].possible_answers.Split('•')[3]</label>
+                                      <select name="optiond" id="optiond3">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+                                      <input type="hidden" id="answerm3" name="answer3"/>
                         }
 
-            <!--Question 4-->
-                        <input type="hidden" name="q_id4" value="@Model.ToList()[3].q_id" />
-                        @foreach(var q in @Model.ToList()[3].question.Split("•"))
+                                      <!--Question 4-->
+                                      <input type="hidden" name="q_id4" value="@Model.ToList()[3].q_id" />
+                                      @foreach(var q in @Model.ToList()[3].question.Split("•"))
                         {
-                        <div class="q">@q</div>
+                                      <div class="q">@q</div>
                         }
-                        @if (@Model.ToList()[3].q_type == "multiple_choice")
+                                      @if (@Model.ToList()[3].q_type == "multiple_choice")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[3].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[3].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[3].possible_answers.IndexOf(@answer) + 1;
-                                    <input type="radio" id="mc" name="answer4" value="@ind" />
-                                    <label for="mc">@answer</label>
+                                          <input type="radio" id="mc" name="answer4" value="@ind" />
+                                          <label for="mc">@answer</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if (@Model.ToList()[3].q_type == "true/false")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[3].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[3].possible_answers.Split("•"))
                                 {
-                                    @answer
+                                          @answer
 
-                                    <br />
-                                    <input type="radio" id="t" name="answer4" value="true" />
-                                    <label for="t">True</label>
+                                          <br />
+                                          <input type="radio" id="t" name="answer4" value="true" />
+                                          <label for="t">True</label>
 
-                                    <br>
-                                    <input type="radio" id="f" name="answer4" value="false" />
-                                    <label for="t">False</label>
+                                          <br>
+                                          <input type="radio" id="f" name="answer4" value="false" />
+                                          <label for="t">False</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if (@Model.ToList()[3].q_type == "completion")
                         {
-                            @foreach (string answer in @Model.ToList()[3].possible_answers.Split("•"))
+                                      @foreach (string answer in @Model.ToList()[3].possible_answers.Split("•"))
                             {
                                 var s = @answer.Split("#");
-                                <label>@s[0]</label>
-                                <input type="text" id="text" name="answer4">
-                                <label>@s[1]</label>
+                                      <label>@s[0]</label>
+                                      <input type="text" id="text" name="answer4">
+                                      <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[3].q_type == "matching")
                         {
-                           <label for="optiona">@Model.ToList()[3].possible_answers.Split('•')[0]</label>
-                    <select name="optiona" id="optiona">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                                      <label for="optiona">@Model.ToList()[3].possible_answers.Split('•')[0]</label>
+                                      <select name="optiona" id="optiona4">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optionb">@Model.ToList()[3].possible_answers.Split('•')[1]</label>
-                    <select name="optionb" id="optionb">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    
-                    <label for="optionc">@Model.ToList()[3].possible_answers.Split('•')[2]</label>
-                    <select name="optionc" id="optionc">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionb">@Model.ToList()[3].possible_answers.Split('•')[1]</label>
+                                      <select name="optionb" id="optionb4">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optiond">@Model.ToList()[3].possible_answers.Split('•')[3]</label>
-                    <select name="optiond" id="optiond">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionc">@Model.ToList()[3].possible_answers.Split('•')[2]</label>
+                                      <select name="optionc" id="optionc4">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+
+                                      <label for="optiond">@Model.ToList()[3].possible_answers.Split('•')[3]</label>
+                                      <select name="optiond" id="optiond4">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+                                      <input type="hidden" id="answerm4" name="answer4"/>
                         }
 
-        <!--Question 5-->
-                        <input type="hidden" name="q_id5" value="@Model.ToList()[4].q_id" />
-                        @foreach(var q in @Model.ToList()[4].question.Split("•"))
+                                      <!--Question 5-->
+                                      <input type="hidden" name="q_id5" value="@Model.ToList()[4].q_id" />
+                                      @foreach(var q in @Model.ToList()[4].question.Split("•"))
                         {
-                        <div class="q">@q</div>
+                                      <div class="q">@q</div>
                         }
-                        @if (@Model.ToList()[4].q_type == "multiple_choice")
+                                      @if (@Model.ToList()[4].q_type == "multiple_choice")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[4].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[4].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[4].possible_answers.IndexOf(@answer) + 1;
-                                    <input type="radio" id="mc" name="answer5" value="@ind" />
-                                    <label for="mc">@answer</label>
+                                          <input type="radio" id="mc" name="answer5" value="@ind" />
+                                          <label for="mc">@answer</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if (@Model.ToList()[4].q_type == "true/false")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[4].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[4].possible_answers.Split("•"))
                                 {
-                                    @answer
+                                          @answer
 
-                                    <br />
-                                    <input type="radio" id="t" name="answer5" value="true" />
-                                    <label for="t">True</label>
+                                          <br />
+                                          <input type="radio" id="t" name="answer5" value="true" />
+                                          <label for="t">True</label>
 
-                                    <br>
-                                    <input type="radio" id="f" name="answer5" value="false" />
-                                    <label for="t">False</label>
+                                          <br>
+                                          <input type="radio" id="f" name="answer5" value="false" />
+                                          <label for="t">False</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if (@Model.ToList()[4].q_type == "completion")
                         {
-                            @foreach (string answer in @Model.ToList()[4].possible_answers.Split("•"))
+                                      @foreach (string answer in @Model.ToList()[4].possible_answers.Split("•"))
                             {
                                 var s = @answer.Split("#");
-                                <label>@s[0]</label>
-                                <input type="text" id="text" name="answer5">
-                                <label>@s[1]</label>
+                                      <label>@s[0]</label>
+                                      <input type="text" id="text" name="answer5">
+                                      <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[4].q_type == "matching")
                         {
-                            <label for="optiona">@Model.ToList()[4].possible_answers.Split('•')[0]</label>
-                    <select name="optiona" id="optiona">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                                      <label for="optiona">@Model.ToList()[4].possible_answers.Split('•')[0]</label>
+                                      <select name="optiona" id="optiona5">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optionb">@Model.ToList()[4].possible_answers.Split('•')[1]</label>
-                    <select name="optionb" id="optionb">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    
-                    <label for="optionc">@Model.ToList()[4].possible_answers.Split('•')[2]</label>
-                    <select name="optionc" id="optionc">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionb">@Model.ToList()[4].possible_answers.Split('•')[1]</label>
+                                      <select name="optionb" id="optionb5">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optiond">@Model.ToList()[4].possible_answers.Split('•')[3]</label>
-                    <select name="optiond" id="optiond">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionc">@Model.ToList()[4].possible_answers.Split('•')[2]</label>
+                                      <select name="optionc" id="optionc5">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+
+                                      <label for="optiond">@Model.ToList()[4].possible_answers.Split('•')[3]</label>
+                                      <select name="optiond" id="optiond5">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+                                      <input type="hidden" id="answerm5" name="answer5"/>
                         }
 
-        <!--Question 6-->
-                    <input type="hidden" name="q_id6" value= "@Model.ToList()[5].q_id"/>
-                        @foreach(var q in @Model.ToList()[5].question.Split("•"))
+                                      <!--Question 6-->
+                                      <input type="hidden" name="q_id6" value="@Model.ToList()[5].q_id" />
+                                      @foreach(var q in @Model.ToList()[5].question.Split("•"))
                         {
-                        <div class="q">@q</div>
+                                      <div class="q">@q</div>
                         }
-                        @if(@Model.ToList()[5].q_type == "multiple_choice")
+                                      @if(@Model.ToList()[5].q_type == "multiple_choice")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[5].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[5].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[5].possible_answers.IndexOf(@answer) + 1;
-                                    <input type="radio" id="mc" name="answer6" value="@ind" />
-                                    <label for="mc">@answer</label>
+                                          <input type="radio" id="mc" name="answer6" value="@ind" />
+                                          <label for="mc">@answer</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if (@Model.ToList()[5].q_type== "true/false")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[5].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[5].possible_answers.Split("•"))
                                 {
-                                    @answer
+                                          @answer
 
-                                    <br />
-                                    <input type="radio" id="t" name="answer6" value="true" />
-                                    <label for="t">True</label>
+                                          <br />
+                                          <input type="radio" id="t" name="answer6" value="true" />
+                                          <label for="t">True</label>
 
-                                    <br>
-                                    <input type="radio" id="f" name="answer6" value="false" />
-                                    <label for="t">False</label>
+                                          <br>
+                                          <input type="radio" id="f" name="answer6" value="false" />
+                                          <label for="t">False</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if(@Model.ToList()[5].q_type == "completion")
                         {
-                            @foreach (string answer in @Model.ToList()[5].possible_answers.Split("•"))
+                                      @foreach (string answer in @Model.ToList()[5].possible_answers.Split("•"))
                             {
                                 var s = @answer.Split("#");
-                                <label>@s[0]</label>
-                                <input type="text" id="text" name="answer1">
-                                <label>@s[1]</label>
+                                      <label>@s[0]</label>
+                                      <input type="text" id="text" name="answer1">
+                                      <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[5].q_type == "matching")
                         {
-                            <label for="optiona">@Model.ToList()[5].possible_answers.Split('•')[0]</label>
-                    <select name="optiona" id="optiona">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                                      <label for="optiona">@Model.ToList()[5].possible_answers.Split('•')[0]</label>
+                                      <select name="optiona" id="optiona6">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optionb">@Model.ToList()[5].possible_answers.Split('•')[1]</label>
-                    <select name="optionb" id="optionb">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    
-                    <label for="optionc">@Model.ToList()[5].possible_answers.Split('•')[2]</label>
-                    <select name="optionc" id="optionc">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionb">@Model.ToList()[5].possible_answers.Split('•')[1]</label>
+                                      <select name="optionb" id="optionb6">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optiond">@Model.ToList()[5].possible_answers.Split('•')[3]</label>
-                    <select name="optiond" id="optiond">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionc">@Model.ToList()[5].possible_answers.Split('•')[2]</label>
+                                      <select name="optionc" id="optionc6">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+
+                                      <label for="optiond">@Model.ToList()[5].possible_answers.Split('•')[3]</label>
+                                      <select name="optiond" id="optiond6">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+                                      <input type="hidden" id="answerm6" name="answer6"/>
                         }
 
-        <!--Question 7-->
-                    <input type="hidden" name="q_id7" value= "@Model.ToList()[6].q_id"/>
-                        @foreach(var q in @Model.ToList()[6].question.Split("•"))
+                                      <!--Question 7-->
+                                      <input type="hidden" name="q_id7" value="@Model.ToList()[6].q_id" />
+                                      @foreach(var q in @Model.ToList()[6].question.Split("•"))
                         {
-                        <div class="q">@q</div>
+                                      <div class="q">@q</div>
                         }
-                        @if(@Model.ToList()[6].q_type == "multiple_choice")
+                                      @if(@Model.ToList()[6].q_type == "multiple_choice")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[6].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[6].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[6].possible_answers.IndexOf(@answer) + 1;
-                                    <input type="radio" id="mc" name="answer7" value="@ind" />
-                                    <label for="mc">@answer</label>
+                                          <input type="radio" id="mc" name="answer7" value="@ind" />
+                                          <label for="mc">@answer</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if (@Model.ToList()[6].q_type== "true/false")
                         {
-                            <div class="radios">
-                                @foreach (var answer in @Model.ToList()[6].possible_answers.Split("•"))
+                                      <div class="radios">
+                                          @foreach (var answer in @Model.ToList()[6].possible_answers.Split("•"))
                                 {
-                                    @answer
+                                          @answer
 
-                                    <br />
-                                    <input type="radio" id="t" name="answer7" value="true" />
-                                    <label for="t">True</label>
+                                          <br />
+                                          <input type="radio" id="t" name="answer7" value="true" />
+                                          <label for="t">True</label>
 
-                                    <br>
-                                    <input type="radio" id="f" name="answer7" value="false" />
-                                    <label for="t">False</label>
+                                          <br>
+                                          <input type="radio" id="f" name="answer7" value="false" />
+                                          <label for="t">False</label>
 
-                                    <br>
+                                          <br>
                                 }
-                            </div>
-                            <br />
+                                      </div>
+                                      <br />
                         }
                         else if(@Model.ToList()[6].q_type == "completion")
                         {
-                            @foreach (string answer in @Model.ToList()[6].possible_answers.Split("•"))
+                                      @foreach (string answer in @Model.ToList()[6].possible_answers.Split("•"))
                             {
                                 var s = @answer.Split("#");
-                                <label>@s[0]</label>
-                                <input type="text" id="text" name="answer7">
-                                <label>@s[1]</label>
+                                      <label>@s[0]</label>
+                                      <input type="text" id="text" name="answer7" />
+                                      <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[6].q_type == "matching")
                         {
-                            <label for="optiona">@Model.ToList()[6].possible_answers.Split('•')[0]</label>
-                    <select name="optiona" id="optiona">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
+                                      <label for="optiona">@Model.ToList()[6].possible_answers.Split('•')[0]</label>
+                                      <select name="optiona" id="optiona7">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optionb">@Model.ToList()[6].possible_answers.Split('•')[1]</label>
-                    <select name="optionb" id="optionb">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    
-                    <label for="optionc">@Model.ToList()[6].possible_answers.Split('•')[2]</label>
-                    <select name="optionc" id="optionc">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionb">@Model.ToList()[6].possible_answers.Split('•')[1]</label>
+                                      <select name="optionb" id="optionb7">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
 
-                    <label for="optiond">@Model.ToList()[6].possible_answers.Split('•')[3]</label>
-                    <select name="optiond" id="optiond">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                                      <label for="optionc">@Model.ToList()[6].possible_answers.Split('•')[2]</label>
+                                      <select name="optionc" id="optionc7">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+
+                                      <label for="optiond">@Model.ToList()[6].possible_answers.Split('•')[3]</label>
+                                      <select name="optiond" id="optiond7">
+                                          <option value="1">1</option>
+                                          <option value="2">2</option>
+                                          <option value="3">3</option>
+                                          <option value="4">4</option>
+                                      </select>
+                                      <input type="hidden" id="answerm7" name="answer7"/>
                         }
-                        <br />    
-                        <input type="hidden" name="test_type" value="E" />
-                        <br />
-                        <button type="submit">Submit</button>
-                    </form>
-                         <script>
+                                      <br />
 
-                         </script>
-                    </div>
-                }
-                else
-                {
-                    <h5><i>You have submitted the evaluation test.</i></h5>
-                <form asp-controller="Home" asp-action="Subjects" method="post">
-                    <input type="hidden" name="username" value="@ViewBag.username" />
-                    <button id="btnDone" type="submit" class="done buttons icon">
-                        Go to HomePage
-                    </button>
-                </form>
-                <form asp-controller="Home" asp-action="Progress" method="post">
-                    <input type="hidden" name="username" value="@ViewBag.username" />
-                    <button id="btnDone" type="submit" class="done buttons icon">
-                        See your Progress
-                    </button>
-                </form>
-                }
-            }
-            </div>
+                                      <input type="hidden" name="test_type" value="E" />
+                                      <br />
+                                      <button type="submit" class="done" id="submit">Submit</button>
+
+                                  </form>
+                              </div>
+                                    }
+                                    else
+                                    {
+                              <h5><i>You have submitted the evaluation test.</i></h5>
+                              <form asp-controller="Home" asp-action="Subjects" method="post">
+                                  <input type="hidden" name="username" value="@ViewBag.username" />
+                                  <button id="btnDone" type="submit" class="done buttons icon">
+                                      Go to HomePage
+                                  </button>
+                              </form>
+                              <form asp-controller="Home" asp-action="Progress" method="post">
+                                  <input type="hidden" name="username" value="@ViewBag.username" />
+                                  <button id="btnDone" type="submit" class="done buttons icon">
+                                      See your Progress
+                                  </button>
+                              </form>
+                                    }
+                             }
+                              </form>
+                          </div>
 
 
-        </section>
+                      </section>
 
-        <script>
-            const body = document.querySelector('body'),
-                sidebar = body.querySelector('nav'),
-                toggle = body.querySelector(".toggle"),
-                searchBtn = body.querySelector(".search-box"),
-                modeSwitch = body.querySelector(".toggle-switch"),
-                modeText = body.querySelector(".mode-text"),
-                buttonplay = body.querySelector(".play"),
-                buttonpause = body.querySelector(".pause");
+                      <script>
+                                                   
+                          function gatherValues(id) {
 
-            toggle.addEventListener("click", () => {
-                sidebar.classList.toggle("close");
-            })
-            searchBtn.addEventListener("click", () => {
-                sidebar.classList.remove("close");
-            })
-            modeSwitch.addEventListener("click", () => {
-                body.classList.toggle("dark");
+                              const answera = document.getElementById('optiona' + id).value;
+                              const answerb = document.getElementById('optionb' + id).value;
+                              const answerc = document.getElementById('optionc' + id).value;
+                              const answerd = document.getElementById('optiond' + id).value;
 
-                if (body.classList.contains("dark")) {
-                    modeText.innerText = "Light mode";
-                } else {
-                    modeText.innerText = "Dark mode";
+                              //let answer4 = document.getElementById('answer4'+id).value;
 
-                }
-            });
-        </script>
+                              let temp = "";
+                              temp = answera.concat("a");
+                              temp = temp.concat(answerb);
+                              temp = temp.concat("b");
+                              temp = temp.concat(answerc);
+                              temp = temp.concat("c");
+                              temp = temp.concat(answerd);
+                              temp = temp.concat("d");
 
-    </body>
+                              document.getElementById('answerm'+id).value = temp; 
+                              alert(document.getElementById('answerm'+id).value);
+                          }
+
+                          function gatherAllValues() {
+                                    alert(0);
+                                    for(let i = 1; i < 8; i++)
+                                        alert(i);
+                                        let st = i.toString();
+                                        gatherValues(st);
+                            }                       
+
+                      </script>
+                      <script>
+                          const body = document.querySelector('body'),
+                              sidebar = body.querySelector('nav'),
+                              toggle = body.querySelector(".toggle"),
+                              searchBtn = body.querySelector(".search-box"),
+                              modeSwitch = body.querySelector(".toggle-switch"),
+                              modeText = body.querySelector(".mode-text"),
+                              buttonplay = body.querySelector(".play"),
+                              buttonpause = body.querySelector(".pause");
+
+                          toggle.addEventListener("click", () => {
+                              sidebar.classList.toggle("close");
+                          })
+                          searchBtn.addEventListener("click", () => {
+                              sidebar.classList.remove("close");
+                          })
+                          modeSwitch.addEventListener("click", () => {
+                              body.classList.toggle("dark");
+
+                              if (body.classList.contains("dark")) {
+                                  modeText.innerText = "Light mode";
+                              } else {
+                                  modeText.innerText = "Dark mode";
+
+                              }
+                          });
+                      </script>
+
+                  </body>

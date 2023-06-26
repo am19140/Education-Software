@@ -109,7 +109,7 @@
 
                 
                 
-                <form asp-controller="Home" asp-action="SubmitTest" method="post" class="test-btn">
+                <form asp-controller="Home" asp-action="SubmitTest" method="post" class="test-btn" onsubmit="gatherValues('')">
                     <h2>
                         Questions
                     </h2>
@@ -197,7 +197,7 @@
                     <i class='bx bxs-x-circle' style="color:red"></i>
                     }
                     <label for="optiona">@Model.ToList()[3].possible_answers.Split('•')[0]</label>
-                    <select name="optiona" id="optiona">
+                    <select name="optiona+id" id="optiona">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -205,7 +205,7 @@
                     </select>
 
                     <label for="optionb">@Model.ToList()[3].possible_answers.Split('•')[1]</label>
-                    <select name="optionb" id="optionb">
+                    <select name="optionb+id" id="optionb">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -213,7 +213,7 @@
                     </select>
 
                     <label for="optionc">@Model.ToList()[3].possible_answers.Split('•')[2]</label>
-                    <select name="optionc" id="optionc">
+                    <select name="optionc+id" id="optionc">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -227,34 +227,36 @@
                         <option value="3">3</option>
                         <option value="4">4</option>
                     </select>
-                    <input type="hidden" id="answer4" name="answer4" />
+                    <input type="hidden" id="answer4" name="answer4"/>
                     <input type="hidden" name="test_type" value="A" />
                     <br />
                     @if (@ViewBag.submitted != true)
                     {
-                    <button type="submit" class="done" id="submit" onclick="gatherValues()">Submit</button>
+                    <button type="submit" class="done" id="submit">Submit</button>
 
                     }
                     <script>
-                        function gatherValues() {
+                        function gatherValues(id) {
                             
-                            const answera = document.getElementById('optiona').value;
-                            const answerb = document.getElementById('optionb').value;
-                            const answerc = document.getElementById('optionc').value;
-                            const answerd = document.getElementById('optiond').value;
+                            const answera = document.getElementById('optiona'+id).value;
+                            const answerb = document.getElementById('optionb'+id).value;
+                            const answerc = document.getElementById('optionc'+id).value;
+                            const answerd = document.getElementById('optiond'+id).value;
 
-                            let answer4 = document.getElementById('answer4').value;
+                            //let answer4 = document.getElementById('answer4'+id).value;
 
-                            answer4 = answera.concat("a");
-                            answer4 = answer4.concat(answerb);
-                            answer4 = answer4.concat("b");
-                            answer4 = answer4.concat(answerc);
-                            answer4 = answer4.concat("c");
-                            answer4 = answer4.concat(answerd);
-                            answer4 = answer4.concat("d");
+                            let temp = "";
+                            temp = answera.concat("a");
+                            temp = temp.concat(answerb);
+                            temp = temp.concat("b");
+                            temp = temp.concat(answerc);
+                            temp = temp.concat("c");
+                            temp = temp.concat(answerd);
+                            temp = temp.concat("d");
 
-                            document..value = temp;
-                            console.log(answer4);
+                            alert(temp);
+                            document.getElementById('answer4').value = temp;
+                            alert(document.getElementById('answer4').value)
                         }
 
                     </script>
@@ -266,7 +268,7 @@
                             You have answered correctly in @ViewBag.percentage% of the questions.
                         </i>
                         </h5>
-                        @if(@ViewBag.percentage < 60)
+                        if(@ViewBag.percentage < 60)
                         {
                             <h5>
                             <i>
