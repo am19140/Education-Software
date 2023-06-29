@@ -89,9 +89,9 @@ namespace Education_Software.Controllers
         public IActionResult NextSubject(string username, string subject)
         {
             ViewBag.username = username;
-            ViewBag.subject = subject;
             SubjectModel subjectmodel = _Service.getNextSubjectDetails(subject);
-            if (subjectmodel != null)
+            ViewBag.subject = subjectmodel.title;
+            if (subjectmodel.sub_id != "CS1000")
             {
                 return View("Subject", subjectmodel);
             }
@@ -109,7 +109,7 @@ namespace Education_Software.Controllers
                 }
                 else
                 {
-                    return View("Evaluation", null);
+                    return View("Evaluation", default);
                 }
             }
         }
@@ -133,8 +133,6 @@ namespace Education_Software.Controllers
             responses.Add(q_id1, answer1);
             responses.Add(q_id2, answer2);
             responses.Add(q_id3, answer3);
-            //string answer4 = optiona+"a"+optionb+"b"+optionc+"c"+optiond+"d";
-            Debug.WriteLine(answer4);
             responses.Add(q_id4, answer4);
             Dictionary<string,List<bool>> dict = _Service.GetTestAnswers(username, responses, test_type);
             string test_id = dict.Keys.First();
@@ -162,12 +160,13 @@ namespace Education_Software.Controllers
             }
             else
             {
-                return View("Evaluation", null);
+                return View("Evaluation", default);
             }
         }
 
         public IActionResult SubmitEvaluationTest(string username, string subject, string q_id1, string answer1, string answerm1, string q_id2, string answer2, string q_id3, string answer3, string q_id4, string answer4, string q_id5, string answer5, string q_id6, string answer6, string q_id7, string answer7, string test_type)
         {
+            ViewBag.username = username;
             Dictionary<string, string> responses = new Dictionary<string, string>();
             responses.Add(q_id1, answer1);
             responses.Add(q_id2, answer2);

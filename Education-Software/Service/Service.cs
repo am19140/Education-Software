@@ -348,7 +348,7 @@ namespace Education_Software.Service
             {
                 first.Add(answer1);
             }
-            else if (answer1 == "2")
+            else
             {
                 second.Add(answer1);
             }
@@ -356,7 +356,7 @@ namespace Education_Software.Service
             {
                 first.Add(answer2);
             }
-            else if (answer2 == "2")
+            else
             {
                 second.Add(answer2);
             }
@@ -364,7 +364,7 @@ namespace Education_Software.Service
             {
                 first.Add(answer3);
             }
-            else if (answer3 == "2")
+            else 
             {
                 second.Add(answer3);
             }

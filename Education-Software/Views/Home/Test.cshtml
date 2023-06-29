@@ -130,11 +130,13 @@
                         <i class='bx bxs-x-circle' style="color:red"></i>
                         }
                         <div class="radios">
-                            @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
+                            @foreach (string answer in @Model.ToList()[0].possible_answers.Split("•"))
                             {
-                                var ind = @Model.ToList()[0].possible_answers.IndexOf(@answer) + 1;
-                            <input type="radio" id="mc" name="answer1" value="@ind" />
-                            <label for="mc">@answer</label>
+                             int ind = (int) @Model.ToList()[0].possible_answers.IndexOf(answer) + (int) 1;
+                                string index = ind.ToString();
+                                //<input type="radio" id="mc" name="answer1" value=@index />
+                                @Html.RadioButton("answer1", index, new { id = "mc" });
+                                <label for="mc">@answer</label>
 
                             <br>
                             }
@@ -243,8 +245,6 @@
                             const answerc = document.getElementById('optionc'+id).value;
                             const answerd = document.getElementById('optiond'+id).value;
 
-                            //let answer4 = document.getElementById('answer4'+id).value;
-
                             let temp = "";
                             temp = answera.concat("a");
                             temp = temp.concat(answerb);
@@ -254,9 +254,7 @@
                             temp = temp.concat(answerd);
                             temp = temp.concat("d");
 
-                            alert(temp);
                             document.getElementById('answer4').value = temp;
-                            alert(document.getElementById('answer4').value)
                         }
 
                     </script>

@@ -120,7 +120,7 @@
                                     @foreach (var answer in Model.ToList()[0].possible_answers.Split("•"))
                                     {
 
-                                        var ind = Model.ToList()[0].possible_answers.IndexOf(answer) + 1;
+                                        int ind = Model.ToList()[0].possible_answers.IndexOf(answer) + (int) 1;
                                         <input type="radio" id="mc" name="answer1" value="@ind">
                                         <label for="mc" >@answer</label>
 
@@ -137,7 +137,7 @@
                             @foreach (var answer in Model.ToList()[1].possible_answers.Split("•"))
                             {
 
-                                var ind = Model.ToList()[1].possible_answers.IndexOf(answer) + 1;
+                                int ind = Model.ToList()[1].possible_answers.IndexOf(answer) + (int) 1;
                                 <input type="radio" id="mc" name="answer2" value="@ind">
                                 <label for="mc" >@answer</label>
 
@@ -154,7 +154,7 @@
                                 @foreach (var answer in Model.ToList()[2].possible_answers.Split("•"))
                                 {
 
-                                    var ind = Model.ToList()[2].possible_answers.IndexOf(answer) + 1;
+                                    int ind = Model.ToList()[2].possible_answers.IndexOf(answer) + (int) 1;
                                     <input type="radio" id="mc" name="answer3" value="@ind">
                                     <label for="mc" >@answer</label>
 

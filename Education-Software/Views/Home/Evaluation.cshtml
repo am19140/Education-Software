@@ -89,24 +89,7 @@
                           </div>
                           <div class="main">
                               
-                                  @if(@Model.DefaultIfEmpty() == default)
-                                {
-                              <form asp-controller="Home" asp-action="Subjects" method="post">
-                                  <input type="hidden" name="username" value="@ViewBag.username" />
-                                  <input type="hidden" name="subject" value="@ViewBag.subject" />
-                                  <div>
-                                      <h5>
-                                          <i>
-                                              In order to take the evaluation test you need first to have completed the
-                                              assessment tests of all the subjects.
-                                          </i>
-                                      </h5>
-                                  </div>
-                                  <button type="submit" class="done" id="submit">See the subjects</button>
-                              </form>
-
-                                }
-                                else
+                                  @if(@Model != default)
                                 {
                                     @if(!ViewBag.submitted)
                                     {
@@ -780,18 +763,36 @@
                               <h5><i>You have submitted the evaluation test.</i></h5>
                               <form asp-controller="Home" asp-action="Subjects" method="post">
                                   <input type="hidden" name="username" value="@ViewBag.username" />
-                                  <button id="btnDone" type="submit" class="done buttons icon">
+                                  <button type="submit" class="done" id="submit">
                                       Go to HomePage
                                   </button>
                               </form>
                               <form asp-controller="Home" asp-action="Progress" method="post">
                                   <input type="hidden" name="username" value="@ViewBag.username" />
-                                  <button id="btnDone" type="submit" class="done buttons icon">
+                                  <button type="submit" class="done" id="submit">
                                       See your Progress
                                   </button>
                               </form>
                                     }
-                             }
+
+                                }
+                                else
+                                {
+                                     <form asp-controller="Home" asp-action="Subjects" method="post">
+                                  <input type="hidden" name="username" value="@ViewBag.username" />
+                                  <input type="hidden" name="subject" value="@ViewBag.subject" />
+                                  <div>
+                                      <h5>
+                                          <i>
+                                              In order to take the evaluation test you need first to have completed the
+                                              assessment tests of all the subjects.
+                                          </i>
+                                      </h5>
+                                  </div>
+                                  <button type="submit" class="done" id="submit">See the subjects</button>
+                              </form>
+                                    
+                                }
                           </div>
 
 
