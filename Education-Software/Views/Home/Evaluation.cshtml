@@ -88,8 +88,8 @@
                               </div>
                           </div>
                           <div class="main">
-                              <form>
-                                  @if(@Model==null)
+                              
+                                  @if(@Model.DefaultIfEmpty() == default)
                                 {
                               <form asp-controller="Home" asp-action="Subjects" method="post">
                                   <input type="hidden" name="username" value="@ViewBag.username" />
@@ -116,7 +116,7 @@
                                       Questions
                                   </h2>
 
-                                  <form asp-controller="Home" asp-action="SubmitEvaluationTest" method="post" onsubmit="gatherAllValues()">
+                                  <form asp-controller="Home" asp-action="SubmitEvaluationTest" method="post" class="evaluation-btn">
                                       <input type="hidden" name="username" value="@ViewBag.username" />
                                       <input type="hidden" name="subject" value="@ViewBag.subject" />
                                       <!--Question 1-->
@@ -131,7 +131,7 @@
                                           @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[0].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mc" name="answer1" value="@ind" />
+                                          <input type="radio" id="mcanswer1" name="answer1" value="@ind" />
                                           <label for="mc">@answer</label>
 
                                           <br>
@@ -147,11 +147,11 @@
                                           @answer
 
                                           <br />
-                                          <input type="radio" id="t" name="answer1" value="true" />
+                                          <input type="radio" id="tanswer1" name="answer1" value="true" />
                                           <label for="t">True</label>
 
                                           <br>
-                                          <input type="radio" id="f" name="answer1" value="false" />
+                                          <input type="radio" id="fanswer1" name="answer1" value="false" />
                                           <label for="t">False</label>
 
                                           <br>
@@ -165,7 +165,7 @@
                             {
                                 var s = @answer.Split("#");
                                       <label>@s[0]</label>
-                                      <input type="text" id="text" name="answer1">
+                                      <input type="text" id="canswer1" name="answer1">
                                       <label>@s[1]</label>
                             }
                         }
@@ -218,7 +218,7 @@
                                           @foreach (var answer in @Model.ToList()[1].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[1].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mc" name="answer2" value="@ind" />
+                                          <input type="radio" id="mcanswer2" name="answer2" value="@ind" />
                                           <label for="mc">@answer</label>
 
                                           <br>
@@ -234,11 +234,11 @@
                                           @answer
 
                                           <br />
-                                          <input type="radio" id="t" name="answer2" value="true" />
+                                          <input type="radio" id="tanswer2" name="answer2" value="true" />
                                           <label for="t">True</label>
 
                                           <br>
-                                          <input type="radio" id="f" name="answer2" value="false" />
+                                          <input type="radio" id="fanswer2" name="answer2" value="false" />
                                           <label for="t">False</label>
 
                                           <br>
@@ -252,7 +252,7 @@
                             {
                                 var s = @answer.Split("#");
                                       <label>@s[0]</label>
-                                      <input type="text" id="text" name="answer2">
+                                      <input type="text" id="canswer2" name="answer2">
                                       <label>@s[1]</label>
                             }
                         }
@@ -304,7 +304,7 @@
                                           @foreach (var answer in @Model.ToList()[2].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[2].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mc" name="answer3" value="@ind" />
+                                          <input type="radio" id="mcanswer3" name="answer3" value="@ind" />
                                           <label for="mc">@answer</label>
 
                                           <br>
@@ -320,11 +320,11 @@
                                           @answer
 
                                           <br />
-                                          <input type="radio" id="t" name="answer3" value="true" />
+                                          <input type="radio" id="tanswer3" name="answer3" value="true" />
                                           <label for="t">True</label>
 
                                           <br>
-                                          <input type="radio" id="f" name="answer3" value="false" />
+                                          <input type="radio" id="fanswer3" name="answer3" value="false" />
                                           <label for="t">False</label>
 
                                           <br>
@@ -338,7 +338,7 @@
                             {
                                 var s = @answer.Split("#");
                                       <label>@s[0]</label>
-                                      <input type="text" id="text" name="answer3">
+                                      <input type="text" id="canswer3" name="answer3">
                                       <label>@s[1]</label>
                             }
                         }
@@ -390,7 +390,7 @@
                                           @foreach (var answer in @Model.ToList()[3].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[3].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mc" name="answer4" value="@ind" />
+                                          <input type="radio" id="mcanswer4" name="answer4" value="@ind" />
                                           <label for="mc">@answer</label>
 
                                           <br>
@@ -406,11 +406,11 @@
                                           @answer
 
                                           <br />
-                                          <input type="radio" id="t" name="answer4" value="true" />
+                                          <input type="radio" id="tanswer4" name="answer4" value="true" />
                                           <label for="t">True</label>
 
                                           <br>
-                                          <input type="radio" id="f" name="answer4" value="false" />
+                                          <input type="radio" id="fanswer4" name="answer4" value="false" />
                                           <label for="t">False</label>
 
                                           <br>
@@ -424,7 +424,7 @@
                             {
                                 var s = @answer.Split("#");
                                       <label>@s[0]</label>
-                                      <input type="text" id="text" name="answer4">
+                                      <input type="text" id="canswer4" name="answer4">
                                       <label>@s[1]</label>
                             }
                         }
@@ -476,7 +476,7 @@
                                           @foreach (var answer in @Model.ToList()[4].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[4].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mc" name="answer5" value="@ind" />
+                                          <input type="radio" id="mcanswer5" name="answer5" value="@ind" />
                                           <label for="mc">@answer</label>
 
                                           <br>
@@ -492,11 +492,11 @@
                                           @answer
 
                                           <br />
-                                          <input type="radio" id="t" name="answer5" value="true" />
+                                          <input type="radio" id="tanswer5" name="answer5" value="true" />
                                           <label for="t">True</label>
 
                                           <br>
-                                          <input type="radio" id="f" name="answer5" value="false" />
+                                          <input type="radio" id="fanswer5" name="answer5" value="false" />
                                           <label for="t">False</label>
 
                                           <br>
@@ -510,7 +510,7 @@
                             {
                                 var s = @answer.Split("#");
                                       <label>@s[0]</label>
-                                      <input type="text" id="text" name="answer5">
+                                      <input type="text" id="canswer5" name="answer5">
                                       <label>@s[1]</label>
                             }
                         }
@@ -562,7 +562,7 @@
                                           @foreach (var answer in @Model.ToList()[5].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[5].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mc" name="answer6" value="@ind" />
+                                          <input type="radio" id="mcanswer6" name="answer6" value="@ind" />
                                           <label for="mc">@answer</label>
 
                                           <br>
@@ -578,11 +578,11 @@
                                           @answer
 
                                           <br />
-                                          <input type="radio" id="t" name="answer6" value="true" />
+                                          <input type="radio" id="tanswer6" name="answer6" value="true" />
                                           <label for="t">True</label>
 
                                           <br>
-                                          <input type="radio" id="f" name="answer6" value="false" />
+                                          <input type="radio" id="fanswer6" name="answer6" value="false" />
                                           <label for="t">False</label>
 
                                           <br>
@@ -596,7 +596,7 @@
                             {
                                 var s = @answer.Split("#");
                                       <label>@s[0]</label>
-                                      <input type="text" id="text" name="answer1">
+                                      <input type="text" id="casnwer6" name="answer1">
                                       <label>@s[1]</label>
                             }
                         }
@@ -648,7 +648,7 @@
                                           @foreach (var answer in @Model.ToList()[6].possible_answers.Split("•"))
                                 {
                                     var ind = @Model.ToList()[6].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mc" name="answer7" value="@ind" />
+                                          <input type="radio" id="mcanswer7" name="answer7" value="@ind" />
                                           <label for="mc">@answer</label>
 
                                           <br>
@@ -664,11 +664,11 @@
                                           @answer
 
                                           <br />
-                                          <input type="radio" id="t" name="answer7" value="true" />
+                                          <input type="radio" id="tanswer7" name="answer7" value="true" />
                                           <label for="t">True</label>
 
                                           <br>
-                                          <input type="radio" id="f" name="answer7" value="false" />
+                                          <input type="radio" id="fanswer7" name="answer7" value="false" />
                                           <label for="t">False</label>
 
                                           <br>
@@ -682,7 +682,7 @@
                             {
                                 var s = @answer.Split("#");
                                       <label>@s[0]</label>
-                                      <input type="text" id="text" name="answer7" />
+                                      <input type="text" id="canswer7" name="answer7" />
                                       <label>@s[1]</label>
                             }
                         }
@@ -725,8 +725,53 @@
 
                                       <input type="hidden" name="test_type" value="E" />
                                       <br />
-                                      <button type="submit" class="done" id="submit">Submit</button>
+                                      <button type="submit" class="done" id="submit" onclick="gatherAllValues()">Submit</button>
+                                      <script>
+                                               
+                                      function gatherAllValues() {
+                                                for(var i = 1; i < 8; i++)
+                                                {
+                                                    let st = i.toString();
+                                                    if((document.getElementById('mcanswer'+ st) != null) | (document.getElementById('canswer'+ st) != null) | (document.getElementById('tanswer'+ st) != null) | (document.getElementById('fanswer'+ st) != null))
+                                                    {
+                                                        continue;
+                                                    }
+                                                    else
+                                                    {
+                                                            gatherValues(st);
+                                                    }
+                                                }
+                                        }
 
+                                        function gatherValues(id){
+                                                   const answera = document.getElementById('optiona' + id).value;
+                                                   const answerb = document.getElementById('optionb' + id).value;
+                                                   const answerc = document.getElementById('optionc' + id).value;
+                                                   const answerd = document.getElementById('optiond' + id).value;
+
+                                                   let temp = answera.concat("a");
+                                                   temp = temp.concat(answerb);
+                                                   temp = temp.concat("b");
+                                                   temp = temp.concat(answerc);
+                                                   temp = temp.concat("c");
+                                                   temp = temp.concat(answerd);
+                                                   temp = temp.concat("d");
+                                                   
+                                                   if(document.getElementById('answerm'+id).value != null)
+                                                   {
+                                                       document.getElementById('answerm'+id).value = temp;
+                                                        alert(document.getElementById('answerm'+id).value);
+                                                   }
+                                                   else
+                                                   {
+                                                       document.getElementById('answerm'+id).value = temp;
+                                                        alert(document.getElementById('answerm'+id).value);
+                                                   }
+                                                   
+                                     }
+                                                      
+
+                      </script>
                                   </form>
                               </div>
                                     }
@@ -747,45 +792,12 @@
                               </form>
                                     }
                              }
-                              </form>
                           </div>
 
 
                       </section>
 
-                      <script>
-                                                   
-                          function gatherValues(id) {
-
-                              const answera = document.getElementById('optiona' + id).value;
-                              const answerb = document.getElementById('optionb' + id).value;
-                              const answerc = document.getElementById('optionc' + id).value;
-                              const answerd = document.getElementById('optiond' + id).value;
-
-                              //let answer4 = document.getElementById('answer4'+id).value;
-
-                              let temp = "";
-                              temp = answera.concat("a");
-                              temp = temp.concat(answerb);
-                              temp = temp.concat("b");
-                              temp = temp.concat(answerc);
-                              temp = temp.concat("c");
-                              temp = temp.concat(answerd);
-                              temp = temp.concat("d");
-
-                              document.getElementById('answerm'+id).value = temp; 
-                              alert(document.getElementById('answerm'+id).value);
-                          }
-
-                          function gatherAllValues() {
-                                    alert(0);
-                                    for(let i = 1; i < 8; i++)
-                                        alert(i);
-                                        let st = i.toString();
-                                        gatherValues(st);
-                            }                       
-
-                      </script>
+                      
                       <script>
                           const body = document.querySelector('body'),
                               sidebar = body.querySelector('nav'),

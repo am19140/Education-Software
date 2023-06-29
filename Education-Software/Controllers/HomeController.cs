@@ -166,7 +166,7 @@ namespace Education_Software.Controllers
             }
         }
 
-        public IActionResult SubmitEvaluationTest(string username, string subject, string q_id1, string answer1, string q_id2, string answer2, string q_id3, string answer3, string q_id4, string answer4, string q_id5, string answer5, string q_id6, string answer6, string q_id7, string answer7, string test_type)
+        public IActionResult SubmitEvaluationTest(string username, string subject, string q_id1, string answer1, string answerm1, string q_id2, string answer2, string q_id3, string answer3, string q_id4, string answer4, string q_id5, string answer5, string q_id6, string answer6, string q_id7, string answer7, string test_type)
         {
             Dictionary<string, string> responses = new Dictionary<string, string>();
             responses.Add(q_id1, answer1);
