@@ -132,13 +132,13 @@
                         <div class="radios">
                             @foreach (string answer in @Model.ToList()[0].possible_answers.Split("•"))
                             {
-                             int ind = (int) @Model.ToList()[0].possible_answers.IndexOf(answer) + (int) 1;
+                                string[] arr = @Model.ToList()[0].possible_answers.Split("•");
+                                int ind = (int) Array.IndexOf(arr, answer) + (int) 1;
                                 string index = ind.ToString();
-                                //<input type="radio" id="mc" name="answer1" value=@index />
-                                @Html.RadioButton("answer1", index, new { id = "mc" });
+                                <input type="radio" id="mc" name="answer1" value=@index />
                                 <label for="mc">@answer</label>
 
-                            <br>
+                            <br/>
                             }
                         </div>
                     </div>

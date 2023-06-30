@@ -113,11 +113,13 @@
                                       <div class="radios">
                                           @foreach (var answer in @Model.ToList()[0].possible_answers.Split("•"))
                                 {
-                                    var ind = @Model.ToList()[0].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mcanswer1" name="answer1" value="@ind" />
-                                          <label for="mc">@answer</label>
+                                    string[] arr = @Model.ToList()[0].possible_answers.Split("•");
+                                int ind = (int) Array.IndexOf(arr, answer) + (int) 1;
+                                string index = ind.ToString();
+                                <input type="radio" id="mcanswer1" name="answer1" value=@index />
+                                <label for="mc">@answer</label>
 
-                                          <br>
+                            <br/>
                                 }
                                       </div>
                                       <br />
@@ -200,11 +202,13 @@
                                       <div class="radios">
                                           @foreach (var answer in @Model.ToList()[1].possible_answers.Split("•"))
                                 {
-                                    var ind = @Model.ToList()[1].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mcanswer2" name="answer2" value="@ind" />
-                                          <label for="mc">@answer</label>
+                                    string[] arr = @Model.ToList()[1].possible_answers.Split("•");
+                                int ind = (int) Array.IndexOf(arr, answer) + (int) 1;
+                                string index = ind.ToString();
+                                <input type="radio" id="mcanswer2" name="answer2" value=@index />
+                                <label for="mc">@answer</label>
 
-                                          <br>
+                            <br/>
                                 }
                                       </div>
                                       <br />
@@ -286,11 +290,13 @@
                                       <div class="radios">
                                           @foreach (var answer in @Model.ToList()[2].possible_answers.Split("•"))
                                 {
-                                    var ind = @Model.ToList()[2].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mcanswer3" name="answer3" value="@ind" />
-                                          <label for="mc">@answer</label>
+                                   string[] arr = @Model.ToList()[2].possible_answers.Split("•");
+                                int ind = (int) Array.IndexOf(arr, answer) + (int) 1;
+                                string index = ind.ToString();
+                                <input type="radio" id="mcanswer3" name="answer3" value=@index />
+                                <label for="mc">@answer</label>
 
-                                          <br>
+                            <br/>
                                 }
                                       </div>
                                       <br />
@@ -372,11 +378,13 @@
                                       <div class="radios">
                                           @foreach (var answer in @Model.ToList()[3].possible_answers.Split("•"))
                                 {
-                                    var ind = @Model.ToList()[3].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mcanswer4" name="answer4" value="@ind" />
-                                          <label for="mc">@answer</label>
+                                    string[] arr = @Model.ToList()[3].possible_answers.Split("•");
+                                int ind = (int) Array.IndexOf(arr, answer) + (int) 1;
+                                string index = ind.ToString();
+                                <input type="radio" id="mcanswer4" name="answer4" value=@index />
+                                <label for="mc">@answer</label>
 
-                                          <br>
+                            <br/>
                                 }
                                       </div>
                                       <br />
@@ -396,7 +404,7 @@
                                           <input type="radio" id="fanswer4" name="answer4" value="false" />
                                           <label for="t">False</label>
 
-                                          <br>
+                                          <br/>
                                 }
                                       </div>
                                       <br />
@@ -458,11 +466,13 @@
                                       <div class="radios">
                                           @foreach (var answer in @Model.ToList()[4].possible_answers.Split("•"))
                                 {
-                                    var ind = @Model.ToList()[4].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mcanswer5" name="answer5" value="@ind" />
-                                          <label for="mc">@answer</label>
+                                    string[] arr = @Model.ToList()[4].possible_answers.Split("•");
+                                int ind = (int) Array.IndexOf(arr, answer) + (int) 1;
+                                string index = ind.ToString();
+                                <input type="radio" id="mcanswer5" name="answer5" value=@index />
+                                <label for="mc">@answer</label>
 
-                                          <br>
+                            <br/>
                                 }
                                       </div>
                                       <br />
@@ -544,11 +554,13 @@
                                       <div class="radios">
                                           @foreach (var answer in @Model.ToList()[5].possible_answers.Split("•"))
                                 {
-                                    var ind = @Model.ToList()[5].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mcanswer6" name="answer6" value="@ind" />
-                                          <label for="mc">@answer</label>
+                                    string[] arr = @Model.ToList()[5].possible_answers.Split("•");
+                                int ind = (int) Array.IndexOf(arr, answer) + (int) 1;
+                                string index = ind.ToString();
+                                <input type="radio" id="mcanswer6" name="answer6" value=@index />
+                                <label for="mc">@answer</label>
 
-                                          <br>
+                            <br/>
                                 }
                                       </div>
                                       <br />
@@ -630,11 +642,13 @@
                                       <div class="radios">
                                           @foreach (var answer in @Model.ToList()[6].possible_answers.Split("•"))
                                 {
-                                    var ind = @Model.ToList()[6].possible_answers.IndexOf(@answer) + 1;
-                                          <input type="radio" id="mcanswer7" name="answer7" value="@ind" />
-                                          <label for="mc">@answer</label>
+                                    string[] arr = @Model.ToList()[6].possible_answers.Split("•");
+                                int ind = (int) Array.IndexOf(arr, answer) + (int) 1;
+                                string index = ind.ToString();
+                                <input type="radio" id="mcanswer7" name="answer7" value=@index />
+                                <label for="mc">@answer</label>
 
-                                          <br>
+                            <br/>
                                 }
                                       </div>
                                       <br />

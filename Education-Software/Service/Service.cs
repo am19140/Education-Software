@@ -333,10 +333,19 @@ namespace Education_Software.Service
             }
         }
 
-        public List<QuestionnaireModel> getRecommendationQuestions()
+        public List<QuestionnaireModel> getRecommendationQuestions(string username)
         {
-            List<QuestionnaireModel> q = (from s in _context.questionnaire
-                                    select s).ToList();
+            List<QuestionnaireModel>? q = new List<QuestionnaireModel>();
+            List<GradesModel>? grades = _context.grades.Where(x => x.username == username).ToList();
+            if(grades == default)
+            {
+                q = default;
+            }
+            else
+            {
+                q = (from s in _context.questionnaire
+                     select s).ToList();
+            }
             return q;
         }
 
@@ -369,7 +378,7 @@ namespace Education_Software.Service
                 second.Add(answer3);
             }
 
-            List<GradesModel> grades = _context.grades.Where(x => x.username == username).ToList();
+            List<GradesModel> grades = _context.grades.Where(x => x.username == username & x.sub_id!="CS1000").ToList();
             Dictionary<string, int?> dict = new Dictionary<string, int?>();
             List<int> average_score = new List<int>(); 
             foreach (var gr in grades)

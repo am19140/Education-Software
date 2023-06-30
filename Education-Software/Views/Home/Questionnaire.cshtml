@@ -109,71 +109,97 @@
                          <h4>This is a questionnaire that will help us understand your insterests and preferences about the world of Computer Science</h4>
                          <h4>You can fill this form miltiple times, but your career recommendations are <i>exclusively </i>based on your last submit.</h4>
                          <div class="form-container">
-                        
-                        <form asp-controller="Home" asp-action="SubmitQuestionnaire" method="post" class="test-btn">
-                            <input type="hidden" name="username" value="@ViewBag.username" />
-                             <h2>Answer the questions below</h2>
-                            <input type="hidden" id="q" name="q_id1" value="@Model.ToList()[0].q_id" />
-                            <div class="question">
-                                <div class="q">@Model.ToList()[0].question</div>
-                                <div class="radios">
-                                    @foreach (var answer in Model.ToList()[0].possible_answers.Split("•"))
-                                    {
 
-                                        int ind = Model.ToList()[0].possible_answers.IndexOf(answer) + (int) 1;
-                                        <input type="radio" id="mc" name="answer1" value="@ind">
-                                        <label for="mc" >@answer</label>
+                @if (@Model != default)
+                {
 
-                                        <br>
-                                    }
-                                </div>
-                            </div>
-                            
 
-                        <input type="hidden" id="q" name="q_id2" value="@Model.ToList()[1].q_id" />
-                         <div class="question">
-                        <div class="q">@Model.ToList()[1].question</div>
-                        <div class="radios">
-                            @foreach (var answer in Model.ToList()[1].possible_answers.Split("•"))
-                            {
-
-                                int ind = Model.ToList()[1].possible_answers.IndexOf(answer) + (int) 1;
-                                <input type="radio" id="mc" name="answer2" value="@ind">
-                                <label for="mc" >@answer</label>
-
-                                <br>
-                            }
-                        </div>
-                        </div>
-                        
-
-                        <input type="hidden" id="q" name="q_id3" value="@Model.ToList()[2].q_id" />
+                    <form asp-controller="Home" asp-action="SubmitQuestionnaire" method="post" class="test-btn">
+                        <input type="hidden" name="username" value="@ViewBag.username" />
+                        <h2>Answer the questions below</h2>
+                        <input type="hidden" id="q" name="q_id1" value="@Model.ToList()[0].q_id" />
                         <div class="question">
-                        <div class="q">@Model.ToList()[2].question</div>
-                        <div class="radios">
-                                @foreach (var answer in Model.ToList()[2].possible_answers.Split("•"))
+                            <div class="q">@Model.ToList()[0].question</div>
+                            <div class="radios">
+                                @foreach (var answer in Model.ToList()[0].possible_answers.Split("•"))
                                 {
 
-                                    int ind = Model.ToList()[2].possible_answers.IndexOf(answer) + (int) 1;
-                                    <input type="radio" id="mc" name="answer3" value="@ind">
-                                    <label for="mc" >@answer</label>
+                                    string[] arr = @Model.ToList()[0].possible_answers.Split("•");
+                                    int ind = (int)Array.IndexOf(arr, answer) + (int)1;
+                                    string index = ind.ToString();
+                                    <input type="radio" id="mc" name="answer1" value=@index />
+                                    <label for="mc">@answer</label>
 
-                                    <br>
+                                    <br />
                                 }
                             </div>
                         </div>
-                        
-                            
-                            <button id="btnDone" type="submit" class="done buttons icon">
-                                Sumbit
-                            </button>
-                </form>
-            
-            </div>
+
+
+                        <input type="hidden" id="q" name="q_id2" value="@Model.ToList()[1].q_id" />
+                        <div class="question">
+                            <div class="q">@Model.ToList()[1].question</div>
+                            <div class="radios">
+                                @foreach (var answer in Model.ToList()[1].possible_answers.Split("•"))
+                                {
+
+                                    string[] arr = @Model.ToList()[1].possible_answers.Split("•");
+                                    int ind = (int)Array.IndexOf(arr, answer) + (int)1;
+                                    string index = ind.ToString();
+                                    <input type="radio" id="mc" name="answer2" value=@index />
+                                    <label for="mc">@answer</label>
+
+                                    <br />
+                                }
+                            </div>
+                        </div>
+
+
+                        <input type="hidden" id="q" name="q_id3" value="@Model.ToList()[2].q_id" />
+                        <div class="question">
+                            <div class="q">@Model.ToList()[2].question</div>
+                            <div class="radios">
+                                @foreach (var answer in Model.ToList()[2].possible_answers.Split("•"))
+                                {
+
+                                    string[] arr = @Model.ToList()[2].possible_answers.Split("•");
+                                    int ind = (int)Array.IndexOf(arr, answer) + (int)1;
+                                    string index = ind.ToString();
+                                    <input type="radio" id="mc" name="answer3" value=@index />
+                                    <label for="mc">@answer</label>
+
+                                    <br />
+                                }
+                            </div>
+                        </div>
+
+
+                        <button id="btnDone" type="submit" class="done buttons icon">
+                            Sumbit
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-controller="Home" asp-action="Grades" method="post">
+                        <input type="hidden" name="username" value="@ViewBag.username" />
+                        <div>
+                            <h5>
+                                <i>
+                                    In order to take the general questionnaire you need first to have submited your grades to all the subjects.
+                                </i>
+                            </h5>
+                        </div>
+                        <button type="submit" class="done" id="submit">Add your grades</button>
+                    </form>
+                }
+
+
+                    </div>
                     </div>
 
-        <div class="modal" tabindex="-1" role="dialog" id="mymodal">
-            <div class="modal-dialog" role="document">
+                    <div class="modal" tabindex="-1" role="dialog" id="mymodal">
+                        <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title"><i class='bx bx-help-circle'></i>Help</h3>

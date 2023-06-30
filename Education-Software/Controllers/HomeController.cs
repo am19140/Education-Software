@@ -228,7 +228,7 @@ namespace Education_Software.Controllers
         public IActionResult Questionnaire(string username)
         {
             ViewBag.username = username;
-            List<QuestionnaireModel> questionnairemodel = _Service.getRecommendationQuestions();
+            List<QuestionnaireModel> questionnairemodel = _Service.getRecommendationQuestions(username);
             return View("Questionnaire", questionnairemodel);
         }
 
