@@ -39,6 +39,8 @@ table{
 }
 
 
+
+
 form {
     display: flex;
     flex-direction: row;
@@ -49,6 +51,7 @@ form {
     border-radius: 20px;
     padding: 2%;
     transition: var(--tran-05);
+    margin:1%;
 }
 
     form:hover {

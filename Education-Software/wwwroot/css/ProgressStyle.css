@@ -19,7 +19,7 @@
 }
 
 .home {
-    height: 100vh;
+    height: 90vh;
 }
 
 .main {
@@ -82,11 +82,16 @@ h2{
          color:black;
      }
    
+     .left{
+         overflow:scroll;
+         height:90%;
+     }
 .right{
     background-color:var(--primary-color);
     padding:2%;
     border-radius:20px;
     color:white;
+    margin-left:2%;
 
 }
 .right table{
