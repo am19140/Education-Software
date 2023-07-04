@@ -126,7 +126,7 @@
             else
             {
                 <img src="~/Resources/icons8-attention-96.png">
-                <h2>Oh no! Looks like you haven't completed your Career Questionnaire yet.</h2>
+                <h2>Oh no! Looks like you haven't completed your Career Test yet.</h2>
                <form asp-controller="Home" asp-action="Questionnaire" method="post">
                    <input type="hidden" name="username" value="@ViewBag.username">
                    <button id="btnDone" type="submit" class="done">
@@ -143,13 +143,13 @@
 
                     </div>
                     <div class="modal-body">
-                        <h5>In this page you can view your career recommendation.</h5>
-                        <h6><b>If you <span class="colored">haven't</span>  completed the final questionnaire:</b> </h6>
-                        <h6>•The message <span class="colored">'Looks like you haven't completed your Career Questionnaire yet' </span>appears on your screen.</h6>
-                        <h6>•Click on the <span class="colored">'Go to the questionnaire'</span> button.</h6>
-                        <h6><b>If you <span class="colored">have</span> completed the questionnaire:</b> </h6>
+                        <h5>In the Recommendations page, you can view your career recommendation.</h5>
+                        <h6><b>If you <span class="colored">haven't</span>  completed the career test:</b> </h6>
+                        <h6>•The message <span class="colored">'Looks like you haven't completed your Career Test yet' </span>appears on your screen.</h6>
+                        <h6>•Click on the <span class="colored">'Go to the questionnaire'</span> button to complete the career test.</h6>
+                        <h6><b>If you <span class="colored">have</span> completed your Career Test:</b> </h6>
                         <h6>
-                            The suggested career in Computer Science, based on the data we collected from tests, grades and the final questionnaire is displayed on the purple box. 
+                            The suggested career in Computer Science, based on the data we collected from tests, grades and the career test, is displayed on the purple box. 
                         </h6>
                        
 

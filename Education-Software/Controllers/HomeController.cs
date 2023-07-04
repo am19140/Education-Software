@@ -53,7 +53,14 @@ namespace Education_Software.Controllers
         public IActionResult Subjects(string username) {
             ViewBag.username = username;
 
-            var subjectmodel = _Service.getSubjects();            
+            var subjectmodel = _Service.getSubjects();
+            Dictionary<string, int> scores = new Dictionary<string, int>();
+            foreach(var subject in subjectmodel)
+            {
+                int score = _Service.getAverageScore(username, subject.sub_id);
+                scores.Add(subject.sub_id, score);
+            }
+            ViewBag.scores = scores;
             return View("Subjects",subjectmodel);
 
         }

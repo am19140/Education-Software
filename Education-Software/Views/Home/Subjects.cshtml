@@ -118,7 +118,37 @@
                                 <form asp-controller="Home" asp-action="Subject" method="post" class="left-form-up">
                                     <input type="hidden" name="subject" value="@subject.title"/>
                                     <input type="hidden" name="username" value="@ViewBag.username" />
-                                    <input type="submit" class="subject" value="@subject.title" />
+                                    
+                                    <div style="text-align:left">
+                                        @if (@ViewBag.scores[subject.sub_id] >= 74)
+                                        {
+                                            <div class="score" style="color:#92D050; font-size:20px">
+                                                <input type="submit" class="subject" value="@subject.title" />
+                                                <i style="color:white; font-size:20px">Your Average Score:</i>
+                                                <i class='bx bx-happy' style="color:#92D050; font-size:25px">  </i>
+                                                   @ViewBag.scores[subject.sub_id] %
+                                            </div>
+                                        }
+                                        else if (@ViewBag.scores[subject.sub_id] < 74 && @ViewBag.scores[subject.sub_id] > 49)
+                                        {
+                                            <div class="score" style="color:orange; font-size:20px">
+                                                <input type="submit" class="subject" value="@subject.title" />
+                                                <i style="color:white; font-size:20px">Your Average Score:</i>
+                                                <i class='bx bx-confused' style="color:orange; font-size:25px">  </i>   @ViewBag.scores[subject.sub_id] %
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="score" style="color:orangered; font-size:20x">
+                                                <input type="submit" class="subject" value="@subject.title" />
+                                                <i style="color:white; font-size:20px">Your Average Score:</i>
+                                                <i class='bx bx-sad' style="color:orangered; font-size:25px">  </i>
+                                                  @ViewBag.scores[subject.sub_id] %
+                                            </div>
+
+                                        }
+                                    </div>
+                                    
                                     <i class='bx bx-chevron-right icon'></i>
                                 </form>
                             </td>
@@ -155,10 +185,16 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h5>In this page, you can see all of the available courses</h5>
+                            <h5>In the Subjects page, you can see all of the available courses as well as your average score in each one, based on the tests you have completed</h5>
                             
                             <h6>•Pick a course to be redirected to the course's page, view the material and take tests!</h6>
-                            <h6>•<i>After</i> completing all of your tests, the evaluation test will appear here</h6>
+                            <h6>•<i>After</i> completing a test for a subject, your average score appears in the purple box after its title</h6>
+                            <h6>•<i>After</i> completing all of your tests, you can take the evaluation test which appears here</h6>
+                            <h6>Based on your performance to the tests your average score will be:</h6>
+                            <h6>•<span style="color:#92D050">Green</span>, if you scored over 75%</h6>
+                            <h6>•<span style="color:orange">Orange</span>, if you scored between 50 and 75%</h6>
+                            <h6>•<span style="color:red">Red</span>, if you scored below 50%</h6>
+                            <h5>Remember!</h5> <h6>You can always view the subject's material again and take more tests to improve your results!</h6>
                         </div>
                         
                     </div>
