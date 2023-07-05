@@ -228,8 +228,19 @@ namespace Education_Software.Controllers
             List<string> grades = new List<string>();
             grades.Add(grade1);
             grades.Add(grade2);
+            List<SubjectModel> subjectmodels = _Service.getSubjects();
             _Service.AddGrades(username, sub_id1, sub_id2, grades);
-            return View("Homepage");
+            Dictionary<string, string> subjects = new Dictionary<string, string>();
+            var gradesmodels = new List<GradesModel>();
+            foreach (var subject in subjectmodels)
+            {
+                subjects.Add(subject.sub_id, subject.title);
+                GradesModel model = _Service.getGrades(username, subject.sub_id);
+                Debug.WriteLine(username + subject.sub_id);
+                gradesmodels.Add(model);
+            }
+            ViewBag.subjects = subjects;
+            return View("Grades",gradesmodels);
         }
 
         public IActionResult Questionnaire(string username)
@@ -243,7 +254,7 @@ namespace Education_Software.Controllers
         {
             ViewBag.username = username;
             RecommendationModel recommendation = _Service.getRecommendations(username, answer1, answer2, answer3);
-            ViewBag.recommendation = true;
+            ViewBag.rec = true;
             return View("Recommendations", recommendation);
         }
 
@@ -253,11 +264,11 @@ namespace Education_Software.Controllers
             RecommendationModel r = _Service.getRecommendationModel(username);
             if(r == null)
             {
-                ViewBag.recommendation = false;
+                ViewBag.rec = false;
             }
             else
             {
-                ViewBag.recommendation = true;
+                ViewBag.rec = true;
             }
             return View("Recommendations", r);
         }
