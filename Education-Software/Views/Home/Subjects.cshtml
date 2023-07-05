@@ -119,31 +119,42 @@
                                     <input type="hidden" name="subject" value="@subject.title"/>
                                     <input type="hidden" name="username" value="@ViewBag.username" />
                                     
-                                    <div style="text-align:left">
+                                    <div class="subject-container" style="text-align:left">
                                         @if (@ViewBag.scores[subject.sub_id] >= 74)
                                         {
+                                            <input type="submit" class="subject" value="@subject.title" />
                                             <div class="score" style="color:#92D050; font-size:20px">
-                                                <input type="submit" class="subject" value="@subject.title" />
-                                                <i style="color:white; font-size:20px">Your Average Score:</i>
-                                                <i class='bx bx-happy' style="color:#92D050; font-size:25px">  </i>
-                                                   @ViewBag.scores[subject.sub_id] %
+                                                
+                                                <i style="color:white; font-size:20px">Your Average Score: </i>
+                                                <span class="number">
+                                                    <i class='bx bx-happy' style="color:#92D050; font-size:25px">  </i> @ViewBag.scores[subject.sub_id] %
+                                                </span>
+                                                
+                                                   
                                             </div>
                                         }
                                         else if (@ViewBag.scores[subject.sub_id] < 74 && @ViewBag.scores[subject.sub_id] > 49)
-                                        {
+                                        {                                               
+                                            <input type="submit" class="subject" value="@subject.title" />
+
                                             <div class="score" style="color:orange; font-size:20px">
-                                                <input type="submit" class="subject" value="@subject.title" />
-                                                <i style="color:white; font-size:20px">Your Average Score:</i>
-                                                <i class='bx bx-confused' style="color:orange; font-size:25px">  </i>   @ViewBag.scores[subject.sub_id] %
+                                                <i style="color:white; font-size:20px">Your Average Score: </i>
+                                                <span class="number">
+                                                    <i class='bx bx-confused' style="color:orange; font-size:25px">  </i>   @ViewBag.scores[subject.sub_id] %
+
+                                                </span>
                                             </div>
                                         }
                                         else
-                                        {
+                                        {   <input type="submit" class="subject" value="@subject.title" />
                                             <div class="score" style="color:orangered; font-size:20x">
-                                                <input type="submit" class="subject" value="@subject.title" />
-                                                <i style="color:white; font-size:20px">Your Average Score:</i>
-                                                <i class='bx bx-sad' style="color:orangered; font-size:25px">  </i>
-                                                  @ViewBag.scores[subject.sub_id] %
+                                                
+                                                <i style="color:white; font-size:20px">Your Average Score: </i>
+                                                <span class="number">
+                                                    <i class='bx bx-sad' style="color:orangered; font-size:25px">  </i>
+                                                    @ViewBag.scores[subject.sub_id] %
+                                                </span>
+                                               
                                             </div>
 
                                         }
@@ -166,7 +177,7 @@
                             <h5>
                                 <i>
                                     Note: In order to access the Evaluation Test, you have to read the content of each subject and pass the test in the end of the chapter.
-                                </i><
+                                </i>
                             </h5>
                         </td>
                     </tr>

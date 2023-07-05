@@ -72,3 +72,25 @@ input[type=submit] {
     width:100%;
     text-align:left;
 }
+.score{
+    display:flex;
+    width:100%;
+    align-items:center;
+}
+.subject-container{
+    width:70%;
+}
+.number{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-left:2%;
+    font-size:25px;
+    width:20%;
+    justify-content:space-evenly;
+
+}
+h5{
+    padding-left:2%;
+    font-weight:bold;
+}

@@ -105,18 +105,16 @@
                 </div>
             </div>
             <div class="main">
-                <div class="form-container">
                 @if(@Model != default)
                                 {
                 @if(!ViewBag.submitted)
                                     {
                 <div class="questions">
 
-                    <h2>
-                        Questions
-                    </h2>
-
-                    <form asp-controller="Home" asp-action="SubmitEvaluationTest" method="post" class="evaluation-btn">
+                    <form asp-controller="Home" asp-action="SubmitEvaluationTest" method="post" class="test-btn">
+                            <h2>
+                                Questions
+                            </h2>
                         <input type="hidden" name="username" value="@ViewBag.username" />
                         <input type="hidden" name="subject" value="@ViewBag.subject" />
                         <!--Question 1-->
@@ -167,14 +165,14 @@
                             {
                                 var s = @answer.Split("#");
                         <label>@s[0]</label>
-                        <input type="text" id="canswer1" name="answer1">
+                                    <input type="text" id="canswer1" name="answer1" class="input">
                         <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[0].q_type == "matching")
                         {
                         <label for="optiona">@Model.ToList()[0].possible_answers.Split('•')[0]</label>
-                        <select name="optiona" id="optiona1">
+                                <select name="optiona" id="optiona1" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -182,7 +180,7 @@
                         </select>
 
                         <label for="optionb">@Model.ToList()[0].possible_answers.Split('•')[1]</label>
-                        <select name="optionb" id="optionb1">
+                                <select name="optionb" id="optionb1" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -190,7 +188,7 @@
                         </select>
 
                         <label for="optionc">@Model.ToList()[0].possible_answers.Split('•')[2]</label>
-                        <select name="optionc" id="optionc1">
+                                <select name="optionc" id="optionc1" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -198,7 +196,7 @@
                         </select>
 
                         <label for="optiond">@Model.ToList()[0].possible_answers.Split('•')[3]</label>
-                        <select name="optiond" id="optiond1">
+                                <select name="optiond" id="optiond1" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -222,7 +220,7 @@
                                     string[] arr = @Model.ToList()[1].possible_answers.Split("•");
                                 int ind = (int) Array.IndexOf(arr, answer) + (int) 1;
                                 string index = ind.ToString();
-                            <input type="radio" id="mcanswer2" name="answer2" value=@index />
+                            <input type="radio" id="mcanswer2" name="answer2" value=@index class="input" />
                             <label for="mc">@answer</label>
 
                             <br />
@@ -256,14 +254,14 @@
                             {
                                 var s = @answer.Split("#");
                         <label>@s[0]</label>
-                        <input type="text" id="canswer2" name="answer2">
+                                    <input type="text" id="canswer2" name="answer2" class="input">
                         <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[1].q_type == "matching")
                         {
                         <label for="optiona">@Model.ToList()[1].possible_answers.Split('•')[0]</label>
-                        <select name="optiona" id="optiona2">
+                                <select name="optiona" id="optiona2" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -271,7 +269,7 @@
                         </select>
 
                         <label for="optionb">@Model.ToList()[1].possible_answers.Split('•')[1]</label>
-                        <select name="optionb" id="optionb2">
+                                <select name="optionb" id="optionb2" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -279,7 +277,7 @@
                         </select>
 
                         <label for="optionc">@Model.ToList()[1].possible_answers.Split('•')[2]</label>
-                        <select name="optionc" id="optionc2">
+                                <select name="optionc" id="optionc2" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -287,7 +285,7 @@
                         </select>
 
                         <label for="optiond">@Model.ToList()[1].possible_answers.Split('•')[3]</label>
-                        <select name="optiond" id="optiond2">
+                                <select name="optiond" id="optiond2" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -344,14 +342,14 @@
                             {
                                 var s = @answer.Split("#");
                         <label>@s[0]</label>
-                        <input type="text" id="canswer3" name="answer3">
+                                    <input type="text" id="canswer3" name="answer3" class="input">
                         <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[2].q_type == "matching")
                         {
                         <label for="optiona">@Model.ToList()[2].possible_answers.Split('•')[0]</label>
-                        <select name="optiona" id="optiona3">
+                                <select name="optiona" id="optiona3" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -359,7 +357,7 @@
                         </select>
 
                         <label for="optionb">@Model.ToList()[2].possible_answers.Split('•')[1]</label>
-                        <select name="optionb" id="optionb3">
+                                <select name="optionb" id="optionb3" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -367,7 +365,7 @@
                         </select>
 
                         <label for="optionc">@Model.ToList()[2].possible_answers.Split('•')[2]</label>
-                        <select name="optionc" id="optionc3">
+                                <select name="optionc" id="optionc3" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -375,7 +373,7 @@
                         </select>
 
                         <label for="optiond">@Model.ToList()[2].possible_answers.Split('•')[3]</label>
-                        <select name="optiond" id="optiond3">
+                                <select name="optiond" id="optiond3" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -432,14 +430,14 @@
                             {
                                 var s = @answer.Split("#");
                         <label>@s[0]</label>
-                        <input type="text" id="canswer4" name="answer4">
+                                    <input type="text" id="canswer4" name="answer4" class="input">
                         <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[3].q_type == "matching")
                         {
                         <label for="optiona">@Model.ToList()[3].possible_answers.Split('•')[0]</label>
-                        <select name="optiona" id="optiona4">
+                                <select name="optiona" id="optiona4" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -447,7 +445,7 @@
                         </select>
 
                         <label for="optionb">@Model.ToList()[3].possible_answers.Split('•')[1]</label>
-                        <select name="optionb" id="optionb4">
+                                <select name="optionb" id="optionb4" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -455,7 +453,7 @@
                         </select>
 
                         <label for="optionc">@Model.ToList()[3].possible_answers.Split('•')[2]</label>
-                        <select name="optionc" id="optionc4">
+                                <select name="optionc" id="optionc4" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -463,7 +461,7 @@
                         </select>
 
                         <label for="optiond">@Model.ToList()[3].possible_answers.Split('•')[3]</label>
-                        <select name="optiond" id="optiond4">
+                                <select name="optiond" id="optiond4" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -520,14 +518,14 @@
                             {
                                 var s = @answer.Split("#");
                         <label>@s[0]</label>
-                        <input type="text" id="canswer5" name="answer5">
+                                    <input type="text" id="canswer5" name="answer5" class="input">
                         <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[4].q_type == "matching")
                         {
                         <label for="optiona">@Model.ToList()[4].possible_answers.Split('•')[0]</label>
-                        <select name="optiona" id="optiona5">
+                                <select name="optiona" id="optiona5" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -535,7 +533,7 @@
                         </select>
 
                         <label for="optionb">@Model.ToList()[4].possible_answers.Split('•')[1]</label>
-                        <select name="optionb" id="optionb5">
+                                <select name="optionb" id="optionb5" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -543,7 +541,7 @@
                         </select>
 
                         <label for="optionc">@Model.ToList()[4].possible_answers.Split('•')[2]</label>
-                        <select name="optionc" id="optionc5">
+                                <select name="optionc" id="optionc5" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -551,7 +549,7 @@
                         </select>
 
                         <label for="optiond">@Model.ToList()[4].possible_answers.Split('•')[3]</label>
-                        <select name="optiond" id="optiond5">
+                                <select name="optiond" id="optiond5" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -608,14 +606,14 @@
                             {
                                 var s = @answer.Split("#");
                         <label>@s[0]</label>
-                        <input type="text" id="casnwer6" name="answer1">
+                                    <input type="text" id="casnwer6" name="answer1" class="input">
                         <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[5].q_type == "matching")
                         {
                         <label for="optiona">@Model.ToList()[5].possible_answers.Split('•')[0]</label>
-                        <select name="optiona" id="optiona6">
+                                <select name="optiona" id="optiona6" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -623,7 +621,7 @@
                         </select>
 
                         <label for="optionb">@Model.ToList()[5].possible_answers.Split('•')[1]</label>
-                        <select name="optionb" id="optionb6">
+                                <select name="optionb" id="optionb6" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -631,7 +629,7 @@
                         </select>
 
                         <label for="optionc">@Model.ToList()[5].possible_answers.Split('•')[2]</label>
-                        <select name="optionc" id="optionc6">
+                                <select name="optionc" id="optionc6" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -639,7 +637,7 @@
                         </select>
 
                         <label for="optiond">@Model.ToList()[5].possible_answers.Split('•')[3]</label>
-                        <select name="optiond" id="optiond6">
+                                <select name="optiond" id="optiond6" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -696,14 +694,14 @@
                             {
                                 var s = @answer.Split("#");
                         <label>@s[0]</label>
-                        <input type="text" id="canswer7" name="answer7" />
+                                    <input type="text" id="canswer7" name="answer7" class="input" />
                         <label>@s[1]</label>
                             }
                         }
                         else if (@Model.ToList()[6].q_type == "matching")
                         {
                         <label for="optiona">@Model.ToList()[6].possible_answers.Split('•')[0]</label>
-                        <select name="optiona" id="optiona7">
+                                <select name="optiona" id="optiona7" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -711,7 +709,7 @@
                         </select>
 
                         <label for="optionb">@Model.ToList()[6].possible_answers.Split('•')[1]</label>
-                        <select name="optionb" id="optionb7">
+                                <select name="optionb" id="optionb7" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -719,7 +717,7 @@
                         </select>
 
                         <label for="optionc">@Model.ToList()[6].possible_answers.Split('•')[2]</label>
-                        <select name="optionc" id="optionc7">
+                                <select name="optionc" id="optionc7" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -727,7 +725,7 @@
                         </select>
 
                         <label for="optiond">@Model.ToList()[6].possible_answers.Split('•')[3]</label>
-                        <select name="optiond" id="optiond7">
+                                <select name="optiond" id="optiond7" class="input">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -782,41 +780,44 @@
                     </form>
                 </div>
                                     }
+                                    
                                     else
                                     {
-                <div>
-                            <img src="~/Resources/Enthusiastic-pana.png">
-                    <h2>You have submitted the evaluation test.</h2>
-                    </div>
-                <form asp-controller="Home" asp-action="Subjects" method="post">
-                    <input type="hidden" name="username" value="@ViewBag.username" />
-                    <button type="submit" class="done" id="submit">
-                        Go to HomePage
-                    </button>
-                </form>
-                <form asp-controller="Home" asp-action="Progress" method="post">
-                    <input type="hidden" name="username" value="@ViewBag.username" />
-                    <button type="submit" class="done" id="submit">
-                        See your Progress
-                    </button>
-                </form>
+                                        <div class="result">
+                                                        
+                                            <img src="~/Resources/Enthusiastic-cuate.png">
+                                                
+                                                <h2>You have submitted the evaluation test.</h2>
+
+                                            <form asp-controller="Home" asp-action="Subjects" method="post" class="after">
+                                                <input type="hidden" name="username" value="@ViewBag.username" />
+                                                <button type="submit" class="back" id="submit">
+                                                        <i class='bx bx-arrow-back icon'></i> Go to Homepage
+                                                </button>
+                                            </form>
+                                            <form asp-controller="Home" asp-action="Progress" method="post" class="after">
+                                                <input type="hidden" name="username" value="@ViewBag.username" />
+                                                <button type="submit" class="back" id="submit">
+                                                        <i class='bx bx-arrow-back icon'></i> See your Progress
+                                                </button>
+                                            </form>
+                                            
+                                        </div>
                                     }
 
                                 }
                                 else
                                 {
-                <form asp-controller="Home" asp-action="Subjects" method="post">
+                <form asp-controller="Home" asp-action="Subjects" method="post" class="before">
                     <input type="hidden" name="username" value="@ViewBag.username" />
                     <input type="hidden" name="subject" value="@ViewBag.subject" />
-                    <div>
-                            <img src="~/Resources/icons8-attention-96.png">
+
+                    <img src="~/Resources/icons8-attention-96.png">
                     <h2>Oh no! Looks like you haven't completed the tests of all the subjects.</h2>
-                    </div>
                     <button type="submit" class="done" id="submit">Go to subjects</button>
                 </form>
 
                                 }  
-            </div>
             </div>
             <div class="modal" tabindex="-1" role="dialog" id="mymodal">
                 <div class="modal-dialog" role="document">

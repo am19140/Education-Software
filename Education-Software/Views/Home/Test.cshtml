@@ -105,9 +105,7 @@
             </div>
         </div>
         <div class="main">
-            <div class="questions">
-
-                
+            <div class="questions">                
                 
                 <form asp-controller="Home" asp-action="SubmitTest" method="post" class="test-btn" onsubmit="gatherValues('')">
                     <h2>
@@ -286,21 +284,21 @@
                         <h5>
                         <i>
                             Do you want to retake the test to improve your results?
-                            (Note: You have to read again the chapter to take another test.)
+                                (Note: You have to read  the chapter again to take another test.)
                         </i>
                             </h5>
-                        <form asp-controller="Home" asp-action="Subject" method="post" class="test-btn">
+                        <form asp-controller="Home" asp-action="Subject" method="post" class="back-btn">
                         <input type="hidden" name="username" value="@ViewBag.username" />
                         <input type="hidden" name="subject" value="@ViewBag.subject" />
-                        <button id="btnDone" type="submit" class="done buttons icon">
-                            Yes, retake the test.
+                        <button id="btnDone" type="submit" class="back">
+                                <i class='bx bx-arrow-back icon'></i> Yes, retake the test.
                         </button>
                         </form>
-                        <form asp-controller="Home" asp-action="NextSubject" method="post" class="test-btn">
+                        <form asp-controller="Home" asp-action="NextSubject" method="post" class="back-btn">
                         <input type="hidden" name="username" value="@ViewBag.username" />
                         <input type="hidden" name="subject" value="@ViewBag.subject" />
-                        <button id="btnDone" type="submit" class="done buttons icon">
-                            No, go to the next chapter.
+                        <button id="btnDone" type="submit" class="back">
+                                <i class='bx bx-arrow-back icon'></i> No, go to the next chapter.
                         </button>
                         </form>
                     }

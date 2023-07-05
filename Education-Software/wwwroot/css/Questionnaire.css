@@ -60,10 +60,7 @@ h2{
 
     margin-bottom:1%;
 }
-.form-container{
-    width:50%;
-    height:80%;
-}
+
 .q{
     font-weight:500;
     color:black;
@@ -88,7 +85,8 @@ i{
     }
 
     .questions{
-        width:70%;
+        width:80%;
+
     }
 
     .main .input{
@@ -106,10 +104,36 @@ i{
     margin-bottom: 1%;
     font-size: 15px;
     background-color:transparent;
+    width:100%;
 
 }
     .back:hover {
         cursor: pointer;
         transform: scale(1.03);
         transition: var(--tran-05);
+    }
+
+    .after{
+        width:100%;
+    }
+
+    .result img{
+        width:30%;
+    }
+
+    .result{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+    }
+    .before{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .before {
+        text-align:center;
     }

@@ -272,8 +272,17 @@ namespace Education_Software.Service
             List<int> subject_progress = _context.progress.Where(x => x.username == username & x.sub_id == sub_id).Select(x => x.score).ToList();
             int count = subject_progress.Count();
             int sum = subject_progress.Sum();
-            double average_score = (sum/count);
-            int average = (int)Math.Floor(average_score);
+            int average;
+            if (count == 0)
+            {
+                average = 0;
+            }
+            else
+            {
+                double average_score = (sum/count);
+                average = (int)Math.Floor(average_score);
+            }
+            
             return average;
         }
 
